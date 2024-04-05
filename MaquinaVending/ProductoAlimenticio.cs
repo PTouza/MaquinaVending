@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace MaquinaVending
 {
-    internal abstract class Producto
+    internal class ProductoAlimenticio : Producto
     {
-
     }
 }
