@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,5 +9,12 @@ namespace MaquinaVending
 {
     internal abstract class Usuario
     {
+        public abstract void Menu();
+        
+        public void ComprarProducto()
+        {
+
+        }
+     
     }
 }
