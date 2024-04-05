@@ -8,5 +8,6 @@ namespace MaquinaVending
 {
     internal abstract class Usuario
     {
+
     }
 }
