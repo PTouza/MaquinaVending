@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MaquinaVending
 {
-    internal class Admin : Usuario
-        
+    internal class Cliente : Usuario
+    {
     }
 }
