@@ -11,8 +11,7 @@ namespace MaquinaVending
         static void Main(string[] args)
         {
             // Prueba commit
-
-   
+            Console.Write("Ye");
         }
     }
 }
