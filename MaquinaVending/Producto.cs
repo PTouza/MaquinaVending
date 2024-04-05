@@ -21,5 +21,6 @@ namespace MaquinaVending
             Precio_Unitario = precio_Unitario;
             Descripcion = descripcion;
         }
+        
     }
 }
