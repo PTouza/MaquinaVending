@@ -12,6 +12,8 @@ namespace MaquinaVending
         {
             // Prueba commit
             
+            Console.Write("Ye");
+            Console.Write("Hola, soy Iván, el mejor profe del mundo mundial jaja salu2");
         }
     }
 }
