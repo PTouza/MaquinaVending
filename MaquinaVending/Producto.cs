@@ -8,6 +8,7 @@ namespace MaquinaVending
 {
     internal abstract class Producto
     {
+
         public string Nombre { get; set; }
         public int Unidades { get; set; }
         public double Precio_Unitario { get; set; }
@@ -20,6 +21,23 @@ namespace MaquinaVending
             Unidades = unidades;
             Precio_Unitario = precio_Unitario;
             Descripcion = descripcion;
+        }
+
+        public double Vender(int cantidadProductos)
+        {
+            Unidades -= cantidadProductos;
+
+            return cantidadProductos * Precio_Unitario;
+        }
+
+        public void AddUnidades(int unidades)
+        {
+            Unidades += unidades;
+        }
+
+        public override string ToString()
+        {
+            return $"";
         }
     }
 }
