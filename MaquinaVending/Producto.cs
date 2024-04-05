@@ -8,6 +8,18 @@ namespace MaquinaVending
 {
     internal abstract class Producto
     {
+        public string Nombre { get; set; }
+        public int Unidades { get; set; }
+        public double Precio_Unitario { get; set; }
+        public string Descripcion {  get; set; }
 
+        public Producto() { }
+        public Producto(string nombre, int unidades, double precio_Unitario, string descripcion)
+        {
+            Nombre = nombre;
+            Unidades = unidades;
+            Precio_Unitario = precio_Unitario;
+            Descripcion = descripcion;
+        }
     }
 }
