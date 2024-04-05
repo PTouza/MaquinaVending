@@ -9,5 +9,11 @@ namespace MaquinaVending
 {
     internal abstract class Usuario
     {
+        public abstract void Menu();
+
+        public void ComprarProducto()
+        {
+
+        }
     }
 }
