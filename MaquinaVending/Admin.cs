@@ -11,12 +11,12 @@ namespace MaquinaVending
     { 
         public string Password { get; set; }
 
-
+        
 
         public Admin() { }
 
         public Admin(List<Producto> productos, string password) : base(productos)
-        {
+        { 
             Password = password;
         }
 

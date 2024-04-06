@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.ComponentModel.Design;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
+using System.Security.Permissions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,20 +12,33 @@ namespace MaquinaVending
 {
     internal abstract class Usuario : IUsuario
     {
+        protected List<Producto> listaProductos;
+
+        public Usuario() { }
+
+        public Usuario(List<Producto> productos)
+        {
+            listaProductos = productos;
+        }
+
         public abstract void Menu();
 
         public void ComprarProducto()
         {
             int opcion = 0;
-            
+            Console.Write("¿Quiere continuar con la operación? (1.- Si / 2.- No): ");
+            opcion = int.Parse(Console.ReadLine());
 
-                    //Producto Alimenticio//
+            switch(opcion)
+            {
+                case 1: // PIDO EL ID DEL PRODUCTO QUE QUIERE COMPRAR
+                    IProducto producto = BuscarProducto();
                     break;
-                case 2:
-                    //Producto Electronico
+
+                case 2: // CANCELAMOS LA OPERACIÓN Y VUELVE AL MENÚ
                     break;
-                case 3:
-                    //Producto 
+
+                default:
                     break;
             }
         }
@@ -62,6 +77,14 @@ namespace MaquinaVending
 
             } while (opcion != 3);
            
+        }
+
+        public Producto BuscarProducto()
+        {
+            Console.Write("Introduce el Id del producto: ");
+            int id = int.Parse(Console.ReadLine());
+
+            return listaProductos.Find(x => x.Id == id); ;
         }
 
         public void PagarTarjeta() { }

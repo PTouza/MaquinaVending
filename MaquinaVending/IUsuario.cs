@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 namespace MaquinaVending
 {
     internal interface IUsuario
-    {
+    { 
+
         void Menu();
         void PagarTarjeta();
         void PagarEfectivo();

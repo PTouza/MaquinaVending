@@ -8,6 +8,14 @@ namespace MaquinaVending
 {
     internal class Cliente : Usuario
     {
+
+        public Cliente() { }
+
+        public Cliente(List<Producto> productos) : base(productos)
+        {
+
+        }
+
         public override void Menu()
         {
             
