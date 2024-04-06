@@ -64,17 +64,8 @@ namespace MaquinaVending
                 }
 
             } while (opcion != 3);
-            void PagarTarjeta()
-            {
-                
 
-
-            }
-            void PagarEfectivo ()
-            {
-                
             }
 
         }
     }
-}
