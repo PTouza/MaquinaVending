@@ -8,7 +8,7 @@ namespace MaquinaVending
 {
     internal abstract class Producto : IProducto
     {
-
+        public int Id { get; set; }
         public string Nombre { get; set; }
         public int Unidades { get; set; }
         public double Precio_Unitario { get; set; }
