@@ -45,6 +45,8 @@
   <ItemGroup>
     <Compile Include="Admin.cs" />
     <Compile Include="Cliente.cs" />
+    <Compile Include="IProducto.cs" />
+    <Compile Include="IUsuario.cs" />
     <Compile Include="MaterialesPreciosos.cs" />
     <Compile Include="Producto.cs" />
     <Compile Include="ProductoAlimenticio.cs" />

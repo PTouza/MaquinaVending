@@ -8,11 +8,15 @@ namespace MaquinaVending
 {
     internal class MaterialesPreciosos : Producto
     {
+        // PROPIEDADES
         public  string Materiales {  get; set; }
-        public double Peso { get; set; }
+        public string Peso { get; set; }
+
+        // CONSTRUCTORES
         public MaterialesPreciosos() { }
 
-        public MaterialesPreciosos(string nombre, int unidades, double precio_Unitario, string descripcion, string materiales, double peso) : base (nombre, unidades, precio_Unitario,descripcion)
+        public MaterialesPreciosos(string nombre, int unidades, double precio_Unitario, string descripcion, 
+            string materiales, string peso) : base (nombre, unidades, precio_Unitario,descripcion)
         {
             Materiales = materiales;
             Peso = peso;
