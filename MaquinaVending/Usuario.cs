@@ -72,7 +72,7 @@ namespace MaquinaVending
             }
             void PagarEfectivo ()
             {
-                
+                Console.WriteLine("Introduce el dinero ")
             }
 
         }
