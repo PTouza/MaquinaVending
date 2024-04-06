@@ -57,7 +57,7 @@ namespace MaquinaVending
                         Console.WriteLine("Salir...");
                         break;
                     default:
-                        Console.WriteLine("No ha introducido ningún dinero");
+                        Console.WriteLine("Elección incorrecta");
                         break;
 
 
