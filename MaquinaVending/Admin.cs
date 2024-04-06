@@ -12,5 +12,10 @@ namespace MaquinaVending
         public string Password { get; set; }
 
         protected List<Producto> productos;
+
+        public override void Menu()
+        {
+            
+        }
     }
 }

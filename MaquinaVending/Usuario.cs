@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.ComponentModel.Design;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace MaquinaVending
 {
-    internal abstract class Usuario
+    internal abstract class Usuario : IUsuario
     {
         public abstract void Menu();
 
@@ -47,25 +48,29 @@ namespace MaquinaVending
 
                 switch (opcion)
                 {
-                    case 1:
-                        PagarTarjeta();
+                    case 1: // PAGAR CON TARJETA
+                        
                         break;
-                    case 2:
-                        PagarEfectivo();
+                    case 2: // PAGAR CON EFECTIVO
+                        
                         break;
-                    case 3:
+                    case 3: // SALIR
                         Console.WriteLine("Salir...");
                         break;
-                    default:
-                        Console.WriteLine("No ha introducido ningún dinero");
+                    default: // OPCIÓN NO VÁLIDA
+                        Console.WriteLine("Porfavor, introduzca una opción válida");
                         break;
 
 
                 }
 
             } while (opcion != 3);
-
-            }
-
+           
         }
+
+        public void PagarTarjeta() { }
+
+        public void PagarEfectivo() { }
+
     }
+}

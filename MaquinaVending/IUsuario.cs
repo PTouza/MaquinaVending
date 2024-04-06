@@ -6,11 +6,10 @@ using System.Threading.Tasks;
 
 namespace MaquinaVending
 {
-    internal class Cliente : Usuario
+    internal interface IUsuario
     {
-        public override void Menu()
-        {
-            
-        }
+        void Menu();
+        void PagarTarjeta();
+        void PagarEfectivo();
     }
 }

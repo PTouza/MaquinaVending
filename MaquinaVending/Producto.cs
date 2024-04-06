@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MaquinaVending
 {
-    internal abstract class Producto
+    internal abstract class Producto : IProducto
     {
 
         public string Nombre { get; set; }
@@ -38,6 +38,11 @@ namespace MaquinaVending
         public override string ToString()
         {
             return $"";
+        }
+
+        public virtual void MostrarInfo()
+        {
+
         }
     }
 }
