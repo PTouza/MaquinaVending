@@ -14,12 +14,8 @@ namespace MaquinaVending
 
         public void ComprarProducto()
         {
-            Console.WriteLine("Seleccione un producto de la maquina");
             int opcion = 0;
             
-            switch (opcion)
-            {
-                case 1:
 
                     //Producto Alimenticio//
                     break;
