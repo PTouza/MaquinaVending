@@ -48,10 +48,10 @@ namespace MaquinaVending
 
                 switch (opcion)
                 {
-                    case 1: // PAGAR CON TARJETA
+                    case 1: PagarTarjeta();
                         
                         break;
-                    case 2: // PAGAR CON EFECTIVO
+                    case 2: PagarEfectivo();
                         
                         break;
                     case 3: // SALIR
@@ -68,12 +68,12 @@ namespace MaquinaVending
             void PagarTarjeta()
             {
                 
-
+                
 
             }
             void PagarEfectivo ()
             {
-                Console.WriteLine("Introduce el dinero ")
+                Console.WriteLine("Introduce el dinero ");
             }
 
     }
