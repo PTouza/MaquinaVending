@@ -79,17 +79,12 @@ namespace MaquinaVending
            
         }
 
-        public Producto BuscarProducto()
-        {
-            Console.Write("Introduce el Id del producto: ");
-            int id = int.Parse(Console.ReadLine());
 
-            return listaProductos.Find(x => x.Id == id); ;
-        }
-
-        public void PagarTarjeta() { }
-
-        public void PagarEfectivo() { }
+            }
+            void PagarEfectivo ()
+            {
+                Console.WriteLine("Introduce el dinero ")
+            }
 
     }
 }
