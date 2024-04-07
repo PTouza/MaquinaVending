@@ -42,7 +42,7 @@ namespace MaquinaVending
                     break;
             }
         }
-        public void PagarProducto()
+        public void PagarProducto(int precio_Producto)
         { 
             
             int opcion = 0;
