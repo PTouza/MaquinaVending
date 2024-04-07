@@ -80,11 +80,11 @@ namespace MaquinaVending
         }
 
 
-            }
-            void PagarEfectivo ()
-            {
-                Console.WriteLine("Introduce el dinero ")
-            }
+        
+         void PagarEfectivo ()
+         {
+            Console.WriteLine("Introduce el dinero ");
+         }
 
     }
 }
