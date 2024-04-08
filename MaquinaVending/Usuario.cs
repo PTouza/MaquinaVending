@@ -80,11 +80,29 @@ namespace MaquinaVending
         }
 
 
-        
-         void PagarEfectivo ()
-         {
-            Console.WriteLine("Introduce el dinero ");
-         }
+
+        public void PagarEfectivo(int precio)
+        {
+            Console.WriteLine($"El precio del producto es : {precio}");
+            Console.WriteLine("Introduce el dinero para pagar el producto: ");
+            float dinero_Introducido = float.Parse(Console.ReadLine());
+            if (dinero_Introducido > precio)
+            {
+                float cambio = dinero_Introducido - precio;
+                Console.WriteLine($":) Muchas gracias recoja el producto y el cambio de : {cambio} ");
+
+
+            }
+            else if (dinero_Introducido == precio)
+            {
+                Console.WriteLine("Muchas gracias, recoja el producto");
+            }
+            else
+            {
+                Console.WriteLine("Error, no se ha introducido la cantidad exacta");
+            }
+
+        }
 
     }
 }
