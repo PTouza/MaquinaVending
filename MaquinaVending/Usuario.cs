@@ -101,7 +101,7 @@ namespace MaquinaVending
         public void PagarEfectivo(int precio)
         {
             Console.WriteLine($"El precio del producto es : {precio}");
-            Console.WriteLine("Introduce el dinero para pagar el producto: ");
+            Console.Write("Introduce el dinero para pagar el producto: ");
             float dinero_Introducido = float.Parse(Console.ReadLine());
             if (dinero_Introducido > precio)
             {
