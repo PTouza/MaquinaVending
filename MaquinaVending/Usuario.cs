@@ -60,10 +60,10 @@ namespace MaquinaVending
                 switch (opcion)
                 {
                     case 1: // PAGAR CON TARJETA
-                        
+                        PagarTarjeta(precio_Producto);
                         break;
                     case 2: // PAGAR CON EFECTIVO
-                        
+                        PagarEfectivo(precio_Producto);
                         break;
                     case 3: // SALIR
                         Console.WriteLine("Salir...");
@@ -120,6 +120,22 @@ namespace MaquinaVending
             }
 
         }
+        public Producto BuscarProducto()
+        {
+            Console.Write("Introduce el Id del Producto: ");
+            int id = int.Parse(Console.ReadLine());
+            Producto p = null;
+
+            foreach (Producto e in listaProductos)
+            {
+                if (e.Id == id)
+                {
+                    p = e;
+                }
+            }
+            return p;
+        }
+
 
     }
 }
