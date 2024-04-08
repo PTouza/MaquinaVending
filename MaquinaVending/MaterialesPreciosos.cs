@@ -21,5 +21,7 @@ namespace MaquinaVending
             Materiales = materiales;
             Peso = peso;
         }
+
+
     }
 }
