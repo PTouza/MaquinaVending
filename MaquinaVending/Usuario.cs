@@ -32,7 +32,7 @@ namespace MaquinaVending
             switch(opcion)
             {
                 case 1: // PIDO EL ID DEL PRODUCTO QUE QUIERE COMPRAR
-                    IProducto producto = BuscarProducto();
+                    Producto producto = BuscarProducto();
                     break;
 
                 case 2: // CANCELAMOS LA OPERACIÓN Y VUELVE AL MENÚ
@@ -64,6 +64,7 @@ namespace MaquinaVending
                         break;
                     case 2: // PAGAR CON EFECTIVO
                         PagarEfectivo(precio_Producto);
+                        
                         break;
                     case 3: // SALIR
                         Console.WriteLine("Salir...");
@@ -87,8 +88,8 @@ namespace MaquinaVending
             {
 
                 Console.WriteLine("Operación Aceptada");
-
-
+                
+                
             }
             else
             {
@@ -97,18 +98,18 @@ namespace MaquinaVending
         }
 
 
-
-        public void PagarEfectivo(int precio)
-        {
+        
+         public void PagarEfectivo (int precio)
+         {
             Console.WriteLine($"El precio del producto es : {precio}");
-            Console.Write("Introduce el dinero para pagar el producto: ");
-            float dinero_Introducido = float.Parse(Console.ReadLine());
+            Console.WriteLine("Introduce el dinero para pagar el producto: ");
+            float  dinero_Introducido = float.Parse(Console.ReadLine());
             if (dinero_Introducido > precio)
             {
                 float cambio = dinero_Introducido - precio;
                 Console.WriteLine($":) Muchas gracias recoja el producto y el cambio de : {cambio} ");
 
-
+             
             }
             else if (dinero_Introducido == precio)
             {
@@ -118,24 +119,24 @@ namespace MaquinaVending
             {
                 Console.WriteLine("Error, no se ha introducido la cantidad exacta");
             }
+            
+         }
 
-        }
-        public Producto BuscarProducto()
+        public  Producto BuscarProducto ()
         {
             Console.Write("Introduce el Id del Producto: ");
             int id = int.Parse(Console.ReadLine());
-            Producto p = null;
+            Producto p = null; 
 
-            foreach (Producto e in listaProductos)
+            foreach(Producto e in listaProductos)
             {
                 if (e.Id == id)
                 {
-                    p = e;
+                    p = e; 
                 }
             }
-            return p;
+            return p; 
         }
-
 
     }
 }
