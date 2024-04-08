@@ -78,6 +78,23 @@ namespace MaquinaVending
             } while (opcion != 3);
            
         }
+        public void PagarTarjeta(int precio)
+        {
+            Console.WriteLine($"El precio del producto es: {precio}");
+            Console.WriteLine("Introduce una tarjeta para pagar");
+            float dinero_Introducido = float.Parse(Console.ReadLine());
+            if (dinero_Introducido == precio)
+            {
+
+                Console.WriteLine("Operación Aceptada");
+
+
+            }
+            else
+            {
+                Console.WriteLine("Operación cancelada  :( ");
+            }
+        }
 
 
 
