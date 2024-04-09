@@ -82,19 +82,48 @@ namespace MaquinaVending
         public void PagarTarjeta(int precio)
         {
             Console.WriteLine($"El precio del producto es: {precio}");
-            Console.WriteLine("Introduce una tarjeta para pagar");
-            float dinero_Introducido = float.Parse(Console.ReadLine());
-            if (dinero_Introducido == precio)
+            Console.Write("Introduce los datos de la tarjeta: ");
+            Console.WriteLine("Introduce el número de la tarjeta: ");
+           string  input = Console.ReadLine();
+            if (input.Length  != 16)
             {
-
-                Console.WriteLine("Operación Aceptada");
-                
-                
+                Console.WriteLine("Error, el número de tarjeta tiene que tener 16 digitos");
             }
             else
             {
-                Console.WriteLine("Operación cancelada  :( ");
+                Console.WriteLine("Introduce el CVV de la tarjeta:"); 
+                string inputs = Console.ReadLine();
+                if(inputs.Length != 3)
+                {
+                    Console.WriteLine("Error, el CVV tiene que tener por lo menos 3 caracteres");
+                }
+                else
+                {
+                    Console.WriteLine("Introduce la fecha de caducidad:");
+                    DateTime fechaCaducidadTarjeta = DateTime.Parse(Console.ReadLine());
+                    if (fechaCaducidadTarjeta <  DateTime.Now)
+                    {
+                        Console.WriteLine("Tarjeta Caducada");
+                    }
+                    else
+                    {
+                        float dinero_Introducido = float.Parse(Console.ReadLine());
+                        if (dinero_Introducido == precio)
+                        {
+
+                            Console.WriteLine("Operación Aceptada");
+
+
+                        }
+                        else
+                        {
+                            Console.WriteLine("Operación cancelada  :( ");
+                        }
+                    }
+                }
             }
+            
+           
         }
 
 
