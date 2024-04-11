@@ -8,16 +8,16 @@ namespace MaquinaVending
 {
     internal class ProductoAlimenticio : Producto
     {
-        // PROPIEDADES
         public string Informacion_Nutricional {  get; set; }
 
         // CONSTRUCTORES
         public ProductoAlimenticio() { }
 
-        public ProductoAlimenticio(string nombre, int unidades, double precio_Unitario, string descripcion, 
-            string info_nutricional) : base (nombre, unidades, precio_Unitario, descripcion)
+        public ProductoAlimenticio(string nombre, int unidades, double precio_Unitario, string descripcion, string info_nutricional) : base (nombre, unidades, precio_Unitario, descripcion)
         {
-            Informacion_Nutricional = info_nutricional;
+            Calorias = calorias;
+            Grasa = grasa;
+            Azucar = azucar;
         }
     }
 }
