@@ -10,7 +10,7 @@ namespace MaquinaVending
     { 
 
         void Menu();
-        void PagarTarjeta();
-        void PagarEfectivo();
+        void PagarTarjeta(int precio);
+        void PagarEfectivo(int precio);
     }
 }
