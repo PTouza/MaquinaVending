@@ -37,7 +37,7 @@ namespace MaquinaVending
 
         public override string ToString()
         {
-            return $"";
+            return $"{Nombre};{Unidades};{Precio_Unitario};{Descripcion}";
         }
 
         public virtual void MostrarInfo()
