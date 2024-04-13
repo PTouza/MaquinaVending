@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace MaquinaVending
 {
-    internal abstract class Usuario : IUsuario
+    internal abstract class Usuario 
     {
         protected List<Producto> listaProductos;
 
@@ -32,7 +32,7 @@ namespace MaquinaVending
             switch(opcion)
             {
                 case 1: // PIDO EL ID DEL PRODUCTO QUE QUIERE COMPRAR
-                    IProducto producto = BuscarProducto();
+                    // IProducto producto  = BuscarProducto();
                     break;
 
                 case 2: // CANCELAMOS LA OPERACIÓN Y VUELVE AL MENÚ
