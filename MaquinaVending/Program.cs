@@ -12,9 +12,9 @@ namespace MaquinaVending
         {
             // Prueba commit
             
-            Console.Write("Ye");
+            Console.Write("\r\n  __  __   __              _                _                    _ _             \r\n |  \\/  | /_/             (_)              | |                  | (_)            \r\n | \\  / | __ _  __ _ _   _ _ _ __   __ _   | |__   ___ _ __   __| |_ _ __   __ _ \r\n | |\\/| |/ _` |/ _` | | | | | '_ \\ / _` |  | '_ \\ / _ \\ '_ \\ / _` | | '_ \\ / _` |\r\n | |  | | (_| | (_| | |_| | | | | | (_| |  | |_) |  __/ | | | (_| | | | | | (_| |\r\n |_|  |_|\\__,_|\\__, |\\__,_|_|_| |_|\\__,_|  |_.__/ \\___|_| |_|\\__,_|_|_| |_|\\__, |\r\n                  | |                                                       __/ |\r\n                  |_|                                                      |___/ \r\n");
             Console.Write("Hola, soy Iván, el mejor profe del mundo mundial jaja salu2");
-            Console.WriteLine();
+            Console.ReadKey();
         }
     }
 }
