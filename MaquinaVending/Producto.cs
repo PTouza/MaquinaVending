@@ -37,12 +37,13 @@ namespace MaquinaVending
 
         public override string ToString()
         {
-            return $"";
+            return $"{Nombre};{Unidades};{Precio_Unitario};{Descripcion}";
         }
 
         public virtual void MostrarInfo()
         {
-
+            Console.WriteLine($"({Id}) Nombre: {Nombre} | Unidades: {Unidades} | Precio: {Precio_Unitario}€ " +
+                $"| Descripción: {Descripcion}");
         }
     }
 }
