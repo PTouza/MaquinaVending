@@ -8,14 +8,49 @@ namespace MaquinaVending
 {
     internal class Program
     {
+        static List<Producto> products
         static void Main(string[] args)
         {
-            // Prueba commit
+            int opcion;
+            products = new List<Producto>();
+            Admin admin = new Admin(products, "admin123");
+            Cliente cliente = new Cliente(products);
+            do
+            {
+                Console.Clear();
+                Console.WriteLine("\t   --- Bienvenido a la máquina de Vending UFV ---  ");
+                Console.WriteLine("\t||                                                 ||");
+                Console.WriteLine("\t||                                                 ||");
+                Console.WriteLine("\t||\t Porfavor, escoge una opción:              ||");
+                Console.WriteLine("\t||                                                 ||");
+                Console.WriteLine("\t||\t 1. Cliente                                ||");
+                Console.WriteLine("\t||\t 2. Admin                                  ||");
+                Console.WriteLine("\t||                                                 ||");
+                Console.WriteLine("\t||_________________________________________________||");
+                Console.WriteLine();
+                Console.WriteLine();
+                Console.WriteLine("\t Escoge una opción: ");
+                opcion = int.Parse(Console.ReadLine());
+
+                switch(opcion)
+                {
+                    case 1:
+                        cliente.Menu();
+                        break;
+
+                    case 2:
+                        admin.Menu();
+                        break;
+
+                    default:
+                        Console.WriteLine("Opción no válida!!!");
+                        break;
+                }
+
+            } while (opcion != 3);
 
 
-            Console.WriteLine("\r\n  __  __   __              _                                   _ _             \r\n |  \\/  | /_/             (_)                                 | (_)            \r\n | \\  / | __ _  __ _ _   _ _ _ __   __ _  __   _____ _ __   __| |_ _ __   __ _ \r\n | |\\/| |/ _` |/ _` | | | | | '_ \\ / _` | \\ \\ / / _ \\ '_ \\ / _` | | '_ \\ / _` |\r\n | |  | | (_| | (_| | |_| | | | | | (_| |  \\ V /  __/ | | | (_| | | | | | (_| |\r\n |_|  |_|\\__,_|\\__, |\\__,_|_|_| |_|\\__,_|   \\_/ \\___|_| |_|\\__,_|_|_| |_|\\__, |\r\n                  | |                                                     __/ |\r\n                  |_|                                                    |___/ \r\n");
-            Console.Write("Hola, soy Iván, el mejor profe del mundo mundial jaja salu2");
-            Console.ReadLine();
+            Console.ReadKey();
         }
     }
 }
