@@ -8,7 +8,7 @@ namespace MaquinaVending
 {
     internal class Program
     {
-        static List<Producto> products
+        static List<Producto> products;
         static void Main(string[] args)
         {
             int opcion;

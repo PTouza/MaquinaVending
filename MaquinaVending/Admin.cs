@@ -41,7 +41,7 @@ namespace MaquinaVending
 
                 switch(opcion)
                 {
-                    case 1: // COMPRAR PRODUCTOS
+                    case 1: // COMPRAR PRODUCTOS 
                         break;
 
                     case 2: // MOSTRAR INFORMACIÓN
