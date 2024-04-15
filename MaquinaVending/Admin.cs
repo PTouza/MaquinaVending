@@ -49,6 +49,7 @@ namespace MaquinaVending
                         break;
 
                     case 3: // CARGA INDIVIDUAL
+                        CargaIndividualProducto();
                         break;
 
                     case 4: // CARGA COMPLETA
@@ -66,6 +67,11 @@ namespace MaquinaVending
 
 
         }
-       
+       public void CargaIndividualProducto()
+        {
+          
+           
+        }
     }
+    
 }
