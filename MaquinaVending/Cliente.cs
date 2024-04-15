@@ -27,9 +27,7 @@ namespace MaquinaVending
                 Console.WriteLine();
                 Console.WriteLine("\t1.- Comprar Productos");
                 Console.WriteLine("\t2.- Mostrar Info. de un Producto");
-                Console.WriteLine("\t3.- Cargar un producto individual");
-                Console.WriteLine("\t4.- Carga completa de productos");
-                Console.WriteLine("\t5.- Salir");
+                Console.WriteLine("\t3.- Salir");
                 Console.WriteLine();
                 Console.WriteLine("--------------------------------------");
                 Console.Write("Escoge una opción: ");
