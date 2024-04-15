@@ -32,7 +32,18 @@ namespace MaquinaVending
             switch(opcion)
             {
                 case 1: // PIDO EL ID DEL PRODUCTO QUE QUIERE COMPRAR
-                    Producto producto = BuscarProducto();
+                    int opcion2 = 0;
+                    do
+                    {
+                        Producto producto = BuscarProducto();
+                        Console.Write("¿Quieres añadir otro producto? (1.- Si / 2.-  No): ");
+                        opcion2 = int.Parse(Console.ReadLine());
+                        if (opcion2 == 1)
+                        {
+                            List<Producto> listaProductosPagar = new List<Producto>();
+                            listaProductos.Add(producto);
+                        }
+                    } while (opcion2  == 1);
                     break;
 
                 case 2: // CANCELAMOS LA OPERACIÓN Y VUELVE AL MENÚ

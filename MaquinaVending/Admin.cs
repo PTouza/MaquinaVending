@@ -43,9 +43,12 @@ namespace MaquinaVending
                 {
                     case 1: // COMPRAR PRODUCTOS 
                         ComprarProducto();
+                        
+
                         break;
 
                     case 2: // MOSTRAR INFORMACIÓN
+                       
                         break;
 
                     case 3: // CARGA INDIVIDUAL
@@ -72,6 +75,10 @@ namespace MaquinaVending
           
            
         }
+        
+        
+
+        
     }
     
 }
