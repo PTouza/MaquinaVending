@@ -40,8 +40,16 @@ namespace MaquinaVending
                         opcion2 = int.Parse(Console.ReadLine());
                         if (opcion2 == 1)
                         {
+                            double precioFinal = 0;
                             List<Producto> listaProductosPagar = new List<Producto>();
                             listaProductos.Add(producto);
+                            foreach(Producto p in listaProductosPagar)
+                            {
+                                precioFinal = precioFinal + p.Precio_Unitario;
+                            }
+
+                            PagarProducto(precioFinal);
+                            
                         }
                     } while (opcion2  == 1);
                     break;
@@ -53,7 +61,7 @@ namespace MaquinaVending
                     break;
             }
         }
-        public void PagarProducto(int precio_Producto)
+        public void PagarProducto(double precio_Producto)
         { 
             
             int opcion = 0;
@@ -90,7 +98,7 @@ namespace MaquinaVending
             } while (opcion != 3);
            
         }
-        public void PagarTarjeta(int precio)
+        public void PagarTarjeta(double precio)
         {
             Console.WriteLine($"El precio del producto es: {precio}");
             Console.Write("Introduce los datos de la tarjeta: ");
@@ -121,10 +129,7 @@ namespace MaquinaVending
                         float dinero_Introducido = float.Parse(Console.ReadLine());
                         if (dinero_Introducido == precio)
                         {
-
                             Console.WriteLine("Operación Aceptada");
-
-
                         }
                         else
                         {
@@ -139,14 +144,14 @@ namespace MaquinaVending
 
 
         
-         public void PagarEfectivo (int precio)
+         public void PagarEfectivo (double precio)
          {
             Console.WriteLine($"El precio del producto es : {precio}");
             Console.WriteLine("Introduce el dinero para pagar el producto: ");
             float  dinero_Introducido = float.Parse(Console.ReadLine());
             if (dinero_Introducido > precio)
             {
-                float cambio = dinero_Introducido - precio;
+                double cambio = dinero_Introducido - precio;
                 Console.WriteLine($":) Muchas gracias recoja el producto y el cambio de : {cambio} ");
 
              

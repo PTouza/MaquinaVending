@@ -44,7 +44,6 @@ namespace MaquinaVending
                     case 1: // COMPRAR PRODUCTOS 
                         ComprarProducto();
                         
-
                         break;
 
                     case 2: // MOSTRAR INFORMACIÓN
