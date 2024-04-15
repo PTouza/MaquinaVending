@@ -23,14 +23,20 @@ namespace MaquinaVending
             do
             {
                 Console.Clear();
-                Console.WriteLine("\t\t  ---Menú  Cliente ---  ");
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("==================================");
+                Console.WriteLine("||        MENÚ CLIENTE          ||");
+                Console.WriteLine("==================================");
+                Console.ResetColor();
                 Console.WriteLine();
-                Console.WriteLine("\t1.- Comprar Productos");
-                Console.WriteLine("\t2.- Mostrar Info. de un Producto");
-                Console.WriteLine("\t3.- Salir");
+                Console.WriteLine("╔═══════════════════════════════╗");
+                Console.WriteLine("║ Pulse 1 para Comprar Productos║");
+                Console.WriteLine("║ Pulse 2 para Mostrar Info. de ║");
+                Console.WriteLine("║ un Producto                   ║");
+                Console.WriteLine("║ Pulse 3 para Salir            ║");
+                Console.WriteLine("╚═══════════════════════════════╝");
                 Console.WriteLine();
-                Console.WriteLine("--------------------------------------");
-                Console.Write("Escoge una opción: ");
+                Console.Write("Por favor, introduzca su opción:");
                 opcion = int.Parse(Console.ReadLine());
 
                 switch (opcion)
