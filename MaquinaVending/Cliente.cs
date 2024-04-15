@@ -23,7 +23,7 @@ namespace MaquinaVending
             do
             {
                 Console.Clear();
-                Console.WriteLine("\t\t  --- Menú de Administrador ---  ");
+                Console.WriteLine("\t\t  ---Menú  Cliente ---  ");
                 Console.WriteLine();
                 Console.WriteLine("\t1.- Comprar Productos");
                 Console.WriteLine("\t2.- Mostrar Info. de un Producto");
