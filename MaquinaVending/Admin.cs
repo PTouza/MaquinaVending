@@ -42,6 +42,7 @@ namespace MaquinaVending
                 switch(opcion)
                 {
                     case 1: // COMPRAR PRODUCTOS 
+                        ComprarProducto();
                         break;
 
                     case 2: // MOSTRAR INFORMACIÓN
@@ -62,6 +63,9 @@ namespace MaquinaVending
 
 
             } while (opcion != 5);
+
+
         }
+       
     }
 }

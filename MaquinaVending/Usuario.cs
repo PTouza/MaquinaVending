@@ -151,7 +151,7 @@ namespace MaquinaVending
             
          }
 
-        public  Producto BuscarProducto ()
+        public virtual Producto BuscarProducto ()
         {
             Console.Write("Introduce el Id del Producto: ");
             int id = int.Parse(Console.ReadLine());
