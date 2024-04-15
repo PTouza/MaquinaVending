@@ -19,15 +19,17 @@ namespace MaquinaVending
             {
                 Console.Clear();
                 Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("==================================");
-                Console.WriteLine("||     MÁQUINA DE VENDING       ||");
-                Console.WriteLine("==================================");
+                Console.WriteLine("\t==================================");
+                Console.WriteLine("\t||     MÁQUINA DE VENDING       ||");
+                Console.WriteLine("\t==================================");
+                Console.WriteLine();
                 Console.ResetColor();
-                Console.WriteLine("╔═══════════════════════════════╗");
-                Console.WriteLine("║ Pulse 1 para Cliente          ║");
-                Console.WriteLine("║ Pulse 2 para Admin            ║");
-                Console.WriteLine("╚═══════════════════════════════╝");
-                Console.Write("Por favor, introduzca su opción:");
+                Console.WriteLine("\t╔═══════════════════════════════╗");
+                Console.WriteLine("\t║ 1.- Si es Cliente             ║");
+                Console.WriteLine("\t║ 2.- Si es Admin               ║");
+                Console.WriteLine("\t╚═══════════════════════════════╝");
+                Console.WriteLine();
+                Console.Write("\tPor favor, introduzca su opción:");
                 opcion = int.Parse(Console.ReadLine());
 
                 switch(opcion)
