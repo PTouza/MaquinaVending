@@ -23,16 +23,21 @@ namespace MaquinaVending
             do
             {
                 Console.Clear();
-                Console.WriteLine("\t\t  ---Menú  Cliente ---  ");
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine(" \t   ================================== ");
+                Console.WriteLine(" \t   ||        MENÚ CLIENTE          ||");
+                Console.WriteLine(" \t   ================================== ");
+                Console.ResetColor();
                 Console.WriteLine();
-                Console.WriteLine("\t1.- Comprar Productos");
-                Console.WriteLine("\t2.- Mostrar Info. de un Producto");
-                Console.WriteLine("\t3.- Cargar un producto individual");
-                Console.WriteLine("\t4.- Carga completa de productos");
-                Console.WriteLine("\t5.- Salir");
+                Console.WriteLine("\t╔═══════════════════════════════════════╗");
+                Console.WriteLine("\t║ 1.- Comprar Productos                 ║");
+                Console.WriteLine("\t║                                       ║");
+                Console.WriteLine("\t║ 2.- Mostrar Info. de un Producto      ║");
+                Console.WriteLine("\t║                                       ║");
+                Console.WriteLine("\t║ 3.- Salir                             ║");
+                Console.WriteLine("\t╚═══════════════════════════════════════╝");
                 Console.WriteLine();
-                Console.WriteLine("--------------------------------------");
-                Console.Write("Escoge una opción: ");
+                Console.Write("\tPor favor, introduzca su opción:");
                 opcion = int.Parse(Console.ReadLine());
 
                 switch (opcion)
@@ -44,13 +49,7 @@ namespace MaquinaVending
                     case 2: // MOSTRAR INFORMACIÓN
                         break;
 
-                    case 3: // CARGA INDIVIDUAL
-                        break;
-
-                    case 4: // CARGA COMPLETA
-                        break;
-
-                    case 5: // SALIR
+                    case 3: // SALIR
                         break;
 
                     default:
@@ -58,7 +57,7 @@ namespace MaquinaVending
                 }
 
 
-            } while (opcion != 5);
+            } while (opcion != 3);
 
         }
     }

@@ -27,16 +27,25 @@ namespace MaquinaVending
             do
             {
                 Console.Clear();
-                Console.WriteLine("\t\t  --- Menú de Administrador ---  ");
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("\t    ================================== ");
+                Console.WriteLine("\t    ||         MENÚ ADMIN           || ");
+                Console.WriteLine("\t    ================================== ");
+                Console.ResetColor();
                 Console.WriteLine();
-                Console.WriteLine("\t1.- Comprar Productos");
-                Console.WriteLine("\t2.- Mostrar Info. de un Producto");
-                Console.WriteLine("\t3.- Cargar un producto individual");
-                Console.WriteLine("\t4.- Carga completa de productos");
-                Console.WriteLine("\t5.- Salir");
+                Console.WriteLine("\t╔═══════════════════════════════════════╗");
+                Console.WriteLine("\t║ 1.- Comprar Productos                 ║");
+                Console.WriteLine("\t║                                       ║");
+                Console.WriteLine("\t║ 2.- Mostrar Info. de un Producto      ║");
+                Console.WriteLine("\t║                                       ║");
+                Console.WriteLine("\t║ 3.- Carga individual de un Producto   ║");
+                Console.WriteLine("\t║                                       ║");
+                Console.WriteLine("\t║ 4.- para Carga completa de Productos  ║");
+                Console.WriteLine("\t║                                       ║");
+                Console.WriteLine("\t║ 5.- Salir                             ║");
+                Console.WriteLine("\t╚═══════════════════════════════════════╝");
                 Console.WriteLine();
-                Console.WriteLine("--------------------------------------");
-                Console.Write("Escoge una opción: ");
+                Console.Write("Por favor, introduzca su opción:");
                 opcion = int.Parse(Console.ReadLine());
 
                 switch(opcion)

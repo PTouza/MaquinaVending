@@ -42,7 +42,7 @@ namespace MaquinaVending
 
         public virtual void MostrarInfo()
         {
-            Console.WriteLine($"({Id}) Nombre: {Nombre} | Unidades: {Unidades} | Precio: {Precio_Unitario}€ " +
+            Console.Write($"({Id}) Nombre: {Nombre} | Unidades: {Unidades} | Precio: {Precio_Unitario}€ " +
                 $"| Descripción: {Descripcion}");
         }
     }

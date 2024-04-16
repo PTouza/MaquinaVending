@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -8,16 +9,29 @@ namespace MaquinaVending
 {
     internal class ProductoAlimenticio : Producto
     {
-        // PROPIEDADES
-        public string Informacion_Nutricional {  get; set; }
+        public string Calorias { get; set; }
+        public string Grasa { get; set; }
+        public string Azucar { get; set; }
 
-        // CONSTRUCTORES
         public ProductoAlimenticio() { }
 
-        public ProductoAlimenticio(string nombre, int unidades, double precio_Unitario, string descripcion, 
-            string info_nutricional) : base (nombre, unidades, precio_Unitario, descripcion)
+        public ProductoAlimenticio(string nombre, int unidades, double precio_Unitario, string descripcion, string calorias, string grasa, string azucar) : base(nombre, unidades, precio_Unitario, descripcion)
         {
-            Informacion_Nutricional = info_nutricional;
+            Calorias = calorias;
+            Grasa = grasa;
+            Azucar = azucar;
+        }
+
+        public override void MostrarInfo()
+        {
+            base.MostrarInfo();
+            Console.Write($"Calorías: {Calorias} | Grasa: {Grasa} | Azúcar: {Azucar}");
+        }
+
+        public override string ToString()
+        {
+            base.ToString();
+            return $"{Calorias};{Grasa};{Azucar}";
         }
     }
 }

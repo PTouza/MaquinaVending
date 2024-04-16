@@ -33,25 +33,26 @@ namespace MaquinaVending
             {
                 case 1: // PIDO EL ID DEL PRODUCTO QUE QUIERE COMPRAR
                     int opcion2 = 0;
+                    List<Producto> listaProductosPagar = new List<Producto>();
+                    double precioFinal = 0;
                     do
                     {
                         Producto producto = BuscarProducto();
+                        listaProductos.Add(producto);
                         Console.Write("¿Quieres añadir otro producto? (1.- Si / 2.-  No): ");
                         opcion2 = int.Parse(Console.ReadLine());
-                        if (opcion2 == 1)
+                        if (opcion2 == 2)
                         {
-                            double precioFinal = 0;
-                            List<Producto> listaProductosPagar = new List<Producto>();
-                            listaProductos.Add(producto);
+                            
                             foreach(Producto p in listaProductosPagar)
                             {
                                 precioFinal = precioFinal + p.Precio_Unitario;
                             }
-
-                            PagarProducto(precioFinal);
-                            
                         }
                     } while (opcion2  == 1);
+
+                    PagarProducto(precioFinal);
+
                     break;
 
                 case 2: // CANCELAMOS LA OPERACIÓN Y VUELVE AL MENÚ
@@ -129,7 +130,7 @@ namespace MaquinaVending
                         float dinero_Introducido = float.Parse(Console.ReadLine());
                         if (dinero_Introducido == precio)
                         {
-                            Console.WriteLine("Operación Aceptada");
+                            Console.WriteLine("Operación Aceptada :)");
                         }
                         else
                         {
