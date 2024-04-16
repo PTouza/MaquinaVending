@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -19,6 +20,12 @@ namespace MaquinaVending
             Calorias = calorias;
             Grasa = grasa;
             Azucar = azucar;
+        }
+
+        public override void MostrarInfo()
+        {
+            base.MostrarInfo();
+            Console.Write($"Calorías: {Calorias} | Grasa: {Grasa} | Azúcar: {Azucar}");
         }
     }
 }
