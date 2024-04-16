@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -7,156 +9,185 @@ using System.Threading.Tasks;
 
 namespace MaquinaVending
 {
-    internal class Admin : Usuario 
-    { 
+    internal class Admin : Usuario
+    {
         public string Password { get; set; }
 
-        
+
 
         public Admin() { }
 
         public Admin(List<Producto> productos, string password) : base(productos)
-        { 
+        {
             Password = password;
+
         }
+
+
+
 
         public override void Menu()
         {
-            int opcion = 0;
-
-            do
+            string password;
+            Console.WriteLine("Introduce una contraseña");
+            password = "";
+            while (true)
             {
-                Console.Clear();
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("\t    ================================== ");
-                Console.WriteLine("\t    ||         MENÚ ADMIN           || ");
-                Console.WriteLine("\t    ================================== ");
-                Console.ResetColor();
-                Console.WriteLine();
-                Console.WriteLine("\t╔═══════════════════════════════════════╗");
-                Console.WriteLine("\t║ 1.- Comprar Productos                 ║");
-                Console.WriteLine("\t║                                       ║");
-                Console.WriteLine("\t║ 2.- Mostrar Info. de un Producto      ║");
-                Console.WriteLine("\t║                                       ║");
-                Console.WriteLine("\t║ 3.- Carga individual de un Producto   ║");
-                Console.WriteLine("\t║                                       ║");
-                Console.WriteLine("\t║ 4.- para Carga completa de Productos  ║");
-                Console.WriteLine("\t║                                       ║");
-                Console.WriteLine("\t║ 5.- Salir                             ║");
-                Console.WriteLine("\t╚═══════════════════════════════════════╝");
-                Console.WriteLine();
-                Console.Write("Por favor, introduzca su opción:");
-                opcion = int.Parse(Console.ReadLine());
+                var key = Console.ReadKey(true);
+                // Salir cuando se presiona Enter
+                if (key.Key == ConsoleKey.Enter)
+                    break;
+                password += key.KeyChar;
 
-                switch(opcion)
+            }
+            Console.WriteLine("\nContraseña introducida: " + password);
+            if (password != "hola")
+            {
+                Console.WriteLine("Contraseña incorrecta");
+                Console.ReadKey();
+
+            }
+            else
+            {
+
+                int opcion = 0;
+
+
+                do
                 {
-                    case 1: // COMPRAR PRODUCTOS 
-                        ComprarProducto();
-                        
-                        break;
+                    Console.Clear();
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("\t    ================================== ");
+                    Console.WriteLine("\t    ||         MENÚ ADMIN           || ");
+                    Console.WriteLine("\t    ================================== ");
+                    Console.ResetColor();
+                    Console.WriteLine();
+                    Console.WriteLine("\t╔═══════════════════════════════════════╗");
+                    Console.WriteLine("\t║ 1.- Comprar Productos                 ║");
+                    Console.WriteLine("\t║                                       ║");
+                    Console.WriteLine("\t║ 2.- Mostrar Info. de un Producto      ║");
+                    Console.WriteLine("\t║                                       ║");
+                    Console.WriteLine("\t║ 3.- Carga individual de un Producto   ║");
+                    Console.WriteLine("\t║                                       ║");
+                    Console.WriteLine("\t║ 4.- para Carga completa de Productos  ║");
+                    Console.WriteLine("\t║                                       ║");
+                    Console.WriteLine("\t║ 5.- Salir                             ║");
+                    Console.WriteLine("\t╚═══════════════════════════════════════╝");
+                    Console.WriteLine();
+                    Console.Write("Por favor, introduzca su opción:");
+                    opcion = int.Parse(Console.ReadLine());
 
-                    case 2: // MOSTRAR INFORMACIÓN
-                        MostrarInfo();
-                        break;
+                    switch (opcion)
+                    {
+                        case 1: // COMPRAR PRODUCTOS 
+                            ComprarProducto();
 
-                    case 3: // CARGA INDIVIDUAL
-                        CargaIndividualProducto();
-                        break;
+                            break;
 
-                    case 4: // CARGA COMPLETA
-                        CargaCompletaProducto();
-                        break;
+                        case 2: // MOSTRAR INFORMACIÓN
+                            MostrarInfo();
+                            break;
 
-                    case 5: // SALIR
-                        break;
+                        case 3: // CARGA INDIVIDUAL
+                            CargaIndividualProducto();
+                            break;
 
-                    default:
-                        break;
+                        case 4: // CARGA COMPLETA
+                            CargaCompletaProducto();
+                            break;
+
+                        case 5: // SALIR
+                            break;
+
+                        default:
+                            break;
+                    }
+
+
+                } while (opcion != 5);
+
+
+            }
+        }
+            public void MostrarInfo()
+            {
+                foreach (Producto p in listaProductos)
+                {
+                    Console.WriteLine($"ID: {p.Id}, Nombre: {p.Nombre}, Unidades {p.Unidades}, Precio {p.Precio_Unitario}€, Información del producto: {p.Descripcion}");
+                }
+                int id = int.Parse(Console.ReadLine());
+                foreach (Producto p in listaProductos)
+                {
+                    if (id == p.Id)
+                    {
+                        p.MostrarInfo();
+                    }
+                    else
+                    { Console.WriteLine("Lo sentimos, no tenemos ninguna información sobre los productos"); }
                 }
 
-
-            } while (opcion != 5);
-           
-
-        }
-        public void MostrarInfo()
-        {
-            foreach(Producto p in listaProductos)
-            {
-                Console.WriteLine($"ID: {p.Id}, Nombre: {p.Nombre}, Unidades {p.Unidades}, Precio {p.Precio_Unitario}€, Información del producto: {p.Descripcion}");
             }
-            int id = int.Parse(Console.ReadLine());
-            foreach(Producto p in listaProductos)
+            public void CargaIndividualProducto()
             {
-                if(id == p.Id)
+                int opcion = 0;
+                do
                 {
-                    p.MostrarInfo();
+                    Console.Clear();
+                    Console.WriteLine("1. Añadir productos existentes");
+                    Console.WriteLine("2. Introducir nuevos productos a la máquina");
+                    opcion = int.Parse(Console.ReadLine());
+                    switch (opcion)
+                    {
+                        case 1:
+                            AddUnidades();
+                            break;
+                        case 2:
+                            AddnewProducto();
+                            break;
+                        default:
+                            Console.WriteLine("Salir");
+                            break;
+                    }
                 }
-                else
-                { Console.WriteLine("Lo sentimos, no tenemos ninguna información sobre los productos"); }
+                while (opcion != 2);
             }
-
-        }
-        public void CargaIndividualProducto()
-        {
-            int opcion = 0;
-            do
+            public void CargaCompletaProducto()
             {
-                Console.Clear();
-                Console.WriteLine("1. Añadir productos existentes");
-                Console.WriteLine("2. Introducir nuevos productos a la máquina");
-                opcion = int.Parse(Console.ReadLine());
-                switch(opcion)
+
+            }
+            public void AddUnidades()
+            {
+
+                foreach (Producto p in listaProductos)
                 {
-                    case 1:
-                        AddUnidades();
-                        break;
-                    case 2:
-                        AddnewProducto();
-                        break;
-                    default:
-                        Console.WriteLine("Salir");
-                        break;
+                    Console.WriteLine($"ID: {p.Id}, Nombre: {p.Nombre}, Unidades {p.Unidades}, Precio {p.Precio_Unitario}€, Información del producto: {p.Descripcion}");
                 }
-            }
-            while (opcion != 2);
-        }
-        public void CargaCompletaProducto ()
-        {
-
-        }
-        public void AddUnidades()
-        {
-
-            foreach (Producto p in listaProductos)
-            {
-                Console.WriteLine($"ID: {p.Id}, Nombre: {p.Nombre}, Unidades {p.Unidades}, Precio {p.Precio_Unitario}€, Información del producto: {p.Descripcion}");
-            }
-            int id = int.Parse(Console.ReadLine());
-            Console.WriteLine("Introduce el número de unidades que desa introducir");
-            int unidades = int.Parse(Console.ReadLine());
-            foreach (Producto p in listaProductos)
-            {
-                if (id == p.Id)
+                int id = int.Parse(Console.ReadLine());
+                Console.WriteLine("Introduce el número de unidades que desa introducir");
+                int unidades = int.Parse(Console.ReadLine());
+                foreach (Producto p in listaProductos)
                 {
-                    p.AddUnidades(unidades);
+                    if (id == p.Id)
+                    {
+                        p.AddUnidades(unidades);
+                    }
+                    else
+                    { Console.WriteLine("Lo sentimos, no tenemos ninguna información sobre los productos"); }
                 }
-                else
-                { Console.WriteLine("Lo sentimos, no tenemos ninguna información sobre los productos"); }
+
+            }
+            public void AddnewProducto()
+            {
+
             }
 
-        }
-        public void AddnewProducto() 
-        {
 
-        }
-
-        
 
 
 
 
 
-    }
+        }
+    
     
 }
