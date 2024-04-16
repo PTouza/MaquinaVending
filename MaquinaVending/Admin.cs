@@ -47,7 +47,7 @@ namespace MaquinaVending
                         break;
 
                     case 2: // MOSTRAR INFORMACIÓN
-                       
+                        MostrarInfo();
                         break;
 
                     case 3: // CARGA INDIVIDUAL
@@ -55,6 +55,7 @@ namespace MaquinaVending
                         break;
 
                     case 4: // CARGA COMPLETA
+                        CargaCompletaProducto();
                         break;
 
                     case 5: // SALIR
@@ -66,18 +67,70 @@ namespace MaquinaVending
 
 
             } while (opcion != 5);
-
-
-        }
-       public void CargaIndividualProducto()
-        {
-          
            
+
         }
-        
-        
+        public void MostrarInfo()
+        {
+            foreach(Producto p in listaProductos)
+            {
+                Console.WriteLine($"ID: {p.Id}, Nombre: {p.Nombre}, Unidades {p.Unidades}, Precio {p.Precio_Unitario}€, Información del producto: {p.Descripcion}");
+            }
+            int id = int.Parse(Console.ReadLine());
+            foreach(Producto p in listaProductos)
+            {
+                if(id == p.Id)
+                {
+                    p.MostrarInfo();
+                }
+                else
+                { Console.WriteLine("Lo sentimos, no tenemos ninguna información sobre los productos"); }
+            }
+
+        }
+        public void CargaIndividualProducto()
+        {
+            int opcion = 0;
+            do
+            {
+                Console.Clear();
+                Console.WriteLine("1. Añadir productos existentes");
+                Console.WriteLine("2. Introducir nuevos productos a la máquina");
+                opcion = int.Parse(Console.ReadLine());
+                switch(opcion)
+                {
+                    case 1:
+                        AddUnidades();
+                        break;
+                    case 2:
+                        AddnewProducto();
+                        break;
+                    default:
+                        Console.WriteLine("Salir");
+                        break;
+                }
+            }
+            while (opcion != 2);
+        }
+        public void CargaCompletaProducto ()
+        {
+
+        }
+        public void AddUnidades()
+        {
+
+        }
+        public void AddnewProducto() 
+        {
+
+        }
 
         
+
+
+
+
+
     }
     
 }
