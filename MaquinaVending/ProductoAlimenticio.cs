@@ -27,5 +27,11 @@ namespace MaquinaVending
             base.MostrarInfo();
             Console.Write($"Calorías: {Calorias} | Grasa: {Grasa} | Azúcar: {Azucar}");
         }
+
+        public override string ToString()
+        {
+            base.ToString();
+            return $"{Calorias};{Grasa};{Azucar}";
+        }
     }
 }
