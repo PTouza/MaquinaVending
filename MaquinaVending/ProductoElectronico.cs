@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -20,6 +21,18 @@ namespace MaquinaVending
             Materiales = materiales;
             Tiene_Bateria = tiene_Bateria;
             Precargado = precargado;
+        }
+
+        public override void MostrarInfo()
+        {
+            base.MostrarInfo();
+            Console.Write($"Materiales: {Materiales} | ¿Tiene batería?: {Tiene_Bateria} | ¿Está precargado?: {Precargado}");
+        }
+
+        public override string ToString()
+        {
+            base.ToString();
+            return $"{Materiales};{Tiene_Bateria};{Precargado}";
         }
     }
 }

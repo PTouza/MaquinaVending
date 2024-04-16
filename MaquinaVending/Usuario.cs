@@ -130,7 +130,7 @@ namespace MaquinaVending
                         float dinero_Introducido = float.Parse(Console.ReadLine());
                         if (dinero_Introducido == precio)
                         {
-                            Console.WriteLine("Operación Aceptada");
+                            Console.WriteLine("Operación Aceptada :)");
                         }
                         else
                         {
