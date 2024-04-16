@@ -109,6 +109,7 @@ namespace MaquinaVending
             if (input.Length  != 16)
             {
                 Console.WriteLine("Error, el número de tarjeta tiene que tener 16 digitos");
+                Console.ReadKey();
             }
             else
             {
@@ -117,6 +118,7 @@ namespace MaquinaVending
                 if(inputs.Length != 3)
                 {
                     Console.WriteLine("Error, el CVV tiene que tener por lo menos 3 caracteres");
+                    Console.ReadKey();
                 }
                 else
                 {
@@ -125,6 +127,7 @@ namespace MaquinaVending
                     if (fechaCaducidadTarjeta <  DateTime.Now)
                     {
                         Console.WriteLine("Tarjeta Caducada");
+                        Console.ReadKey();
                     }
                     else
                     {
@@ -162,10 +165,13 @@ namespace MaquinaVending
             else if (dinero_Introducido == precio)
             {
                 Console.WriteLine("Muchas gracias, recoja el producto");
+                
+                Console.ReadKey(true);
             }
             else
             {
                 Console.WriteLine("Error, no se ha introducido la cantidad exacta");
+                Console.ReadKey();
             }
             
          }
