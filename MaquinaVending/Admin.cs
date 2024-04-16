@@ -34,7 +34,7 @@ namespace MaquinaVending
             while (true)
             {
                 var key = Console.ReadKey(true);
-                // Salir cuando se presiona Enter
+             
                 if (key.Key == ConsoleKey.Enter)
                     break;
                 password += key.KeyChar;

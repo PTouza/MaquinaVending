@@ -102,8 +102,9 @@ namespace MaquinaVending
         public void PagarTarjeta(double precio)
         {
             Console.WriteLine($"El precio del producto es: {precio}");
-            Console.Write("Introduce los datos de la tarjeta: ");
+            Console.WriteLine("Introduce los datos de la tarjeta: ");
             Console.WriteLine("Introduce el número de la tarjeta: ");
+          
            string  input = Console.ReadLine();
             if (input.Length  != 16)
             {
@@ -154,6 +155,7 @@ namespace MaquinaVending
             {
                 double cambio = dinero_Introducido - precio;
                 Console.WriteLine($":) Muchas gracias recoja el producto y el cambio de : {cambio} ");
+                Console.ReadKey();
 
              
             }

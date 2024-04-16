@@ -47,6 +47,7 @@ namespace MaquinaVending
                         break;
 
                     case 2: // MOSTRAR INFORMACIÓN
+                        MostrarInfo();
                         break;
 
                     case 3: // SALIR
@@ -59,6 +60,24 @@ namespace MaquinaVending
 
             } while (opcion != 3);
 
+
+        }
+        public void MostrarInfo()
+        {
+            foreach (Producto p in listaProductos)
+            {
+                Console.WriteLine($"ID: {p.Id}, Nombre: {p.Nombre}, Unidades {p.Unidades}, Precio {p.Precio_Unitario}€, Información del producto: {p.Descripcion}");
+            }
+            int id = int.Parse(Console.ReadLine());
+            foreach (Producto p in listaProductos)
+            {
+                if (id == p.Id)
+                {
+                    p.MostrarInfo();
+                }
+                else
+                { Console.WriteLine("Lo sentimos, no tenemos ninguna información sobre los productos"); }
+            }
         }
     }
 }
