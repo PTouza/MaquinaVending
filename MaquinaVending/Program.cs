@@ -29,7 +29,7 @@ namespace MaquinaVending
                 Console.WriteLine("\t║ 2.- Si es Admin               ║");
                 Console.WriteLine("\t╚═══════════════════════════════╝");
                 Console.WriteLine();
-                Console.Write("\tPor favor, introduzca su opción:");
+                Console.Write("\tPor favor, introduzca su opción:   ");
                 opcion = int.Parse(Console.ReadLine());
 
                 switch(opcion)
