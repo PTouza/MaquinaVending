@@ -199,7 +199,17 @@ namespace MaquinaVending
                 Console.WriteLine("Producto encontrado!!!");
             }
 
-            return p; 
+            return producto; 
+        }
+
+        public void MostrarInfo()
+        {
+            Producto producto = BuscarProducto();
+            if (producto != null)
+            {
+                producto.MostrarInfo();
+            }
+
         }
 
     }

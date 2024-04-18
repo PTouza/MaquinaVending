@@ -45,7 +45,7 @@ namespace MaquinaVending
             }
 
             Console.WriteLine("\nContraseña introducida: " + password);
-            if (password != "hola")
+            if (password != Password)
             {
                 Console.WriteLine("Contraseña incorrecta");
                 Console.ReadKey();
@@ -113,15 +113,7 @@ namespace MaquinaVending
 
             }
         }
-        public void MostrarInfo()
-        {
-            Producto producto = BuscarProducto();
-            if(producto != null)
-            {
-                producto.MostrarInfo();
-            }
-
-        }
+        
         public void CargaIndividualProducto()
         {
             int opcion = 0;
@@ -154,6 +146,7 @@ namespace MaquinaVending
         {
 
         }
+
         public void AddUnidades()
         {
             Producto producto = BuscarProducto();
