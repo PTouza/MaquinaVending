@@ -24,13 +24,22 @@ namespace MaquinaVending
 
         public override string ToString()
         {
-            return $"1;{base.ToString()};{TipoMaterial};{Peso}";
+            return $"1;{base.ToString()};{TipoMaterial};{Peso};;;";
         }
         
         public override void MostrarInfo()
         {
             base.MostrarInfo();
             Console.WriteLine($"Tipo de Material: {TipoMaterial} | Peso: {Peso}");
+        }
+
+        public override void SolicitarDetalles()
+        {
+            base.SolicitarDetalles();
+            Console.Write("Material: ");
+            TipoMaterial = Console.ReadLine();
+            Console.Write("Peso (en gramos): ");
+            Peso = Console.ReadLine();
         }
 
     }
