@@ -178,17 +178,27 @@ namespace MaquinaVending
 
         public virtual Producto BuscarProducto ()
         {
+            foreach (Producto p in listaProductos)
+            {
+                Console.WriteLine($"ID: {p.Id}, Nombre: {p.Nombre}, Unidades {p.Unidades}, Precio {p.Precio_Unitario}€," +
+                    $" Información del producto: {p.Descripcion}");
+            }
+
             Console.Write("Introduce el Id del Producto: ");
             int id = int.Parse(Console.ReadLine());
-            Producto p = null; 
+            Producto producto = null; 
+            producto  = listaProductos.Find (x => x.Id == id); 
 
-            foreach(Producto e in listaProductos)
+            if (producto == null)
             {
-                if (e.Id == id)
-                {
-                    p = e; 
-                }
+                Console.WriteLine("No hemos podido encontrar su producto");
             }
+
+            else
+            {
+                Console.WriteLine("Producto encontrado!!!");
+            }
+
             return p; 
         }
 
