@@ -113,47 +113,47 @@ namespace MaquinaVending
         {
             foreach (Producto p in listaProductos)
             {
-                Console.WriteLine($"ID: {p.Id}, Nombre: {p.Nombre}, Unidades {p.Unidades}, Precio {p.Precio_Unitario}€, " +
-                    $"Información del producto: {p.Descripcion}");
+                Console.WriteLine($"ID: {p.Id}, Nombre: {p.Nombre}, Unidades {p.Unidades}, Precio {p.Precio_Unitario}€, Información del producto: {p.Descripcion}");
             }
             int id = int.Parse(Console.ReadLine());
-            Producto producto = null;
-            producto = listaProductos.Find(x => x.Id == id);
-            if (producto == null)
+            foreach (Producto p in listaProductos)
             {
-                Console.WriteLine("No hemos podido encontrar el producto");
-            }
-
-            else
-            {
-                Console.WriteLine("Producto encontrado!!!");
-                producto.MostrarInfo();
+                if (id == p.Id)
+                {
+                    p.MostrarInfo();
+                }
+                else
+                { Console.WriteLine("Lo sentimos, no tenemos ninguna información sobre los productos"); }
             }
 
         }
         public void CargaIndividualProducto()
         {
             int opcion = 0;
-            do
+
+            Console.Clear();
+            Console.WriteLine("1. Añadir productos existentes");
+            Console.WriteLine("2. Introducir nuevos productos a la máquina");
+            opcion = int.Parse(Console.ReadLine());
+            switch (opcion)
             {
-                Console.Clear();
-                Console.WriteLine("1. Añadir unidades a productos existentes");
-                Console.WriteLine("2. Introducir nuevos productos a la máquina");
-                opcion = int.Parse(Console.ReadLine());
-                switch (opcion)
-                {
-                    case 1:
-                        AddUnidades();
-                        break;
-                    case 2:
-                        AddnewProducto();
-                        break;
-                    default:
-                        Console.WriteLine("Salir");
-                        break;
-                }
+                case 1:
+                    AddUnidades();
+                    break;
+                case 2:
+                    int opcion2 = 0;
+                    do
+                    {
+                        AddNewProducto();
+                        Console.Write("¿Quiere añadir otro producto? (1.- Si / 2.- No): ");
+                        opcion2 = int.Parse(Console.ReadLine());
+
+                    } while (opcion2 == 1);
+                    break;
+                default:
+                    Console.WriteLine("Salir");
+                    break;
             }
-            while (opcion != 2);
         }
         public void CargaCompletaProducto()
         {
@@ -164,33 +164,58 @@ namespace MaquinaVending
 
             foreach (Producto p in listaProductos)
             {
-                p.MostrarInfo();
+                Console.WriteLine($"ID: {p.Id}, Nombre: {p.Nombre}, Unidades {p.Unidades}, Precio {p.Precio_Unitario}€, Información del producto: {p.Descripcion}");
             }
-            Console.Write("Introduce el ID del producto deseado: ");
             int id = int.Parse(Console.ReadLine());
-            Producto producto = null;
-
-            producto = listaProductos.Find(x => x.Id == id);
-
-            if (producto != null)
+            Console.WriteLine("Introduce el número de unidades que desa introducir");
+            int unidades = int.Parse(Console.ReadLine());
+            foreach (Producto p in listaProductos)
             {
-                Console.WriteLine("No hemos podido encontrar su producto");
-            }
-
-            else
-            {
-                Console.WriteLine("Prodcuto encontrado!!!");
-                Console.WriteLine();
-                Console.Write("Introduce el número de unidades que desa introducir");
-                int unidades = int.Parse(Console.ReadLine());
-                producto.AddUnidades(unidades);
+                if (id == p.Id)
+                {
+                    p.AddUnidades(unidades);
+                }
+                else
+                { Console.WriteLine("Lo sentimos, no tenemos ninguna información sobre los productos"); }
             }
 
         }
-        public void AddnewProducto()
+        public void AddNewProducto()
         {
+            Producto producto = null;
+            Console.WriteLine("¿Que tipo de producto quiere añadir?: ");
+            Console.WriteLine("\t1.- Producto Alimenticio");
+            Console.WriteLine("\t2.- Producto Electrónico");
+            Console.WriteLine("\t3.- Material Precioso");
+            Console.WriteLine("\t4.- Salir");
+            Console.WriteLine();
+            Console.Write("Escoge una opción: ");
+            int opcion = int.Parse(Console.ReadLine());
 
+            switch (opcion)
+            {
+                case 1:
+                    ProductoAlimenticio productoAlimenticio = (ProductoAlimenticio)producto;
+                    break;
+
+                case 2:
+                    ProductoElectronico productoElectronico = (ProductoElectronico)producto;
+                    break;
+
+                case 3:
+                    MaterialesPreciosos materialesPreciosos = (MaterialesPreciosos)producto;
+                    break;
+
+                default:
+                    break;
+            }
         }
+
+
+
+
+
+
 
     }
 
