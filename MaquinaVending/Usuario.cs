@@ -139,6 +139,8 @@ namespace MaquinaVending
                     }
                     else
                     {
+                        Console.WriteLine("Introduce la cantidad del producto");
+                        
                         float dinero_Introducido = float.Parse(Console.ReadLine());
                         if (dinero_Introducido == precio)
                         {
