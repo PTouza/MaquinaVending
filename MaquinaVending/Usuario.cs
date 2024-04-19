@@ -110,8 +110,10 @@ namespace MaquinaVending
            string  input = Console.ReadLine();
             if (input.Length  != 16)
             {
-                Console.WriteLine("Error, el número de tarjeta tiene que tener 16 digitos");
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine(" X Error, el número de tarjeta tiene que tener 16 digitos");
                 Console.ReadKey();
+                Console.ResetColor ();
             }
             else
             {
@@ -119,8 +121,10 @@ namespace MaquinaVending
                 string inputs = Console.ReadLine();
                 if(inputs.Length != 3)
                 {
-                    Console.WriteLine("Error, el CVV tiene que tener por lo menos 3 caracteres");
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("X Error, el CVV tiene que tener por lo menos 3 caracteres");
                     Console.ReadKey();
+                    Console.ResetColor ();
                 }
                 else
                 {
@@ -128,19 +132,25 @@ namespace MaquinaVending
                     DateTime fechaCaducidadTarjeta = DateTime.Parse(Console.ReadLine());
                     if (fechaCaducidadTarjeta <  DateTime.Now)
                     {
+                        Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine("Tarjeta Caducada");
                         Console.ReadKey();
+                        Console.ResetColor ();
                     }
                     else
                     {
                         float dinero_Introducido = float.Parse(Console.ReadLine());
                         if (dinero_Introducido == precio)
                         {
+                            Console.ForegroundColor = ConsoleColor.Green;
                             Console.WriteLine("Operación Aceptada :)");
+                            Console.ResetColor();
                         }
                         else
                         {
+                            Console.ForegroundColor= ConsoleColor.Red;
                             Console.WriteLine("Operación cancelada  :( ");
+                            Console.ResetColor();
                         }
                     }
                 }
@@ -172,8 +182,10 @@ namespace MaquinaVending
             }
             else
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Error, no se ha introducido la cantidad exacta");
                 Console.ReadKey();
+                Console.ResetColor();
             }
             
          }
