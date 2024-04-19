@@ -102,7 +102,9 @@ namespace MaquinaVending
         public void PagarTarjeta(double precio)
         {
             Console.WriteLine($"El precio del producto es: {precio}");
-            Console.WriteLine("Introduce los datos de la tarjeta: ");
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("[Introduce los datos de la tarjeta]\n");
+            Console.ResetColor();
             Console.WriteLine("Introduce el número de la tarjeta: ");
           
            string  input = Console.ReadLine();
