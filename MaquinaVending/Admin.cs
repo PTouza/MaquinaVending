@@ -79,7 +79,7 @@ namespace MaquinaVending
                     Console.WriteLine("\t║ 5.- Salir                             ║");
                     Console.WriteLine("\t╚═══════════════════════════════════════╝");
                     Console.WriteLine();
-                    Console.Write("Por favor, introduzca su opción:");
+                    Console.Write("\tPor favor, introduzca su opción:");
                     opcion = int.Parse(Console.ReadLine());
 
                     switch (opcion)
