@@ -144,7 +144,7 @@ namespace MaquinaVending
             }
         }
         public void CargaCompletaProducto()
-        {
+        { 
 
         }
 
