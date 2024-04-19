@@ -29,7 +29,8 @@ namespace MaquinaVending
         public override void Menu()
         {
             string password;
-            Console.WriteLine("Introduce una contraseña");
+            Console.WriteLine();
+            Console.Write("\tIntroduce una contraseña: ");
             password = "";
             bool passwordEscrito = false;
             while (!passwordEscrito)
