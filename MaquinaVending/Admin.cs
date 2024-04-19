@@ -156,7 +156,7 @@ namespace MaquinaVending
             }
         }
         public void CargaCompletaProducto()
-        {
+        { 
 
         }
         public void AddUnidades()
