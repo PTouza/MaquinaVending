@@ -19,6 +19,6 @@ namespace MaquinaVending
         void AddUnidades(int unidades);
         string ToString();
         void MostrarInfo();
-
+        void SolicitarDetalles();
     }
 }

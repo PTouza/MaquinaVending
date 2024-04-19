@@ -31,22 +31,26 @@ namespace MaquinaVending
             string password;
             Console.WriteLine("Introduce una contraseña");
             password = "";
-            while (true)
+            bool passwordEscrito = false;
+            while (!passwordEscrito)
             {
                 var key = Console.ReadKey(true);
 
                 if (key.Key == ConsoleKey.Enter)
-                    break;
+                {
+                    passwordEscrito = true;
+                }
                 password += key.KeyChar;
 
             }
+
             Console.WriteLine("\nContraseña introducida: " + password);
-            if (password != "hola")
+            if (password != Password)
             {
                 Console.WriteLine("Contraseña incorrecta");
                 Console.ReadKey();
-
             }
+
             else
             {
 
@@ -109,24 +113,7 @@ namespace MaquinaVending
 
             }
         }
-        public void MostrarInfo()
-        {
-            foreach (Producto p in listaProductos)
-            {
-                Console.WriteLine($"ID: {p.Id}, Nombre: {p.Nombre}, Unidades {p.Unidades}, Precio {p.Precio_Unitario}€, Información del producto: {p.Descripcion}");
-            }
-            int id = int.Parse(Console.ReadLine());
-            foreach (Producto p in listaProductos)
-            {
-                if (id == p.Id)
-                {
-                    p.MostrarInfo();
-                }
-                else
-                { Console.WriteLine("Lo sentimos, no tenemos ninguna información sobre los productos"); }
-            }
-
-        }
+        
         public void CargaIndividualProducto()
         {
             int opcion = 0;
@@ -159,26 +146,16 @@ namespace MaquinaVending
         { 
 
         }
+
         public void AddUnidades()
         {
-
-            foreach (Producto p in listaProductos)
-            {
-                Console.WriteLine($"ID: {p.Id}, Nombre: {p.Nombre}, Unidades {p.Unidades}, Precio {p.Precio_Unitario}€, Información del producto: {p.Descripcion}");
-            }
-            int id = int.Parse(Console.ReadLine());
-            Console.WriteLine("Introduce el número de unidades que desa introducir");
+            Producto producto = BuscarProducto();
+            Console.Write("Introduce el número de unidades que desa introducir: ");
             int unidades = int.Parse(Console.ReadLine());
-            foreach (Producto p in listaProductos)
+            if(producto != null)
             {
-                if (id == p.Id)
-                {
-                    p.AddUnidades(unidades);
-                }
-                else
-                { Console.WriteLine("Lo sentimos, no tenemos ninguna información sobre los productos"); }
+                producto.AddUnidades(unidades);
             }
-
         }
         public void AddNewProducto()
         {
@@ -203,19 +180,14 @@ namespace MaquinaVending
                     break;
 
                 case 3:
-                    MaterialesPreciosos materialesPreciosos = (MaterialesPreciosos)producto;
+                    MaterialPrecioso materialPrecioso = (MaterialPrecioso)producto;
+                    materialPrecioso.SolicitarDetalles();
                     break;
 
                 default:
                     break;
             }
         }
-
-
-
-
-
-
 
     }
 
