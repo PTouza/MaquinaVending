@@ -69,11 +69,14 @@ namespace MaquinaVending
 
             do
             {
+                Console.Clear();
                 Console.WriteLine("Introduce su metodo de pago");
                 Console.Clear();
-                Console.WriteLine("1. Pago de tarjeta");
-                Console.WriteLine("2. Pago en efectivo");
-                Console.WriteLine("3. Retroceder");
+                Console.WriteLine("\t1. Pago de tarjeta");
+                Console.WriteLine("\t2. Pago en efectivo");
+                Console.WriteLine("\t3. Retroceder");
+                Console.WriteLine();
+                Console.Write("Escoge una opción: ");
                 opcion = int.Parse(Console.ReadLine());
                 Console.Clear();
 
@@ -105,10 +108,10 @@ namespace MaquinaVending
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("[Introduce los datos de la tarjeta]\n");
             Console.ResetColor();
-            Console.WriteLine("Introduce el número de la tarjeta: ");
+            Console.Write("Introduce el número de la tarjeta: ");
           
-           string  input = Console.ReadLine();
-            if (input.Length  != 16)
+           string  numTarjeta = Console.ReadLine();
+            if (numTarjeta.Length  != 16)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine(" X Error, el número de tarjeta tiene que tener 16 digitos");
@@ -117,9 +120,9 @@ namespace MaquinaVending
             }
             else
             {
-                Console.WriteLine("Introduce el CVV de la tarjeta:"); 
-                string inputs = Console.ReadLine();
-                if(inputs.Length != 3)
+                Console.Write("Introduce el CVV de la tarjeta:"); 
+                string cvv = Console.ReadLine();
+                if(cvv.Length != 3)
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("X Error, el CVV tiene que tener por lo menos 3 caracteres");
@@ -128,7 +131,7 @@ namespace MaquinaVending
                 }
                 else
                 {
-                    Console.WriteLine("Introduce la fecha de caducidad:");
+                    Console.Write("Introduce la fecha de caducidad:");
                     DateTime fechaCaducidadTarjeta = DateTime.Parse(Console.ReadLine());
                     if (fechaCaducidadTarjeta <  DateTime.Now)
                     {
@@ -139,20 +142,17 @@ namespace MaquinaVending
                     }
                     else
                     {
-                        Console.WriteLine("Introduce la cantidad del producto");
-                        
-                        float dinero_Introducido = float.Parse(Console.ReadLine());
-                        if (dinero_Introducido == precio)
+                        Console.Write("Introduce el Pin: ");
+                        int pin = int.Parse(Console.ReadLine());
+
+                        if(pin > 9999)
                         {
-                            Console.ForegroundColor = ConsoleColor.Green;
-                            Console.WriteLine("Operación Aceptada :)");
-                            Console.ResetColor();
+                            Console.WriteLine($"Operación aceptada, el coste total es {precio} € ");
                         }
+
                         else
                         {
-                            Console.ForegroundColor= ConsoleColor.Red;
-                            Console.WriteLine("Operación cancelada  :( ");
-                            Console.ResetColor();
+                            Console.WriteLine("El Pin debe tener cuatro números, porfavor inténtelo de nuevo");
                         }
                     }
                 }
@@ -166,7 +166,7 @@ namespace MaquinaVending
          public void PagarEfectivo (double precio)
          {
             Console.WriteLine($"El precio del producto es : {precio}");
-            Console.WriteLine("Introduce el dinero para pagar el producto: ");
+            Console.Write("Introduce el dinero para pagar el producto: ");
             float  dinero_Introducido = float.Parse(Console.ReadLine());
             if (dinero_Introducido > precio)
             {
