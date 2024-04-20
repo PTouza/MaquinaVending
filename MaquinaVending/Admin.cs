@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.Design;
 using System.Diagnostics.Eventing.Reader;
+using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -143,8 +144,53 @@ namespace MaquinaVending
             }
         }
         public void CargaCompletaProducto()
-        { 
+        {
+            int opcion = 0;
+            Console.Write("¿Quiere continuar con la operación (1.- Si | 2.- No): ");
+            opcion = int.Parse(Console.ReadLine());
 
+            switch(opcion)
+            {
+                case 1:
+                    Console.Write("Introduce la dirección de memoria del archivo: ");
+                    var path = Console.ReadLine();
+                    if (File.Exists(path))
+                    {
+                        using(StreamReader sr = new StreamReader(path))
+                        {
+                            string line = null;
+                            string[] campos = null;
+                            while ((line = sr.ReadLine()) != null)
+                            {
+                                campos = line.Split(';');
+                                switch(int.Parse(campos[0]))
+                                {
+                                    case 1:
+                                        MaterialPrecioso mp = new MaterialPrecioso(campos[1], int.Parse(campos[2]), double.Parse(campos[3]), 
+                                            campos[4], campos[5], campos[6]);
+                                        break;
+
+                                    case 2:
+                                        ProductoAlimenticio pa = new ProductoAlimenticio(campos[1], int.Parse(campos[2]), double.Parse(campos[3]),
+                                            campos[4], campos[7]);
+                                        break;
+
+                                    case 3:
+                                        ProductoElectronico pe = new ProductoElectronico(campos[1], int.Parse(campos[2]), double.Parse(campos[3]),
+                                            campos[4], campos[6], bool.Parse(campos[8]), bool.Parse(campos[9]));
+                                        break;
+                                }
+                            }
+                        }
+                    }
+                    break;
+
+                case 2:
+                    break;
+
+                default:
+                    break;
+            }
         }
 
         public void AddUnidades()
@@ -188,6 +234,7 @@ namespace MaquinaVending
                     break;
             }
         }
+
 
     }
 
