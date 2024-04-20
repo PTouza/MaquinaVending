@@ -12,13 +12,13 @@ namespace MaquinaVending
 {
     internal abstract class Usuario : IUsuario
     {
-        protected List<Producto> listaProductos;
+        protected List<Producto> ProductosMaquina;
 
         public Usuario() { }
 
         public Usuario(List<Producto> productos)
         {
-            listaProductos = productos;
+            ProductosMaquina = productos;
         }
 
         public abstract void Menu();
@@ -38,7 +38,7 @@ namespace MaquinaVending
                     do
                     {
                         Producto producto = BuscarProducto();
-                        listaProductos.Add(producto);
+                        ProductosMaquina.Add(producto);
                         Console.Write("¿Quieres añadir otro producto? (1.- Si / 2.-  No): ");
                         opcion2 = int.Parse(Console.ReadLine());
                         if (opcion2 == 2)
@@ -194,7 +194,7 @@ namespace MaquinaVending
 
         public virtual Producto BuscarProducto ()
         {
-            foreach (Producto p in listaProductos)
+            foreach (Producto p in ProductosMaquina)
             {
                 Console.WriteLine($"ID: {p.Id}, Nombre: {p.Nombre}, Unidades {p.Unidades}, Precio {p.Precio_Unitario}€," +
                     $" Información del producto: {p.Descripcion}");
@@ -203,7 +203,7 @@ namespace MaquinaVending
             Console.Write("Introduce el Id del Producto: ");
             int id = int.Parse(Console.ReadLine());
             Producto producto = null; 
-            producto  = listaProductos.Find (x => x.Id == id); 
+            producto  = ProductosMaquina.Find (x => x.Id == id); 
 
             if (producto == null)
             {

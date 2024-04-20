@@ -12,20 +12,17 @@ namespace MaquinaVending
 {
     internal class Admin : Usuario
     {
-        public string Password { get; set; }
-
+        private string Password { get; set; }
+        public List<Producto> Productos { get; private set; }
 
 
         public Admin() { }
 
-        public Admin(List<Producto> productos, string password) : base(productos)
+        public Admin(List<Producto> productos, string password, List<Producto> productosMaquina) : base(productos)
         {
             Password = password;
-
+            Productos = productos;
         }
-
-
-
 
         public override void Menu()
         {
@@ -152,37 +149,7 @@ namespace MaquinaVending
             switch(opcion)
             {
                 case 1:
-                    Console.Write("Introduce la dirección de memoria del archivo: ");
-                    var path = Console.ReadLine();
-                    if (File.Exists(path))
-                    {
-                        using(StreamReader sr = new StreamReader(path))
-                        {
-                            string line = null;
-                            string[] campos = null;
-                            while ((line = sr.ReadLine()) != null)
-                            {
-                                campos = line.Split(';');
-                                switch(int.Parse(campos[0]))
-                                {
-                                    case 1:
-                                        MaterialPrecioso mp = new MaterialPrecioso(campos[1], int.Parse(campos[2]), double.Parse(campos[3]), 
-                                            campos[4], campos[5], campos[6]);
-                                        break;
-
-                                    case 2:
-                                        ProductoAlimenticio pa = new ProductoAlimenticio(campos[1], int.Parse(campos[2]), double.Parse(campos[3]),
-                                            campos[4], campos[7]);
-                                        break;
-
-                                    case 3:
-                                        ProductoElectronico pe = new ProductoElectronico(campos[1], int.Parse(campos[2]), double.Parse(campos[3]),
-                                            campos[4], campos[6], bool.Parse(campos[8]), bool.Parse(campos[9]));
-                                        break;
-                                }
-                            }
-                        }
-                    }
+                    LeerArchivo();
                     break;
 
                 case 2:
@@ -192,7 +159,48 @@ namespace MaquinaVending
                     break;
             }
         }
+        public void LeerArchivo()
+        {
+            Console.Write("Introduce la dirección de memoria del archivo: ");
+            var path = Console.ReadLine();
+            if (File.Exists(path))
+            {
+                using (StreamReader sr = new StreamReader(path))
+                {
+                    
+                    string line = null;
+                    string[] campos = null;
+                    while ((line = sr.ReadLine()) != null)
+                    {
+                        campos = line.Split(';');
+                        switch (int.Parse(campos[0]))
+                        {
+                            case 1:
+                                MaterialPrecioso mp = new MaterialPrecioso(campos[1], int.Parse(campos[2]), double.Parse(campos[3]),
+                                    campos[4], campos[5], campos[6]);
+                                ProductosMaquina.Add(mp);
+                                break;
 
+                            case 2:
+                                ProductoAlimenticio pa = new ProductoAlimenticio(campos[1], int.Parse(campos[2]), double.Parse(campos[3]),
+                                    campos[4], campos[7]);
+                                ProductosMaquina.Add(pa);
+                                break;
+
+                            case 3:
+                                ProductoElectronico pe = new ProductoElectronico(campos[1], int.Parse(campos[2]), double.Parse(campos[3]),
+                                    campos[4], campos[6], bool.Parse(campos[8]), bool.Parse(campos[9]));
+                                ProductosMaquina.Add(pe);
+                                break;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                Console.WriteLine("El archivo dado no existe o no lo hemos encontrado, porfavor inténtalo de nuevo");
+            }
+        }
         public void AddUnidades()
         {
             Producto producto = BuscarProducto();
@@ -219,10 +227,12 @@ namespace MaquinaVending
             {
                 case 1:
                     ProductoAlimenticio productoAlimenticio = (ProductoAlimenticio)producto;
+                    productoAlimenticio.SolicitarDetalles();
                     break;
 
                 case 2:
                     ProductoElectronico productoElectronico = (ProductoElectronico)producto;
+                    productoElectronico.SolicitarDetalles();
                     break;
 
                 case 3:

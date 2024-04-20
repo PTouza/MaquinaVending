@@ -9,12 +9,14 @@ namespace MaquinaVending
     internal class Program
     {
         static List<Producto> products;
+        static List<Producto> productosMaquina;
         static void Main(string[] args)
         {
             int opcion;
             products = new List<Producto>();
-            Admin admin = new Admin(products, "admin123");
-            Cliente cliente = new Cliente(products);
+            productosMaquina = new List<Producto>();
+            Admin admin = new Admin(productosMaquina, "admin123", products);
+            Cliente cliente = new Cliente(productosMaquina);
             do
             {
                 Console.Clear();

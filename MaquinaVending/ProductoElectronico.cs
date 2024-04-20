@@ -9,16 +9,17 @@ namespace MaquinaVending
 {
     internal class ProductoElectronico : Producto
     {
-        public string Materiales {  get; set; }
+        public string Peso {  get; set; }
         public bool Tiene_Bateria { get; set; }
         public bool Precargado { get; set; }
 
         // CONSTRUCTORES
         public ProductoElectronico() { }
 
-        public ProductoElectronico (string nombre, int unidades, double precio_Unitario, string descripcion,string materiales, bool tiene_Bateria, bool precargado) : base (nombre, unidades, precio_Unitario, descripcion)
+        public ProductoElectronico (string nombre, int unidades, double precio_Unitario, string descripcion,string peso,
+            bool tiene_Bateria, bool precargado) : base (nombre, unidades, precio_Unitario, descripcion)
         {
-            Materiales = materiales;
+            Peso = peso;
             Tiene_Bateria = tiene_Bateria;
             Precargado = precargado;
         }
@@ -26,21 +27,20 @@ namespace MaquinaVending
         public override void MostrarInfo()
         {
             base.MostrarInfo();
-            Console.Write($"Materiales: {Materiales} | ¿Tiene batería?: {Tiene_Bateria} | ¿Está precargado?: {Precargado}");
+            Console.Write($"Peso: {Peso} | ¿Tiene batería?: {Tiene_Bateria} | ¿Está precargado?: {Precargado}");
         }
 
         public override string ToString()
         {
-            base.ToString();
-            return $"{Materiales};{Tiene_Bateria};{Precargado}";
+            return $"3;{base.ToString()};;{Peso};;{Tiene_Bateria};{Precargado}";
         }
 
 
         public override void SolicitarDetalles()
         {
             base.SolicitarDetalles();
-            Console.Write("Materiales: ");
-            Materiales = Console.ReadLine();
+            Console.Write("Peso: ");
+            Peso = Console.ReadLine();
             Console.WriteLine("¿Tiene batería?: ");
             Tiene_Bateria = bool.Parse(Console.ReadLine());
             Console.Write("¿Está precargado?: ");
