@@ -34,5 +34,17 @@ namespace MaquinaVending
             base.ToString();
             return $"{Materiales};{Tiene_Bateria};{Precargado}";
         }
+
+
+        public override void SolicitarDetalles()
+        {
+            base.SolicitarDetalles();
+            Console.Write("Materiales: ");
+            Materiales = Console.ReadLine();
+            Console.WriteLine("¿Tiene batería?: ");
+            Tiene_Bateria = bool.Parse(Console.ReadLine());
+            Console.Write("¿Está precargado?: ");
+            Precargado = bool.Parse(Console.ReadLine());
+        }
     }
 }
