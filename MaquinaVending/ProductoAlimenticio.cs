@@ -33,5 +33,16 @@ namespace MaquinaVending
             base.ToString();
             return $"{Calorias};{Grasa};{Azucar}";
         }
+
+        public override void SolicitarDetalles()
+        {
+            base.SolicitarDetalles();
+            Console.Write("Cantidad de calorías: ");
+            Calorias = Console.ReadLine();
+            Console.WriteLine("Cantidad de grasa: ");
+            Grasa = Console.ReadLine();
+            Console.Write("Cantidad de azúcar: ");
+            Azucar = Console.ReadLine();
+        }
     }
 }
