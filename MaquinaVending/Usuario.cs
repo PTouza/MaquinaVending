@@ -165,6 +165,7 @@ namespace MaquinaVending
         
          public void PagarEfectivo (double precio)
          {
+           
             Console.WriteLine($"El precio del producto es : {precio}");
             Console.WriteLine("Introduce el dinero para pagar el producto: ");
             float  dinero_Introducido = float.Parse(Console.ReadLine());
