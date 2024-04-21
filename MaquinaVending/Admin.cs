@@ -178,19 +178,19 @@ namespace MaquinaVending
                             case 1:
                                 MaterialPrecioso mp = new MaterialPrecioso(campos[1], int.Parse(campos[2]), double.Parse(campos[3]),
                                     campos[4], campos[5], campos[6]);
-                                ProductosMaquina.Add(mp);
+                                Productos.Add(mp);
                                 break;
 
                             case 2:
                                 ProductoAlimenticio pa = new ProductoAlimenticio(campos[1], int.Parse(campos[2]), double.Parse(campos[3]),
                                     campos[4], campos[7]);
-                                ProductosMaquina.Add(pa);
+                                Productos.Add(pa);
                                 break;
 
                             case 3:
                                 ProductoElectronico pe = new ProductoElectronico(campos[1], int.Parse(campos[2]), double.Parse(campos[3]),
                                     campos[4], campos[6], bool.Parse(campos[8]), bool.Parse(campos[9]));
-                                ProductosMaquina.Add(pe);
+                                Productos.Add(pe);
                                 break;
                         }
                     }
@@ -203,7 +203,7 @@ namespace MaquinaVending
         }
         public void AddUnidades()
         {
-            Producto producto = BuscarProducto();
+            Producto producto = BuscarProductoMaquina();
             Console.Write("Introduce el número de unidades que desa introducir: ");
             int unidades = int.Parse(Console.ReadLine());
             if(producto != null)
@@ -243,6 +243,27 @@ namespace MaquinaVending
                 default:
                     break;
             }
+        }
+
+        public void Salir()
+        {
+
+            using (StreamWriter sw = new StreamWriter("productos.txt", false))
+            {
+                foreach (Producto p in Productos)
+                {
+                    sw.WriteLine(p.ToString());
+                }
+            }
+            
+            using (StreamWriter sw = new StreamWriter("productosMaquina.txt", false))
+            {
+                foreach (Producto p in ProductosMaquina)
+                {
+                    sw.WriteLine(p.ToString());
+                }
+            }
+            
         }
 
 

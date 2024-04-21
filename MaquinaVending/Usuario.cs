@@ -36,7 +36,7 @@ namespace MaquinaVending
                     double precioFinal = 0;
                     do
                     {
-                        Producto producto = BuscarProducto();
+                        Producto producto = BuscarProductoMaquina();
                         precioFinal = precioFinal + producto.Vender();
                         Console.Write("¿Quieres añadir otro producto? (1.- Si / 2.-  No): ");
                         opcion2 = int.Parse(Console.ReadLine());
@@ -189,7 +189,7 @@ namespace MaquinaVending
 
         }
 
-        public Producto BuscarProducto()
+        public Producto BuscarProductoMaquina()
         {
             foreach (Producto p in ProductosMaquina)
             {
@@ -217,7 +217,7 @@ namespace MaquinaVending
 
         public void MostrarInfo()
         {
-            Producto producto = BuscarProducto();
+            Producto producto = BuscarProductoMaquina();
             if (producto != null)
             {
                 producto.MostrarInfo();
