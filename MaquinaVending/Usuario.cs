@@ -12,13 +12,13 @@ namespace MaquinaVending
 {
     internal abstract class Usuario : IUsuario
     {
-        protected List<Producto> listaProductos;
+        protected List<Producto> ProductosMaquina;
 
         public Usuario() { }
 
         public Usuario(List<Producto> productos)
         {
-            listaProductos = productos;
+            ProductosMaquina = productos;
         }
 
         public abstract void Menu();
@@ -29,30 +29,21 @@ namespace MaquinaVending
             Console.Write("¿Quiere continuar con la operación? (1.- Si / 2.- No): ");
             opcion = int.Parse(Console.ReadLine());
 
-            switch(opcion)
+            switch (opcion)
             {
                 case 1: // PIDO EL ID DEL PRODUCTO QUE QUIERE COMPRAR
                     int opcion2 = 0;
-                    List<Producto> listaProductosPagar = new List<Producto>();
                     double precioFinal = 0;
                     do
                     {
-                        Producto producto = BuscarProducto();
-                        listaProductos.Add(producto);
+                        Producto producto = BuscarProductoMaquina();
+                        precioFinal = precioFinal + producto.Vender();
                         Console.Write("¿Quieres añadir otro producto? (1.- Si / 2.-  No): ");
                         opcion2 = int.Parse(Console.ReadLine());
-                        if (opcion2 == 2)
-                        {
-                            
-                            foreach(Producto p in listaProductosPagar)
-                            {
-                                precioFinal = precioFinal + p.Precio_Unitario;
-                            }
-                        }
-                    } while (opcion2  == 1);
+
+                    } while (opcion2 == 1);
 
                     PagarProducto(precioFinal);
-
                     break;
 
                 case 2: // CANCELAMOS LA OPERACIÓN Y VUELVE AL MENÚ
@@ -63,17 +54,20 @@ namespace MaquinaVending
             }
         }
         public void PagarProducto(double precio_Producto)
-        { 
-            
+        {
+
             int opcion = 0;
 
             do
             {
+                Console.Clear();
                 Console.WriteLine("Introduce su metodo de pago");
                 Console.Clear();
-                Console.WriteLine("1. Pago de tarjeta");
-                Console.WriteLine("2. Pago en efectivo");
-                Console.WriteLine("3. Retroceder");
+                Console.WriteLine("\t1. Pago de tarjeta");
+                Console.WriteLine("\t2. Pago en efectivo");
+                Console.WriteLine("\t3. Retroceder");
+                Console.WriteLine();
+                Console.Write("Escoge una opción: ");
                 opcion = int.Parse(Console.ReadLine());
                 Console.Clear();
 
@@ -84,7 +78,7 @@ namespace MaquinaVending
                         break;
                     case 2: // PAGAR CON EFECTIVO
                         PagarEfectivo(precio_Producto);
-                        
+
                         break;
                     case 3: // SALIR
                         Console.WriteLine("Salir...");
@@ -97,7 +91,7 @@ namespace MaquinaVending
                 }
 
             } while (opcion != 3);
-           
+
         }
         public void PagarTarjeta(double precio)
         {
@@ -105,82 +99,84 @@ namespace MaquinaVending
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("[Introduce los datos de la tarjeta]\n");
             Console.ResetColor();
-            Console.WriteLine("Introduce el número de la tarjeta: ");
-          
-           string  input = Console.ReadLine();
-            if (input.Length  != 16)
+            Console.Write("Introduce el número de la tarjeta: ");
+
+            int numTarjeta = int.Parse(Console.ReadLine());
+            if (numTarjeta.ToString().Length != 16)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine(" X Error, el número de tarjeta tiene que tener 16 digitos");
                 Console.ReadKey();
-                Console.ResetColor ();
+                Console.ResetColor();
             }
-            else
+            else if (QuiereContinuar())
             {
-                Console.WriteLine("Introduce el CVV de la tarjeta:"); 
-                string inputs = Console.ReadLine();
-                if(inputs.Length != 3)
+                Console.Write("Introduce el CVV de la tarjeta:");
+                int cvv = int.Parse(Console.ReadLine());
+                if (cvv.ToString().Length != 3)
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("X Error, el CVV tiene que tener por lo menos 3 caracteres");
                     Console.ReadKey();
-                    Console.ResetColor ();
+                    Console.ResetColor();
                 }
-                else
+                else if (QuiereContinuar())
                 {
-                    Console.WriteLine("Introduce la fecha de caducidad:");
+                    Console.Write("Introduce la fecha de caducidad:");
                     DateTime fechaCaducidadTarjeta = DateTime.Parse(Console.ReadLine());
-                    if (fechaCaducidadTarjeta <  DateTime.Now)
+                    if (fechaCaducidadTarjeta < DateTime.Now)
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine("Tarjeta Caducada");
                         Console.ReadKey();
-                        Console.ResetColor ();
+                        Console.ResetColor();
                     }
-                    else
+                    else if (QuiereContinuar())
                     {
-                        Console.WriteLine("Introduce la cantidad del producto");
-                        
-                        float dinero_Introducido = float.Parse(Console.ReadLine());
-                        if (dinero_Introducido == precio)
+                        Console.Write("Introduce el Pin: ");
+                        int pin = int.Parse(Console.ReadLine());
+                        if (pin.ToString().Length != 4)
                         {
-                            Console.ForegroundColor = ConsoleColor.Green;
-                            Console.WriteLine("Operación Aceptada :)");
-                            Console.ResetColor();
+                            Console.WriteLine("El Pin debe tener cuatro números, porfavor inténtelo de nuevo");
                         }
+
                         else
                         {
-                            Console.ForegroundColor= ConsoleColor.Red;
-                            Console.WriteLine("Operación cancelada  :( ");
-                            Console.ResetColor();
+                            Console.WriteLine($"Operación aceptada, el coste total es {precio} € ");
                         }
                     }
                 }
             }
-            
-           
+
+
         }
 
+        public bool QuiereContinuar()
+        {
+            bool continuar = false;
+            Console.Write("¿Quiere continuar? (1.- SI | 2.- NO): ");
+            int opcion = int.Parse(Console.ReadLine());
+            if (opcion == 1) { continuar = true; }
+            return continuar;
+        }
 
-        
-         public void PagarEfectivo (double precio)
-         {
-           
+        public void PagarEfectivo(double precio)
+        {
             Console.WriteLine($"El precio del producto es : {precio}");
-            Console.WriteLine("Introduce el dinero para pagar el producto: ");
-            float  dinero_Introducido = float.Parse(Console.ReadLine());
+            Console.Write("Introduce el dinero para pagar el producto: ");
+            float dinero_Introducido = float.Parse(Console.ReadLine());
             if (dinero_Introducido > precio)
             {
                 double cambio = dinero_Introducido - precio;
                 Console.WriteLine($":) Muchas gracias recoja el producto y el cambio de : {cambio} ");
                 Console.ReadKey();
 
-             
+
             }
             else if (dinero_Introducido == precio)
             {
                 Console.WriteLine("Muchas gracias, recoja el producto");
-                
+
                 Console.ReadKey(true);
             }
             else
@@ -190,12 +186,12 @@ namespace MaquinaVending
                 Console.ReadKey();
                 Console.ResetColor();
             }
-            
-         }
 
-        public virtual Producto BuscarProducto ()
+        }
+
+        public Producto BuscarProductoMaquina()
         {
-            foreach (Producto p in listaProductos)
+            foreach (Producto p in ProductosMaquina)
             {
                 Console.WriteLine($"ID: {p.Id}, Nombre: {p.Nombre}, Unidades {p.Unidades}, Precio {p.Precio_Unitario}€," +
                     $" Información del producto: {p.Descripcion}");
@@ -203,8 +199,8 @@ namespace MaquinaVending
 
             Console.Write("Introduce el Id del Producto: ");
             int id = int.Parse(Console.ReadLine());
-            Producto producto = null; 
-            producto  = listaProductos.Find (x => x.Id == id); 
+            Producto producto = null;
+            producto = ProductosMaquina.Find(x => x.Id == id);
 
             if (producto == null)
             {
@@ -216,17 +212,16 @@ namespace MaquinaVending
                 Console.WriteLine("Producto encontrado!!!");
             }
 
-            return producto; 
+            return producto;
         }
 
         public void MostrarInfo()
         {
-            Producto producto = BuscarProducto();
+            Producto producto = BuscarProductoMaquina();
             if (producto != null)
             {
                 producto.MostrarInfo();
             }
-
         }
 
     }

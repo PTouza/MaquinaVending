@@ -9,29 +9,31 @@ namespace MaquinaVending
 {
     internal class ProductoAlimenticio : Producto
     {
-        public string Calorias { get; set; }
-        public string Grasa { get; set; }
-        public string Azucar { get; set; }
+        public string InfoNutricional { get; set; }
 
         public ProductoAlimenticio() { }
 
-        public ProductoAlimenticio(string nombre, int unidades, double precio_Unitario, string descripcion, string calorias, string grasa, string azucar) : base(nombre, unidades, precio_Unitario, descripcion)
+        public ProductoAlimenticio(string nombre, int unidades, double precio_Unitario, string descripcion, string infoNutricional) : base(nombre, unidades, precio_Unitario, descripcion)
         {
-            Calorias = calorias;
-            Grasa = grasa;
-            Azucar = azucar;
+            InfoNutricional = infoNutricional;
         }
 
         public override void MostrarInfo()
         {
             base.MostrarInfo();
-            Console.Write($"Calorías: {Calorias} | Grasa: {Grasa} | Azúcar: {Azucar}");
+            Console.Write($"Información nutricional: {InfoNutricional}");
         }
 
         public override string ToString()
         {
-            base.ToString();
-            return $"{Calorias};{Grasa};{Azucar}";
+            return $"2;{base.ToString()};;;{InfoNutricional};;";
+        }
+
+        public override void SolicitarDetalles()
+        {
+            base.SolicitarDetalles();
+            Console.Write("Información nutricional: ");
+            InfoNutricional = Console.ReadLine();
         }
     }
 }

@@ -26,10 +26,12 @@ namespace MaquinaVending
         }
 
         // MÉTODOS
-        public double Vender(int cantidadProductos)
+        public double Vender()
         {
-            Unidades -= cantidadProductos;
+            Console.Write("¿Cuantas unidades desea?: ");
+            int cantidadProductos = int.Parse(Console.ReadLine());
 
+            Unidades -= cantidadProductos;
             return cantidadProductos * Precio_Unitario;
         }
 
