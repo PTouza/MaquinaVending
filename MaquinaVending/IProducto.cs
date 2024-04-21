@@ -15,7 +15,7 @@ namespace MaquinaVending
         double Precio_Unitario { get; set; }
         string Descripcion { get; set; }
 
-        double Vender(int cantidadProductos);
+        double Vender();
         void AddUnidades(int unidades);
         string ToString();
         void MostrarInfo();
