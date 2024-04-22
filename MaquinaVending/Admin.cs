@@ -57,9 +57,11 @@ namespace MaquinaVending
                     Console.WriteLine("\t║                                       ║");
                     Console.WriteLine("\t║ 3.- Carga individual de un Producto   ║");
                     Console.WriteLine("\t║                                       ║");
-                    Console.WriteLine("\t║ 4.- para Carga completa de Productos  ║");
+                    Console.WriteLine("\t║ 4.- Carga completa de Productos       ║");
                     Console.WriteLine("\t║                                       ║");
-                    Console.WriteLine("\t║ 5.- Salir                             ║");
+                    Console.WriteLine("\t║ 5.- Eliminar un Producto              ║");
+                    Console.WriteLine("\t║                                       ║");
+                    Console.WriteLine("\t║ 6.- Salir                             ║");
                     Console.WriteLine("\t╚═══════════════════════════════════════╝");
                     Console.WriteLine();
                     Console.Write("\tPor favor, introduzca su opción:");
@@ -84,7 +86,7 @@ namespace MaquinaVending
                             CargaCompletaProducto();
                             break;
 
-                        case 5: // SALIR
+                        case 5: // ELIMINAR UN PRODUCTO
                             break;
 
                         default:
