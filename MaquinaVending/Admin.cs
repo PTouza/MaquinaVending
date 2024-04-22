@@ -27,24 +27,10 @@ namespace MaquinaVending
 
         public override void Menu()
         {
-            string password;
+            
             Console.WriteLine();
             Console.Write("\tIntroduce una contraseña: ");
-            password = "";
-            bool passwordEscrito = false;
-            while (!passwordEscrito)
-            {
-                var key = Console.ReadKey(true);
-
-                if (key.Key == ConsoleKey.Enter)
-                {
-                    passwordEscrito = true;
-                }
-                password += key.KeyChar;
-
-            }
-
-            Console.WriteLine("\nContraseña introducida: " + password);
+            string password = Console.ReadLine();
             if (password != Password)
             {
                 Console.WriteLine("Contraseña incorrecta");
