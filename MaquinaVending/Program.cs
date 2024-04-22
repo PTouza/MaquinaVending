@@ -18,7 +18,7 @@ namespace MaquinaVending
             productosMaquina = new List<Producto>();
             CargarProductos();
             CargarProductosMaquina();
-            Admin admin = new Admin(productosMaquina, "admin123", products);
+            Admin admin = new Admin(productosMaquina, " admin123", products);
             Cliente cliente = new Cliente(productosMaquina);
             do
             {

@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace MaquinaVending
@@ -149,7 +150,7 @@ namespace MaquinaVending
             switch(opcion)
             {
                 case 1:
-                    LeerArchivo();
+                    LeerArchivoCSV();
                     break;
 
                 case 2:
@@ -159,7 +160,7 @@ namespace MaquinaVending
                     break;
             }
         }
-        public void LeerArchivo()
+        public void LeerArchivoCSV()
         {
             Console.Write("Introduce la dirección de memoria del archivo: ");
             var path = Console.ReadLine();
@@ -244,7 +245,56 @@ namespace MaquinaVending
                     break;
             }
         }
+        public void AddProductoMaquina()
+        {
+            Producto producto = BuscarProductoAlmacen();
+            Console.Write("¿Quiere añadir este producto a la máquina? (1.- SI | 2.- NO): ");
+            int opcion = int.Parse(Console.ReadLine());
+            int opcionQuitarProducto = 0;
+            if(opcion == 1)
+            {
+                if(ProductosMaquina.Count < 11)
+                {
+                    ProductosMaquina.Add(producto);
+                    Thread.Sleep(1000);
+                    Console.WriteLine("Producto añadido a la máquina");
+                }
 
+                else
+                {
+                    Console.WriteLine("La máquina está al máximo de su capacidad");
+                    Thread.Sleep(1000);
+                    Console.WriteLine("¿Desea quitar un producto de la máquina? (1.- SI | 2.- NO): ");
+                    opcionQuitarProducto = int.Parse(Console.ReadLine());
+                    if(opcionQuitarProducto == 1)
+                    {
+                        Producto p = BuscarProductoMaquina();
+                        Thread.Sleep(1000);
+                        if (QuiereContinuar())
+                        {
+                            ProductosMaquina.Remove(p);
+                            ProductosMaquina.Add(producto);
+                        }
+                    }
+                }
+
+                Console.WriteLine("Operación realizada correctamente");
+            }
+        }
+
+        public Producto BuscarProductoAlmacen()
+        {
+            foreach(Producto p in Productos)
+            {
+                Console.WriteLine($"Nombre: {p.Nombre}, Unidades {p.Unidades}, Precio {p.Precio_Unitario}€," +
+                    $" Información del producto: {p.Descripcion}");
+            }
+            Console.WriteLine();
+            Console.Write("Introduce el nombre del producto: ");
+            string nombre = Console.ReadLine();
+            Producto producto = Productos.Find(x => x.Nombre.ToLower() == nombre.ToLower());
+            return producto;
+        }
         public void Salir()
         {
 
