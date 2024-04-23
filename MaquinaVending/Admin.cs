@@ -227,28 +227,32 @@ namespace MaquinaVending
             Console.WriteLine("\t4.- Salir");
             Console.WriteLine();
             Console.Write("Escoge una opción: ");
-            int opcion = int.Parse(Console.ReadLine());
-
-            switch (opcion)
+            try
             {
-                case 1:
-                    ProductoAlimenticio productoAlimenticio = (ProductoAlimenticio)producto;
-                    productoAlimenticio.SolicitarDetalles();
-                    break;
+                int opcion = int.Parse(Console.ReadLine());
 
-                case 2:
-                    ProductoElectronico productoElectronico = (ProductoElectronico)producto;
-                    productoElectronico.SolicitarDetalles();
-                    break;
+                switch (opcion)
+                {
+                    case 1:
+                        ProductoAlimenticio productoAlimenticio = (ProductoAlimenticio)producto;
+                        productoAlimenticio.SolicitarDetalles();
+                        break;
 
-                case 3:
-                    MaterialPrecioso materialPrecioso = (MaterialPrecioso)producto;
-                    materialPrecioso.SolicitarDetalles();
-                    break;
+                    case 2:
+                        ProductoElectronico productoElectronico = (ProductoElectronico)producto;
+                        productoElectronico.SolicitarDetalles();
+                        break;
 
-                default:
-                    break;
-            }
+                    case 3:
+                        MaterialPrecioso materialPrecioso = (MaterialPrecioso)producto;
+                        materialPrecioso.SolicitarDetalles();
+                        break;
+
+                    default:
+                        break;
+                }
+            }catch(Exception e) { Console.WriteLine(e.Message); }
+            
         }
         public void AddProductoMaquina()
         {
