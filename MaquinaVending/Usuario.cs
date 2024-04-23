@@ -37,9 +37,12 @@ namespace MaquinaVending
                     do
                     {
                         Producto producto = BuscarProductoMaquina();
-                        precioFinal = precioFinal + producto.Vender();
-                        Console.Write("¿Quieres añadir otro producto? (1.- Si / 2.-  No): ");
-                        opcion2 = int.Parse(Console.ReadLine());
+                        if (producto != null)
+                        {
+                            precioFinal = precioFinal + producto.Vender();
+                            Console.Write("¿Quieres añadir otro producto? (1.- Si / 2.-  No): ");
+                            opcion2 = int.Parse(Console.ReadLine());
+                        }
 
                     } while (opcion2 == 1);
 
