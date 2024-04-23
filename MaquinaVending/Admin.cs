@@ -64,37 +64,46 @@ namespace MaquinaVending
                     Console.WriteLine("\t║ 6.- Salir                             ║");
                     Console.WriteLine("\t╚═══════════════════════════════════════╝");
                     Console.WriteLine();
+                    
                     Console.Write("\tPor favor, introduzca su opción:");
-                    opcion = int.Parse(Console.ReadLine());
-                    Console.Clear();
-                    switch (opcion)
+                    try
                     {
-                        case 1: // COMPRAR PRODUCTOS 
-                            ComprarProducto();
+                        opcion = int.Parse(Console.ReadLine());
 
-                            break;
+                        Console.Clear();
+                        switch (opcion)
+                        {
+                            case 1: // COMPRAR PRODUCTOS 
+                                ComprarProducto();
 
-                        case 2: // MOSTRAR INFORMACIÓN
-                            MostrarInfo();
-                            break;
+                                break;
 
-                        case 3: // CARGA INDIVIDUAL
-                            CargaIndividualProducto();
-                            break;
+                            case 2: // MOSTRAR INFORMACIÓN
+                                MostrarInfo();
+                                break;
 
-                        case 4: // CARGA COMPLETA
-                            CargaCompletaProducto();
-                            break;
+                            case 3: // CARGA INDIVIDUAL
+                                CargaIndividualProducto();
+                                break;
 
-                        case 5: // ELIMINAR UN PRODUCTO
-                            break;
+                            case 4: // CARGA COMPLETA
+                                CargaCompletaProducto();
+                                break;
 
-                        default:
-                            break;
+                            case 5: // ELIMINAR UN PRODUCTO
+                                break;
+
+                            default:
+                                break;
+                        }
+                    }catch(Exception e)
+                    {
+                        Console.WriteLine(e.Message);
                     }
+                    
 
 
-                } while (opcion != 5);
+                } while (opcion != 6);
 
 
             }
@@ -108,45 +117,53 @@ namespace MaquinaVending
             Console.WriteLine("1. Añadir productos existentes");
             Console.WriteLine("2. Introducir nuevos productos a la máquina");
             Console.Write("Escoge una opción: ");
-            opcion = int.Parse(Console.ReadLine());
-            switch (opcion)
+            try
             {
-                case 1:
-                    AddUnidades();
-                    break;
-                case 2:
-                    int opcion2 = 0;
-                    do
-                    {
-                        AddNewProducto();
-                        Console.Write("¿Quiere añadir otro producto? (1.- Si / 2.- No): ");
-                        opcion2 = int.Parse(Console.ReadLine());
+                opcion = int.Parse(Console.ReadLine());
+                switch (opcion)
+                {
+                    case 1:
+                        AddUnidades();
+                        break;
+                    case 2:
+                        int opcion2 = 0;
+                        do
+                        {
+                            AddNewProducto();
+                            Console.Write("¿Quiere añadir otro producto? (1.- Si / 2.- No): ");
+                            opcion2 = int.Parse(Console.ReadLine());
 
-                    } while (opcion2 == 1);
-                    break;
-                default:
-                    Console.WriteLine("Salir");
-                    break;
-            }
+                        } while (opcion2 == 1);
+                        break;
+                    default:
+                        Console.WriteLine("Salir");
+                        break;
+                }
+            }catch(Exception e) { Console.WriteLine(e.Message) ; }
+            
         }
         public void CargaCompletaProducto()
         {
             int opcion = 0;
             Console.Write("¿Quiere continuar con la operación (1.- Si | 2.- No): ");
-            opcion = int.Parse(Console.ReadLine());
-
-            switch(opcion)
+            try
             {
-                case 1:
-                    LeerArchivoCSV();
-                    break;
+                opcion = int.Parse(Console.ReadLine());
 
-                case 2:
-                    break;
+                switch (opcion)
+                {
+                    case 1:
+                        LeerArchivoCSV();
+                        break;
 
-                default:
-                    break;
-            }
+                    case 2:
+                        break;
+
+                    default:
+                        break;
+                }
+            }catch (Exception e) { Console.WriteLine(e.Message); }
+            
         }
         public void LeerArchivoCSV()
         {
@@ -209,28 +226,32 @@ namespace MaquinaVending
             Console.WriteLine("\t4.- Salir");
             Console.WriteLine();
             Console.Write("Escoge una opción: ");
-            int opcion = int.Parse(Console.ReadLine());
-
-            switch (opcion)
+            try
             {
-                case 1:
-                    ProductoAlimenticio productoAlimenticio = new ProductoAlimenticio();
-                    productoAlimenticio.SolicitarDetalles();
-                    break;
+                int opcion = int.Parse(Console.ReadLine());
 
-                case 2:
-                    ProductoElectronico productoElectronico = new ProductoElectronico();
-                    productoElectronico.SolicitarDetalles();
-                    break;
+                switch (opcion)
+                {
+                    case 1:
+                        ProductoAlimenticio productoAlimenticio = (ProductoAlimenticio)producto;
+                        productoAlimenticio.SolicitarDetalles();
+                        break;
 
-                case 3:
-                    MaterialPrecioso materialPrecioso = new MaterialPrecioso();
-                    materialPrecioso.SolicitarDetalles();
-                    break;
+                    case 2:
+                        ProductoElectronico productoElectronico = (ProductoElectronico)producto;
+                        productoElectronico.SolicitarDetalles();
+                        break;
 
-                default:
-                    break;
-            }
+                    case 3:
+                        MaterialPrecioso materialPrecioso = (MaterialPrecioso)producto;
+                        materialPrecioso.SolicitarDetalles();
+                        break;
+
+                    default:
+                        break;
+                }
+            }catch(Exception e) { Console.WriteLine(e.Message); }
+            
         }
         public void AddProductoMaquina()
         {
@@ -282,7 +303,7 @@ namespace MaquinaVending
             Producto producto = Productos.Find(x => x.Nombre.ToLower() == nombre.ToLower());
             return producto;
         }
-        public void Salir()
+        public void Guardar()
         {
 
             using (StreamWriter sw = new StreamWriter("productos.txt", false))

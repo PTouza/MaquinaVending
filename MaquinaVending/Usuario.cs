@@ -27,31 +27,41 @@ namespace MaquinaVending
         {
             int opcion = 0;
             Console.Write("¿Quiere continuar con la operación? (1.- Si / 2.- No): ");
-            opcion = int.Parse(Console.ReadLine());
-
-            switch (opcion)
+            try
             {
-                case 1: // PIDO EL ID DEL PRODUCTO QUE QUIERE COMPRAR
-                    int opcion2 = 0;
-                    double precioFinal = 0;
-                    do
-                    {
-                        Producto producto = BuscarProductoMaquina();
-                        precioFinal = precioFinal + producto.Vender();
-                        Console.Write("¿Quieres añadir otro producto? (1.- Si / 2.-  No): ");
-                        opcion2 = int.Parse(Console.ReadLine());
+                opcion = int.Parse(Console.ReadLine());
 
-                    } while (opcion2 == 1);
+                switch (opcion)
+                {
+                    case 1: // PIDO EL ID DEL PRODUCTO QUE QUIERE COMPRAR
+                        int opcion2 = 0;
+                        double precioFinal = 0;
+                        do
+                        {
+                            Producto producto = BuscarProductoMaquina();
+                            if (producto != null)
+                            {
+                                precioFinal = precioFinal + producto.Vender();
+                                Console.Write("¿Quieres añadir otro producto? (1.- Si / 2.-  No): ");
+                                opcion2 = int.Parse(Console.ReadLine());
+                            }
 
-                    PagarProducto(precioFinal);
-                    break;
+                        } while (opcion2 == 1);
 
-                case 2: // CANCELAMOS LA OPERACIÓN Y VUELVE AL MENÚ
-                    break;
+                        PagarProducto(precioFinal);
+                        break;
 
-                default:
-                    break;
+                    case 2: // CANCELAMOS LA OPERACIÓN Y VUELVE AL MENÚ
+                        break;
+
+                    default:
+                        break;
+                }
+            } catch (Exception e) 
+            {
+                Console.WriteLine(e.Message);
             }
+            
         }
         public void PagarProducto(double precio_Producto)
         {
@@ -68,27 +78,35 @@ namespace MaquinaVending
                 Console.WriteLine("\t3. Retroceder");
                 Console.WriteLine();
                 Console.Write("Escoge una opción: ");
-                opcion = int.Parse(Console.ReadLine());
-                Console.Clear();
-
-                switch (opcion)
+                try 
                 {
-                    case 1: // PAGAR CON TARJETA
-                        PagarTarjeta(precio_Producto);
-                        break;
-                    case 2: // PAGAR CON EFECTIVO
-                        PagarEfectivo(precio_Producto);
+                    opcion = int.Parse(Console.ReadLine());
 
-                        break;
-                    case 3: // SALIR
-                        Console.WriteLine("Salir...");
-                        break;
-                    default: // OPCIÓN NO VÁLIDA
-                        Console.WriteLine("Porfavor, introduzca una opción válida");
-                        break;
+                    Console.Clear();
+
+                    switch (opcion)
+                    {
+                        case 1: // PAGAR CON TARJETA
+                            PagarTarjeta(precio_Producto);
+                            break;
+                        case 2: // PAGAR CON EFECTIVO
+                            PagarEfectivo(precio_Producto);
+
+                            break;
+                        case 3: // SALIR
+                            Console.WriteLine("Salir...");
+                            break;
+                        default: // OPCIÓN NO VÁLIDA
+                            Console.WriteLine("Porfavor, introduzca una opción válida");
+                            break;
 
 
+                    }
+                }catch (Exception e)
+                {
+                    Console.WriteLine (e.Message);
                 }
+               
 
             } while (opcion != 3);
 
@@ -155,8 +173,15 @@ namespace MaquinaVending
         {
             bool continuar = false;
             Console.Write("¿Quiere continuar? (1.- SI | 2.- NO): ");
-            int opcion = int.Parse(Console.ReadLine());
-            if (opcion == 1) { continuar = true; }
+            try
+            {
+                int opcion = int.Parse(Console.ReadLine());
+                if (opcion == 1) { continuar = true; }
+            }catch(Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            
             return continuar;
         }
 

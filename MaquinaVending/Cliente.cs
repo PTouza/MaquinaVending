@@ -38,24 +38,31 @@ namespace MaquinaVending
                 Console.WriteLine("\t╚═══════════════════════════════════════╝");
                 Console.WriteLine();
                 Console.Write("\tPor favor, introduzca su opción:");
-                opcion = int.Parse(Console.ReadLine());
-                Console.Clear();
-                switch (opcion)
+                try
                 {
-                    case 1: // COMPRAR PRODUCTOS 
-                        ComprarProducto();
-                        break;
+                    opcion = int.Parse(Console.ReadLine());
+                    Console.Clear();
+                    switch (opcion)
+                    {
+                        case 1: // COMPRAR PRODUCTOS 
+                            ComprarProducto();
+                            break;
 
-                    case 2: // MOSTRAR INFORMACIÓN
-                        MostrarInfo();
-                        break;
+                        case 2: // MOSTRAR INFORMACIÓN
+                            MostrarInfo();
+                            break;
 
-                    case 3: // SALIR
-                        break;
+                        case 3: // SALIR
+                            break;
 
-                    default:
-                        break;
+                        default:
+                            break;
+                    }
+                }catch(Exception e) 
+                {
+                    Console.WriteLine(e.Message);
                 }
+               
 
 
             } while (opcion != 3);
