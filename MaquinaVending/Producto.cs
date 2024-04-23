@@ -40,6 +40,11 @@ namespace MaquinaVending
             Unidades += unidades;
         }
 
+        public void QuitarUnidades(int unidades)
+        {
+            Unidades -= unidades;
+        }
+
         public override string ToString()
         {
             return $"{Nombre};{Unidades};{Precio_Unitario};{Descripcion}"; // Formato del archivo CSV
@@ -61,6 +66,11 @@ namespace MaquinaVending
             Precio_Unitario = int.Parse(Console.ReadLine());
             Console.Write("Descripción del producto: ");
             Descripcion = Console.ReadLine();
+        }
+
+        public Producto Clonar()
+        {
+            return (Producto)this.MemberwiseClone();
         }
     }
 }

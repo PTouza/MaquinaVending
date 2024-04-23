@@ -18,6 +18,7 @@ namespace MaquinaVending
 
         public Usuario(List<Producto> productos)
         {
+            ProductosMaquina.Capacity = 12;
             ProductosMaquina = productos;
         }
 

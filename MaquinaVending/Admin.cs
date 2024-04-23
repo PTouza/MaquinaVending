@@ -209,12 +209,19 @@ namespace MaquinaVending
         }
         public void AddUnidades()
         {
-            Producto producto = BuscarProductoMaquina();
+            Producto productoMaquina = BuscarProductoMaquina();
+            Producto productoAlmacen = BuscarProductoAlmacen(productoMaquina.Nombre);
             Console.Write("Introduce el número de unidades que desa introducir: ");
             int unidades = int.Parse(Console.ReadLine());
-            if(producto != null)
+            if(productoMaquina != null && productoAlmacen != null)
             {
-                producto.AddUnidades(unidades);
+                productoAlmacen.QuitarUnidades(unidades);
+                productoMaquina.AddUnidades(unidades);
+            }
+
+            else if(productoMaquina != null)
+            {
+                productoMaquina.AddUnidades(unidades);
             }
         }
         public void AddNewProducto()
@@ -235,62 +242,106 @@ namespace MaquinaVending
                     case 1:
                         ProductoAlimenticio productoAlimenticio = new ProductoAlimenticio();
                         productoAlimenticio.SolicitarDetalles();
+                        Productos.Add(productoAlimenticio);
+
                         break;
 
                     case 2:
                         ProductoElectronico productoElectronico = new ProductoElectronico();
                         productoElectronico.SolicitarDetalles();
+                        Productos.Add(productoElectronico);
                         break;
 
                     case 3:
                         MaterialPrecioso materialPrecioso = new MaterialPrecioso();
                         materialPrecioso.SolicitarDetalles();
+                        Productos.Add(materialPrecioso);
                         break;
 
                     default:
                         break;
                 }
+
+                
+
             }catch(Exception e) { Console.WriteLine(e.Message); }
             
         }
         public void AddProductoMaquina()
         {
-            Producto producto = BuscarProductoAlmacen();
-            Console.Write("¿Quiere añadir este producto a la máquina? (1.- SI | 2.- NO): ");
-            int opcion = int.Parse(Console.ReadLine());
-            int opcionQuitarProducto = 0;
-            if(opcion == 1)
+            string nombre = null;
+            Producto producto = BuscarProductoAlmacen(nombre);
+            Producto productoClonado = ClonarObjeto(producto);
+            if (producto != null)
             {
-                if(ProductosMaquina.Count < 11)
+                Console.Write("¿Quiere añadir este producto a la máquina? (1.- SI | 2.- NO): ");
+                int opcion = int.Parse(Console.ReadLine());
+                if(producto.Unidades > 10)
                 {
-                    ProductosMaquina.Add(producto);
-                    Thread.Sleep(1000);
-                    Console.WriteLine("Producto añadido a la máquina");
+                    productoClonado.Unidades = 10;
+                    producto.QuitarUnidades(10);
+                    Console.WriteLine($"Quedan {producto.Unidades} unidades del producto {producto.Nombre}");
                 }
 
                 else
                 {
-                    Console.WriteLine("La máquina está al máximo de su capacidad");
-                    Thread.Sleep(1000);
-                    Console.WriteLine("¿Desea quitar un producto de la máquina? (1.- SI | 2.- NO): ");
-                    opcionQuitarProducto = int.Parse(Console.ReadLine());
-                    if(opcionQuitarProducto == 1)
+                    Console.WriteLine($"No quedan existencias del producto {producto.Nombre} en el Almacén");
+                }
+                int opcionQuitarProducto = 0;
+                if (opcion == 1)
+                {
+                    if (ProductosMaquina.Count < 11)
                     {
-                        Producto p = BuscarProductoMaquina();
+                        ProductosMaquina.Add(producto);
                         Thread.Sleep(1000);
-                        if (QuiereContinuar())
+                        Console.WriteLine("Producto añadido a la máquina");
+                    }
+
+                    else
+                    {
+                        Console.WriteLine("La máquina está al máximo de su capacidad");
+                        Thread.Sleep(1000);
+                        Console.WriteLine("¿Desea quitar un producto de la máquina? (1.- SI | 2.- NO): ");
+                        opcionQuitarProducto = int.Parse(Console.ReadLine());
+                        if (opcionQuitarProducto == 1)
                         {
-                            ProductosMaquina.Remove(p);
-                            ProductosMaquina.Add(producto);
+                            Producto p = BuscarProductoMaquina();
+                            Thread.Sleep(1000);
+                            if (QuiereContinuar())
+                            {
+                                ProductosMaquina.Remove(p);
+                                ProductosMaquina.Add(producto);
+                            }
                         }
                     }
-                }
 
-                Console.WriteLine("Operación realizada correctamente");
+                    Console.WriteLine("Operación realizada correctamente");
+                }
             }
         }
 
-        public Producto BuscarProductoAlmacen()
+        public Producto ClonarObjeto(Producto producto)
+        {
+            if (producto is ProductoElectronico)
+            {
+                ProductoElectronico pe = (ProductoElectronico)producto.Clonar();
+                return pe;
+            }
+            if (producto is ProductoAlimenticio)
+            {
+                ProductoAlimenticio pa = (ProductoAlimenticio)producto.Clonar();
+                return pa;
+            }
+            if (producto is MaterialPrecioso)
+            {
+                MaterialPrecioso mp = (MaterialPrecioso)producto.Clonar();
+                return mp;
+            }
+
+            return null;
+        }
+
+        public Producto BuscarProductoAlmacen(string nombre)
         {
             foreach(Producto p in Productos)
             {
@@ -298,8 +349,11 @@ namespace MaquinaVending
                     $" Información del producto: {p.Descripcion}");
             }
             Console.WriteLine();
-            Console.Write("Introduce el nombre del producto: ");
-            string nombre = Console.ReadLine();
+            if (nombre == null)
+            {
+                Console.Write("Introduce el nombre del producto: ");
+                nombre = Console.ReadLine();
+            }
             Producto producto = Productos.Find(x => x.Nombre.ToLower() == nombre.ToLower());
             return producto;
         }
