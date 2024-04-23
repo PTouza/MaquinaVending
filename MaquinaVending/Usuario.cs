@@ -129,7 +129,7 @@ namespace MaquinaVending
             }
             else if (QuiereContinuar())
             {
-                Console.Write("Introduce el CVV de la tarjeta:");
+                Console.Write("Introduce el CVV de la tarjeta: ");
                 int cvv = int.Parse(Console.ReadLine());
                 if (cvv.ToString().Length != 3)
                 {
@@ -140,7 +140,7 @@ namespace MaquinaVending
                 }
                 else if (QuiereContinuar())
                 {
-                    Console.Write("Introduce la fecha de caducidad:");
+                    Console.Write("Introduce la fecha de caducidad: ");
                     DateTime fechaCaducidadTarjeta = DateTime.Parse(Console.ReadLine());
                     if (fechaCaducidadTarjeta < DateTime.Now)
                     {
