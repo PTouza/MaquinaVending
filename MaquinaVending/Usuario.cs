@@ -192,6 +192,7 @@ namespace MaquinaVending
             float dinero_Introducido = float.Parse(Console.ReadLine());
             if (dinero_Introducido > precio)
             {
+
                 double cambio = dinero_Introducido - precio;
                 Console.WriteLine($":) Muchas gracias recoja el producto y el cambio de : {cambio} ");
                 Console.ReadKey();
