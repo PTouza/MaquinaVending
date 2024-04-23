@@ -146,20 +146,24 @@ namespace MaquinaVending
         {
             int opcion = 0;
             Console.Write("¿Quiere continuar con la operación (1.- Si | 2.- No): ");
-            opcion = int.Parse(Console.ReadLine());
-
-            switch(opcion)
+            try
             {
-                case 1:
-                    LeerArchivoCSV();
-                    break;
+                opcion = int.Parse(Console.ReadLine());
 
-                case 2:
-                    break;
+                switch (opcion)
+                {
+                    case 1:
+                        LeerArchivoCSV();
+                        break;
 
-                default:
-                    break;
-            }
+                    case 2:
+                        break;
+
+                    default:
+                        break;
+                }
+            }catch (Exception e) { Console.WriteLine(e.Message); }
+            
         }
         public void LeerArchivoCSV()
         {
