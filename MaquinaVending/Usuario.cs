@@ -207,22 +207,34 @@ namespace MaquinaVending
                      y luego he calculado su resto para que me devuelva el billete que más se acerca al dinero introducido.
                 */
                 int  [] billetes  = {50,20,10,5 }; 
+              
 
                 foreach (int billete in billetes)
                 {
                     double vueltoBilletes = cambio / billete;
                     cambio %= billete;
-                    Console.WriteLine($"Muchas gracias por comprar no se olvide de recoger su vuelto  de {vueltoBilletes}€ en billetes de {billete}€");
+                    if (vueltoBilletes > 0)
+                    {
+                        Console.WriteLine($"Muchas gracias por comprar no se olvide de recoger su vuelto  de {vueltoBilletes}euros en billetes de {billete}euros");
+                        Console.ReadKey();
+                    }
+                    
 
                 }
 
-                double[] monedas = { 0.5, 0.2, 0.1, 0.05, 0.02, 0.01 };
+                double[] monedas = {2,1,0.5, 0.2, 0.1, 0.05, 0.02, 0.01 };
+                
                 
                 foreach (int moneda in monedas)
                 {
                     double vueltoMonedas = cambio / moneda;
                     cambio %= moneda;
-                    Console.Write($"y de {vueltoMonedas}€ en monedas de {moneda} € ");
+                    if (vueltoMonedas > 0)
+                    {
+                        Console.WriteLine($"Vuelto de {vueltoMonedas}euros en monedas de {moneda} euros");
+                        Console.ReadKey();
+                    }
+                    
                 }
                 
 
@@ -231,6 +243,7 @@ namespace MaquinaVending
             else if (dinero_Introducido == precio)
             {
                 Console.WriteLine("Muchas Gracias por comprar recoja su producto");
+                Console.ReadKey();
             }
             
             
