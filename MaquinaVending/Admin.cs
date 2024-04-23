@@ -64,34 +64,43 @@ namespace MaquinaVending
                     Console.WriteLine("\t║ 6.- Salir                             ║");
                     Console.WriteLine("\t╚═══════════════════════════════════════╝");
                     Console.WriteLine();
+                    
                     Console.Write("\tPor favor, introduzca su opción:");
-                    opcion = int.Parse(Console.ReadLine());
-                    Console.Clear();
-                    switch (opcion)
+                    try
                     {
-                        case 1: // COMPRAR PRODUCTOS 
-                            ComprarProducto();
+                        opcion = int.Parse(Console.ReadLine());
 
-                            break;
+                        Console.Clear();
+                        switch (opcion)
+                        {
+                            case 1: // COMPRAR PRODUCTOS 
+                                ComprarProducto();
 
-                        case 2: // MOSTRAR INFORMACIÓN
-                            MostrarInfo();
-                            break;
+                                break;
 
-                        case 3: // CARGA INDIVIDUAL
-                            CargaIndividualProducto();
-                            break;
+                            case 2: // MOSTRAR INFORMACIÓN
+                                MostrarInfo();
+                                break;
 
-                        case 4: // CARGA COMPLETA
-                            CargaCompletaProducto();
-                            break;
+                            case 3: // CARGA INDIVIDUAL
+                                CargaIndividualProducto();
+                                break;
 
-                        case 5: // ELIMINAR UN PRODUCTO
-                            break;
+                            case 4: // CARGA COMPLETA
+                                CargaCompletaProducto();
+                                break;
 
-                        default:
-                            break;
+                            case 5: // ELIMINAR UN PRODUCTO
+                                break;
+
+                            default:
+                                break;
+                        }
+                    }catch(Exception e)
+                    {
+                        Console.WriteLine(e.Message);
                     }
+                    
 
 
                 } while (opcion != 5);
