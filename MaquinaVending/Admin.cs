@@ -292,7 +292,7 @@ namespace MaquinaVending
             Producto producto = Productos.Find(x => x.Nombre.ToLower() == nombre.ToLower());
             return producto;
         }
-        public void Salir()
+        public void Guardar()
         {
 
             using (StreamWriter sw = new StreamWriter("productos.txt", false))

@@ -13,7 +13,7 @@ namespace MaquinaVending
         static List<Producto> productosMaquina;
         static void Main(string[] args)
         {
-            int opcion;
+            int opcion = 0;
             products = new List<Producto>();
             productosMaquina = new List<Producto>();
             CargarProductos();
@@ -35,22 +35,29 @@ namespace MaquinaVending
                 Console.WriteLine("\t╚═══════════════════════════════╝");
                 Console.WriteLine();
                 Console.Write("\tPor favor, introduzca su opción:   ");
-                opcion = int.Parse(Console.ReadLine());
-
-                switch(opcion)
+                try
                 {
-                    case 1:
-                        cliente.Menu();
-                        break;
+                    opcion = int.Parse(Console.ReadLine());
 
-                    case 2:
-                        admin.Menu();
-                        break;
+                    switch (opcion)
+                    {
+                        case 1:
+                            cliente.Menu();
+                            break;
 
-                    default:
-                        Console.WriteLine("Opción no válida!!!");
-                        break;
+                        case 2:
+                            admin.Menu();
+                            break;
+
+                        default:
+                            Console.WriteLine("Opción no válida!!!");
+                            break;
+                    }
+                }catch(Exception e)
+                {
+                    Console.WriteLine(e.Message);
                 }
+                
 
             } while (opcion != 3);
 
