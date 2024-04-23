@@ -233,17 +233,17 @@ namespace MaquinaVending
                 switch (opcion)
                 {
                     case 1:
-                        ProductoAlimenticio productoAlimenticio = (ProductoAlimenticio)producto;
+                        ProductoAlimenticio productoAlimenticio = new ProductoAlimenticio();
                         productoAlimenticio.SolicitarDetalles();
                         break;
 
                     case 2:
-                        ProductoElectronico productoElectronico = (ProductoElectronico)producto;
+                        ProductoElectronico productoElectronico = new ProductoElectronico();
                         productoElectronico.SolicitarDetalles();
                         break;
 
                     case 3:
-                        MaterialPrecioso materialPrecioso = (MaterialPrecioso)producto;
+                        MaterialPrecioso materialPrecioso = new MaterialPrecioso();
                         materialPrecioso.SolicitarDetalles();
                         break;
 
