@@ -113,6 +113,12 @@ namespace MaquinaVending
         }
         public void PagarTarjeta(double precio)
         {
+            /* 1. Para el pago con tarjeta he pedido que me de los datos de la tarjeta además he añadido una condición para cuando el 
+                número de la tarjeta el CVV y la fecha de caducidad no sean las correctas no me deje pagar. 
+               2. Aparte le he añadido la función ToString().Length que me lee la cantidad de carcteres que he añadido para que cuando el CVV o el número de la tarjeta
+                 no tengan los caracteres necesarios me salte un error 
+             
+             */
             Console.WriteLine($"El precio del producto es: {precio}\n");
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("[Introduce los datos de la tarjeta]\n");
@@ -188,23 +194,46 @@ namespace MaquinaVending
         public void PagarEfectivo(double precio)
         {
             Console.WriteLine($"El precio del producto es : {precio}");
-            Console.Write("Introduce el dinero para pagar el producto: ");
+            Console.WriteLine("Introduce el dinero para comprar el producto");
             float dinero_Introducido = float.Parse(Console.ReadLine());
             if (dinero_Introducido > precio)
             {
-
                 double cambio = dinero_Introducido - precio;
-                Console.WriteLine($":) Muchas gracias recoja el producto y el cambio de : {cambio} ");
-                Console.ReadKey();
+                /*Para que la maquina me devuelva monedas o billetes exactos:
+                  1. Creamos un array con el valor de los billetes que queremos que nos devuelva la máquina en este caso
+                      he decidido que la máquina  duelva como mucho  el cambio en billetes de 50.
+
+                  2. He hecho un foreach para que me recorra el array. Dentro del array he dividido el cambio entre el valor del billete
+                     y luego he calculado su resto para que me devuelva el billete que más se acerca al dinero introducido.
+                */
+                int  [] billetes  = {50,20,10,5 }; 
+
+                foreach (int billete in billetes)
+                {
+                    double vueltoBilletes = cambio / billete;
+                    cambio %= billete;
+                    Console.WriteLine($"Muchas gracias por comprar no se olvide de recoger su vuelto  de {vueltoBilletes}€ en billetes de {billete}€");
+
+                }
+
+                double[] monedas = { 0.5, 0.2, 0.1, 0.05, 0.02, 0.01 };
+                
+                foreach (int moneda in monedas)
+                {
+                    double vueltoMonedas = cambio / moneda;
+                    cambio %= moneda;
+                    Console.Write($"y de {vueltoMonedas}€ en monedas de {moneda} € ");
+                }
+                
 
 
             }
             else if (dinero_Introducido == precio)
             {
-                Console.WriteLine("Muchas gracias, recoja el producto");
-
-                Console.ReadKey(true);
+                Console.WriteLine("Muchas Gracias por comprar recoja su producto");
             }
+            
+            
             else
             {
                 Console.ForegroundColor = ConsoleColor.Red;
@@ -249,6 +278,10 @@ namespace MaquinaVending
                 producto.MostrarInfo();
             }
         }
+
+        
+     
+        
 
     }
 }
