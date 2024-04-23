@@ -117,26 +117,30 @@ namespace MaquinaVending
             Console.WriteLine("1. Añadir productos existentes");
             Console.WriteLine("2. Introducir nuevos productos a la máquina");
             Console.Write("Escoge una opción: ");
-            opcion = int.Parse(Console.ReadLine());
-            switch (opcion)
+            try
             {
-                case 1:
-                    AddUnidades();
-                    break;
-                case 2:
-                    int opcion2 = 0;
-                    do
-                    {
-                        AddNewProducto();
-                        Console.Write("¿Quiere añadir otro producto? (1.- Si / 2.- No): ");
-                        opcion2 = int.Parse(Console.ReadLine());
+                opcion = int.Parse(Console.ReadLine());
+                switch (opcion)
+                {
+                    case 1:
+                        AddUnidades();
+                        break;
+                    case 2:
+                        int opcion2 = 0;
+                        do
+                        {
+                            AddNewProducto();
+                            Console.Write("¿Quiere añadir otro producto? (1.- Si / 2.- No): ");
+                            opcion2 = int.Parse(Console.ReadLine());
 
-                    } while (opcion2 == 1);
-                    break;
-                default:
-                    Console.WriteLine("Salir");
-                    break;
-            }
+                        } while (opcion2 == 1);
+                        break;
+                    default:
+                        Console.WriteLine("Salir");
+                        break;
+                }
+            }catch(Exception e) { Console.WriteLine(e.Message) ; }
+            
         }
         public void CargaCompletaProducto()
         {
