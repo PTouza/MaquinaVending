@@ -271,7 +271,7 @@ namespace MaquinaVending
         {
             string nombre = null;
             Producto producto = BuscarProductoAlmacen(nombre);
-            Producto productoClonado = ClonarObjeto(producto);
+            Producto productoClonado = producto.Clonar();
             if (producto != null)
             {
                 Console.Write("¿Quiere añadir este producto a la máquina? (1.- SI | 2.- NO): ");
@@ -320,26 +320,6 @@ namespace MaquinaVending
             }
         }
 
-        public Producto ClonarObjeto(Producto producto)
-        {
-            if (producto is ProductoElectronico)
-            {
-                ProductoElectronico pe = (ProductoElectronico)producto.Clonar();
-                return pe;
-            }
-            if (producto is ProductoAlimenticio)
-            {
-                ProductoAlimenticio pa = (ProductoAlimenticio)producto.Clonar();
-                return pa;
-            }
-            if (producto is MaterialPrecioso)
-            {
-                MaterialPrecioso mp = (MaterialPrecioso)producto.Clonar();
-                return mp;
-            }
-
-            return null;
-        }
 
         public Producto BuscarProductoAlmacen(string nombre)
         {
