@@ -18,8 +18,10 @@ namespace MaquinaVending
 
         public Usuario(List<Producto> productos)
         {
-            ProductosMaquina.Capacity = 12;
+            
+
             ProductosMaquina = productos;
+            ProductosMaquina.Capacity = 12;
         }
 
         public abstract void Menu();
@@ -163,11 +165,13 @@ namespace MaquinaVending
                         if (pin.ToString().Length != 4)
                         {
                             Console.WriteLine("El Pin debe tener cuatro números, porfavor inténtelo de nuevo");
+                            Console.ReadKey();
                         }
 
                         else
                         {
                             Console.WriteLine($"Operación aceptada, el coste total es {precio} € ");
+                            Console.ReadKey();
                         }
                     }
                 }
@@ -202,6 +206,7 @@ namespace MaquinaVending
                 double cambio = dinero_Introducido - precio;
                 cambio = Math.Round(cambio, 3); // Redondeo el cambio para tener céntimos exactos
                 Console.WriteLine($"Su cambio es de {cambio} Euros");
+                Console.ReadKey();
                 int cambioEntero = (int)cambio; // Saco la parte entera del cambio usando una conversión implícita a int
                 double cambioDecimal = Math.Round(cambio - cambioEntero, 3); // Saco la parte decimal restando la parte entera del cambio al cambio total
                 int[] billetes = { 50, 20, 10, 5 }; // Declaro un array de billetes para ver la devolución
@@ -215,6 +220,7 @@ namespace MaquinaVending
                         billetesDevueltos = (cambioEntero / billete);
                         cambio -= billete * billetesDevueltos;
                         Console.WriteLine($"\t{billetesDevueltos} billete/s de {billete} €");
+                        Console.ReadKey();
                     }
                 }
 
@@ -228,6 +234,7 @@ namespace MaquinaVending
                     {
                         monedasDevueltasEnteras = cambioEntero / moneda;
                         Console.WriteLine($"\t{monedasDevueltasEnteras} moneda/s de {moneda} Euros");
+                        Console.ReadKey();
                         cambioEntero -= moneda * monedasDevueltasEnteras;
                         cambio -= moneda * monedasDevueltasEnteras;
                     }
@@ -247,6 +254,7 @@ namespace MaquinaVending
                         cambio -= moneda * monedasDevueltasDecimales;
                         cambioDecimal -= moneda * monedasDevueltasDecimales;
                         Console.WriteLine($"\t{monedasDevueltasDecimales} moneda/s de {moneda} Euros");
+                        Console.ReadKey ();
                     }
                 }
             }
