@@ -184,19 +184,19 @@ namespace MaquinaVending
                             case 1:
                                 MaterialPrecioso mp = new MaterialPrecioso(campos[1], int.Parse(campos[2]), double.Parse(campos[3]),
                                     campos[4], campos[5], campos[6]);
-                                Productos.Add(mp);
+                                ProductosMaquina.Add(mp);
                                 break;
 
                             case 2:
                                 ProductoAlimenticio pa = new ProductoAlimenticio(campos[1], int.Parse(campos[2]), double.Parse(campos[3]),
                                     campos[4], campos[7]);
-                                Productos.Add(pa);
+                                ProductosMaquina.Add(pa);
                                 break;
 
                             case 3:
                                 ProductoElectronico pe = new ProductoElectronico(campos[1], int.Parse(campos[2]), double.Parse(campos[3]),
                                     campos[4], campos[6], bool.Parse(campos[8]), bool.Parse(campos[9]));
-                                Productos.Add(pe);
+                                ProductosMaquina.Add(pe);
                                 break;
                         }
                     }
@@ -271,7 +271,7 @@ namespace MaquinaVending
         {
             string nombre = null;
             Producto producto = BuscarProductoAlmacen(nombre);
-            Producto productoClonado = ClonarObjeto(producto);
+            Producto productoClonado = producto.Clonar();
             if (producto != null)
             {
                 Console.Write("¿Quiere añadir este producto a la máquina? (1.- SI | 2.- NO): ");
@@ -320,26 +320,6 @@ namespace MaquinaVending
             }
         }
 
-        public Producto ClonarObjeto(Producto producto)
-        {
-            if (producto is ProductoElectronico)
-            {
-                ProductoElectronico pe = (ProductoElectronico)producto.Clonar();
-                return pe;
-            }
-            if (producto is ProductoAlimenticio)
-            {
-                ProductoAlimenticio pa = (ProductoAlimenticio)producto.Clonar();
-                return pa;
-            }
-            if (producto is MaterialPrecioso)
-            {
-                MaterialPrecioso mp = (MaterialPrecioso)producto.Clonar();
-                return mp;
-            }
-
-            return null;
-        }
 
         public Producto BuscarProductoAlmacen(string nombre)
         {
