@@ -65,7 +65,7 @@ namespace MaquinaVending
             Console.WriteLine("Unidades: ");
             Unidades = int.Parse(Console.ReadLine());
             Console.Write("Precio por unidad: ");
-            Precio_Unitario = int.Parse(Console.ReadLine());
+            Precio_Unitario = double.Parse(Console.ReadLine());
             Console.Write("Descripción del producto: ");
             Descripcion = Console.ReadLine();
         }
