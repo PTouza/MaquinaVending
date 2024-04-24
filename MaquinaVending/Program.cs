@@ -4,6 +4,8 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WMPLib;
+using System.Media;
 
 namespace MaquinaVending
 {
@@ -13,6 +15,9 @@ namespace MaquinaVending
         static List<Producto> productosMaquina;
         static void Main(string[] args)
         {
+            WindowsMediaPlayer musica = new WindowsMediaPlayer();
+            musica.URL = "Smooth operator But only the Best Part loop_qczc8Xzt8aU.mp3";
+            musica.controls.play();
             int opcion = 0;
             products = new List<Producto>();
             productosMaquina = new List<Producto>();
