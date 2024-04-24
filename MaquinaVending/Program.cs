@@ -78,33 +78,36 @@ namespace MaquinaVending
             {
                 string json = File.ReadAllText("productos.json");
 
-                List<Object> ProductosMaquinaJson = JsonSerializer.Deserialize<List<Object>>(json);
-
-                if (ProductosMaquinaJson.Count != 0)
+                if (json != string.Empty)
                 {
-                    foreach (Object o in ProductosMaquinaJson)
+                    List<Object> ProductosMaquinaJson = JsonSerializer.Deserialize<List<Object>>(json);
+
+                    if (ProductosMaquinaJson.Count != 0)
                     {
-
-                        JsonElement jsonElement = (JsonElement)o;
-
-                        int tipoProducto = jsonElement.GetProperty("TipoProducto").GetInt32();
-
-                        switch (tipoProducto)
+                        foreach (Object o in ProductosMaquinaJson)
                         {
-                            case 1:
-                                MaterialPrecioso mp = JsonSerializer.Deserialize<MaterialPrecioso>(jsonElement.GetRawText());
-                                productosMaquina.Add(mp);
-                                break;
 
-                            case 2:
-                                ProductoAlimenticio pa = JsonSerializer.Deserialize<ProductoAlimenticio>(jsonElement.GetRawText());
-                                productosMaquina.Add(pa);
-                                break;
+                            JsonElement jsonElement = (JsonElement)o;
 
-                            case 3:
-                                ProductoElectronico pe = JsonSerializer.Deserialize<ProductoElectronico>(jsonElement.GetRawText());
-                                productosMaquina.Add(pe);
-                                break;
+                            int tipoProducto = jsonElement.GetProperty("TipoProducto").GetInt32();
+
+                            switch (tipoProducto)
+                            {
+                                case 1:
+                                    MaterialPrecioso mp = JsonSerializer.Deserialize<MaterialPrecioso>(jsonElement.GetRawText());
+                                    productosMaquina.Add(mp);
+                                    break;
+
+                                case 2:
+                                    ProductoAlimenticio pa = JsonSerializer.Deserialize<ProductoAlimenticio>(jsonElement.GetRawText());
+                                    productosMaquina.Add(pa);
+                                    break;
+
+                                case 3:
+                                    ProductoElectronico pe = JsonSerializer.Deserialize<ProductoElectronico>(jsonElement.GetRawText());
+                                    productosMaquina.Add(pe);
+                                    break;
+                            }
                         }
                     }
                 }
@@ -122,33 +125,37 @@ namespace MaquinaVending
             {
                 string json = File.ReadAllText("productosMaquina.json");
 
-                List<Object> ProductosMaquinaJson = JsonSerializer.Deserialize<List<Object>>(json);
-
-                if (ProductosMaquinaJson.Count != 0)
+                if (json != string.Empty)
                 {
-                    foreach (Object o in ProductosMaquinaJson)
+
+                    List<Object> ProductosMaquinaJson = JsonSerializer.Deserialize<List<Object>>(json);
+
+                    if (ProductosMaquinaJson.Count != 0)
                     {
-
-                        JsonElement jsonElement = (JsonElement)o;
-
-                        int tipoProducto = jsonElement.GetProperty("TipoProducto").GetInt32();
-
-                        switch (tipoProducto)
+                        foreach (Object o in ProductosMaquinaJson)
                         {
-                            case 1:
-                                MaterialPrecioso mp = JsonSerializer.Deserialize<MaterialPrecioso>(jsonElement.GetRawText());
-                                productosMaquina.Add(mp);
-                                break;
 
-                            case 2:
-                                ProductoAlimenticio pa = JsonSerializer.Deserialize<ProductoAlimenticio>(jsonElement.GetRawText());
-                                productosMaquina.Add(pa);
-                                break;
+                            JsonElement jsonElement = (JsonElement)o;
 
-                            case 3:
-                                ProductoElectronico pe = JsonSerializer.Deserialize<ProductoElectronico>(jsonElement.GetRawText());
-                                productosMaquina.Add(pe);
-                                break;
+                            int tipoProducto = jsonElement.GetProperty("TipoProducto").GetInt32();
+
+                            switch (tipoProducto)
+                            {
+                                case 1:
+                                    MaterialPrecioso mp = JsonSerializer.Deserialize<MaterialPrecioso>(jsonElement.GetRawText());
+                                    productosMaquina.Add(mp);
+                                    break;
+
+                                case 2:
+                                    ProductoAlimenticio pa = JsonSerializer.Deserialize<ProductoAlimenticio>(jsonElement.GetRawText());
+                                    productosMaquina.Add(pa);
+                                    break;
+
+                                case 3:
+                                    ProductoElectronico pe = JsonSerializer.Deserialize<ProductoElectronico>(jsonElement.GetRawText());
+                                    productosMaquina.Add(pe);
+                                    break;
+                            }
                         }
                     }
                 }
