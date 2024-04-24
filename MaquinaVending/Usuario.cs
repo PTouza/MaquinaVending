@@ -199,7 +199,6 @@ namespace MaquinaVending
             float dinero_Introducido = float.Parse(Console.ReadLine());
             if (dinero_Introducido > precio)
             {
-                double cambio = dinero_Introducido - precio;
                 /*Para que la maquina me devuelva monedas o billetes exactos:
                   1. Creamos un array con el valor de los billetes que queremos que nos devuelva la máquina en este caso
                       he decidido que la máquina  duelva como mucho  el cambio en billetes de 50.
@@ -207,33 +206,28 @@ namespace MaquinaVending
                   2. He hecho un foreach para que me recorra el array. Dentro del array he dividido el cambio entre el valor del billete
                      y luego he calculado su resto para que me devuelva el billete que más se acerca al dinero introducido.
                 */
-                int  [] billetes  = {50,20,10,5 }; 
-              
-
+                double cambio = dinero_Introducido - precio;
+                int  [] billetes  = {50,20,10,5 };
+                double billetesDevueltos = 0;
                 foreach (int billete in billetes)
                 {
-                    double vueltoBilletes = cambio / billete;
-                    cambio %= billete;
-                    if (vueltoBilletes > 0)
+                    if (cambio > billete && cambio % billete == 0)
                     {
-                        Console.WriteLine($"Muchas gracias por comprar no se olvide de recoger su vuelto  de {vueltoBilletes}euros en billetes de {billete}euros");
-                        Console.ReadKey();
+                        billetesDevueltos = cambio/billete;
+                        cambio -= billete * billetesDevueltos;
+                        Console.Write($"Su cambio es de {billetesDevueltos} billete/s de {billete} €, ");
                     }
-                    
-
                 }
 
                 double[] monedas = {2,1,0.5, 0.2, 0.1, 0.05, 0.02, 0.01 };
-                
+                double monedasDevueltas = 0;
                 
                 foreach (int moneda in monedas)
                 {
-                    double vueltoMonedas = cambio / moneda;
-                    cambio %= moneda;
-                    if (vueltoMonedas > 0)
+                    if (cambio > moneda && cambio % moneda == 0)
                     {
-                        Console.WriteLine($"Vuelto de {vueltoMonedas}euros en monedas de {moneda} euros");
-                        Console.ReadKey();
+                        monedasDevueltas = cambio/moneda;
+                        Console.Write("Su cambio");
                     }
                     
                 }

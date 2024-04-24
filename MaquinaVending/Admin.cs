@@ -184,19 +184,19 @@ namespace MaquinaVending
                             case 1:
                                 MaterialPrecioso mp = new MaterialPrecioso(campos[1], int.Parse(campos[2]), double.Parse(campos[3]),
                                     campos[4], campos[5], campos[6]);
-                                Productos.Add(mp);
+                                ProductosMaquina.Add(mp);
                                 break;
 
                             case 2:
                                 ProductoAlimenticio pa = new ProductoAlimenticio(campos[1], int.Parse(campos[2]), double.Parse(campos[3]),
                                     campos[4], campos[7]);
-                                Productos.Add(pa);
+                                ProductosMaquina.Add(pa);
                                 break;
 
                             case 3:
                                 ProductoElectronico pe = new ProductoElectronico(campos[1], int.Parse(campos[2]), double.Parse(campos[3]),
                                     campos[4], campos[6], bool.Parse(campos[8]), bool.Parse(campos[9]));
-                                Productos.Add(pe);
+                                ProductosMaquina.Add(pe);
                                 break;
                         }
                     }
