@@ -153,6 +153,7 @@ namespace MaquinaVending
                 else if (QuiereContinuar())
                 {
                     Console.Write("Introduce la fecha de caducidad: ");
+                    Console.WriteLine("mes/año");
                     DateTime fechaCaducidadTarjeta = DateTime.ParseExact(Console.ReadLine(), "MM/yy", CultureInfo.InvariantCulture);
                     if (fechaCaducidadTarjeta < DateTime.Now)
                     {
