@@ -178,7 +178,7 @@ namespace MaquinaVending
                 }
             }
 
-
+            Console.ReadKey();
         }
 
         public bool QuiereContinuar()
