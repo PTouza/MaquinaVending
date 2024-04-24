@@ -112,7 +112,7 @@ namespace MaquinaVending
 
             else
             {
-                File.Create("productos.txt").Close();
+                File.Create("productos.json").Close();
             }
         }
 
