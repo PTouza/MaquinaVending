@@ -127,8 +127,8 @@ namespace MaquinaVending
             Console.WriteLine("[Introduce los datos de la tarjeta]\n");
             Console.ResetColor();
             Console.Write("Introduce el número de la tarjeta: ");
-
-            int numTarjeta = int.Parse(Console.ReadLine());
+            
+            Int64 numTarjeta = Int64.Parse(Console.ReadLine());
             if (numTarjeta.ToString().Length != 16)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
