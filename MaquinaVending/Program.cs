@@ -38,6 +38,7 @@ namespace MaquinaVending
                 Console.WriteLine("\t╔═══════════════════════════════╗");
                 Console.WriteLine("\t║ 1.- Si es Cliente             ║");
                 Console.WriteLine("\t║ 2.- Si es Admin               ║");
+                Console.WriteLine("\t║ 3.- Salir                     ║");
                 Console.WriteLine("\t╚═══════════════════════════════╝");
                 Console.WriteLine();
                 Console.Write("\tPor favor, introduzca su opción:   ");
