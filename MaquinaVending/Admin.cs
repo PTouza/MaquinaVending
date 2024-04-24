@@ -387,30 +387,29 @@ namespace MaquinaVending
             Producto producto = Productos.Find(x => x.Nombre.ToLower() == nombre.ToLower());
             return producto;
         }
-        public void GuardarCSV()
-        {
-
-            using (StreamWriter sw = new StreamWriter("productos.txt", false))
-            {
-                foreach (Producto p in Productos)
-                {
-                    sw.WriteLine(p.ToString());
-                }
-            }
-            
-            using (StreamWriter sw = new StreamWriter("productosMaquina.txt", false))
-            {
-                foreach (Producto p in ProductosMaquina)
-                {
-                    sw.WriteLine(p.ToString());
-                }
-            }
-            
-        }
 
         public void GuardarJson()
         {
+            if (Productos.Count > 0)
+            {
+                File.Create("productos.json").Close();
 
+                string json = JsonSerializer.Serialize(Productos);
+                using (StreamWriter sw = new StreamWriter("productos.json"))
+                {
+                    sw.WriteLine(json);
+                }
+            }
+
+            if (ProductosMaquina.Count > 0)
+            {
+                File.Create("productosMaquina.json").Close();
+                string json = JsonSerializer.Serialize(ProductosMaquina);
+                using (StreamWriter sw = new StreamWriter("productosMaquina.json"))
+                {
+                    sw.WriteLine(json);
+                }
+            }
         }
 
     }
