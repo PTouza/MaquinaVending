@@ -74,7 +74,7 @@ namespace MaquinaVending
 
         public static void CargarProductos()
         {
-            if (File.Exists("productos.txt"))
+            if (File.Exists("productos.json"))
             {
                 string json = File.ReadAllText("productos.json");
 
@@ -156,7 +156,7 @@ namespace MaquinaVending
 
             else
             {
-                File.Create("productosMaquina.txt").Close();
+                File.Create("productosMaquina.json").Close();
             }
         }
     }
