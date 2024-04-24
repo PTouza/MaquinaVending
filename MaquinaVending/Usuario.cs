@@ -18,8 +18,10 @@ namespace MaquinaVending
 
         public Usuario(List<Producto> productos)
         {
-            ProductosMaquina.Capacity = 12;
+            
+
             ProductosMaquina = productos;
+            ProductosMaquina.Capacity = 12;
         }
 
         public abstract void Menu();
