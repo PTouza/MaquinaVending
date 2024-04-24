@@ -223,7 +223,7 @@ namespace MaquinaVending
 
             if (File.Exists(path))
             {
-                string json = File.ReadAllText("usuarios.json");
+                string json = File.ReadAllText(path);
 
                 List<Object> ProductosMaquinaJson = JsonSerializer.Deserialize<List<Object>>(json);
 

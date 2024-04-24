@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WMPLib;
 using System.Media;
+using System.Text.Json;
 
 namespace MaquinaVending
 {
@@ -58,11 +59,12 @@ namespace MaquinaVending
                             Console.WriteLine("Opción no válida!!!");
                             break;
                     }
-                }catch(Exception e)
+                }
+                catch (Exception e)
                 {
                     Console.WriteLine(e.Message);
                 }
-                
+
 
             } while (opcion != 3);
 
@@ -74,32 +76,34 @@ namespace MaquinaVending
         {
             if (File.Exists("productos.txt"))
             {
-                using (StreamReader sr = new StreamReader("productos.txt"))
-                {
+                string json = File.ReadAllText("productos.json");
 
-                    string line = null;
-                    string[] campos = null;
-                    while ((line = sr.ReadLine()) != null)
+                List<Object> ProductosMaquinaJson = JsonSerializer.Deserialize<List<Object>>(json);
+
+                if (ProductosMaquinaJson.Count != 0)
+                {
+                    foreach (Object o in ProductosMaquinaJson)
                     {
-                        campos = line.Split(';');
-                        switch (int.Parse(campos[0]))
+
+                        JsonElement jsonElement = (JsonElement)o;
+
+                        int tipoProducto = jsonElement.GetProperty("TipoProducto").GetInt32();
+
+                        switch (tipoProducto)
                         {
                             case 1:
-                                MaterialPrecioso mp = new MaterialPrecioso(campos[1], int.Parse(campos[2]), double.Parse(campos[3]),
-                                    campos[4], campos[5], campos[6]);
-                                products.Add(mp);
+                                MaterialPrecioso mp = JsonSerializer.Deserialize<MaterialPrecioso>(jsonElement.GetRawText());
+                                productosMaquina.Add(mp);
                                 break;
 
                             case 2:
-                                ProductoAlimenticio pa = new ProductoAlimenticio(campos[1], int.Parse(campos[2]), double.Parse(campos[3]),
-                                    campos[4], campos[7]);
-                                products.Add(pa);
+                                ProductoAlimenticio pa = JsonSerializer.Deserialize<ProductoAlimenticio>(jsonElement.GetRawText());
+                                productosMaquina.Add(pa);
                                 break;
 
                             case 3:
-                                ProductoElectronico pe = new ProductoElectronico(campos[1], int.Parse(campos[2]), double.Parse(campos[3]),
-                                    campos[4], campos[6], bool.Parse(campos[8]), bool.Parse(campos[9]));
-                                products.Add(pe);
+                                ProductoElectronico pe = JsonSerializer.Deserialize<ProductoElectronico>(jsonElement.GetRawText());
+                                productosMaquina.Add(pe);
                                 break;
                         }
                     }
@@ -114,33 +118,35 @@ namespace MaquinaVending
 
         public static void CargarProductosMaquina()
         {
-            if (File.Exists("productosMaquina.txt"))
+            if (File.Exists("productosMaquina.json"))
             {
-                using (StreamReader sr = new StreamReader("productosMaquina.txt"))
-                {
+                string json = File.ReadAllText("productosMaquina.json");
 
-                    string line = null;
-                    string[] campos = null;
-                    while ((line = sr.ReadLine()) != null)
+                List<Object> ProductosMaquinaJson = JsonSerializer.Deserialize<List<Object>>(json);
+
+                if (ProductosMaquinaJson.Count != 0)
+                {
+                    foreach (Object o in ProductosMaquinaJson)
                     {
-                        campos = line.Split(';');
-                        switch (int.Parse(campos[0]))
+
+                        JsonElement jsonElement = (JsonElement)o;
+
+                        int tipoProducto = jsonElement.GetProperty("TipoProducto").GetInt32();
+
+                        switch (tipoProducto)
                         {
                             case 1:
-                                MaterialPrecioso mp = new MaterialPrecioso(campos[1], int.Parse(campos[2]), double.Parse(campos[3]),
-                                    campos[4], campos[5], campos[6]);
+                                MaterialPrecioso mp = JsonSerializer.Deserialize<MaterialPrecioso>(jsonElement.GetRawText());
                                 productosMaquina.Add(mp);
                                 break;
 
                             case 2:
-                                ProductoAlimenticio pa = new ProductoAlimenticio(campos[1], int.Parse(campos[2]), double.Parse(campos[3]),
-                                    campos[4], campos[7]);
+                                ProductoAlimenticio pa = JsonSerializer.Deserialize<ProductoAlimenticio>(jsonElement.GetRawText());
                                 productosMaquina.Add(pa);
                                 break;
 
                             case 3:
-                                ProductoElectronico pe = new ProductoElectronico(campos[1], int.Parse(campos[2]), double.Parse(campos[3]),
-                                    campos[4], campos[6], bool.Parse(campos[8]), bool.Parse(campos[9]));
+                                ProductoElectronico pe = JsonSerializer.Deserialize<ProductoElectronico>(jsonElement.GetRawText());
                                 productosMaquina.Add(pe);
                                 break;
                         }
