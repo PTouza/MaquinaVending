@@ -18,8 +18,14 @@ namespace MaquinaVending
             TipoProducto = 1;
         }
 
-        public MaterialPrecioso(string nombre, int unidades, double precio_Unitario, string descripcion, 
-            string tipoMaterial, string peso) : base (nombre, unidades, precio_Unitario,descripcion)
+        public MaterialPrecioso(int id)
+        {
+            Id = id;
+            TipoProducto = 1;
+        }
+
+        public MaterialPrecioso(int id, string nombre, int unidades, double precio_Unitario, string descripcion, 
+            string tipoMaterial, string peso) : base (id, nombre, unidades, precio_Unitario,descripcion)
         {
             TipoProducto = 1;
             TipoMaterial = tipoMaterial;

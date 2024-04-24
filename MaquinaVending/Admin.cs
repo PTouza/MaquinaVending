@@ -191,19 +191,19 @@ namespace MaquinaVending
                         switch (int.Parse(campos[0]))
                         {
                             case 1:
-                                MaterialPrecioso mp = new MaterialPrecioso(campos[1], int.Parse(campos[2]), double.Parse(campos[3]),
+                                MaterialPrecioso mp = new MaterialPrecioso(Productos.Count, campos[1], int.Parse(campos[2]), double.Parse(campos[3]),
                                     campos[4], campos[5], campos[6]);
                                 ProductosMaquina.Add(mp);
                                 break;
 
                             case 2:
-                                ProductoAlimenticio pa = new ProductoAlimenticio(campos[1], int.Parse(campos[2]), double.Parse(campos[3]),
+                                ProductoAlimenticio pa = new ProductoAlimenticio(Productos.Count, campos[1], int.Parse(campos[2]), double.Parse(campos[3]),
                                     campos[4], campos[7]);
                                 ProductosMaquina.Add(pa);
                                 break;
 
                             case 3:
-                                ProductoElectronico pe = new ProductoElectronico(campos[1], int.Parse(campos[2]), double.Parse(campos[3]),
+                                ProductoElectronico pe = new ProductoElectronico(Productos.Count, campos[1], int.Parse(campos[2]), double.Parse(campos[3]),
                                     campos[4], campos[6], bool.Parse(campos[8]), bool.Parse(campos[9]));
                                 ProductosMaquina.Add(pe);
                                 break;
@@ -290,20 +290,20 @@ namespace MaquinaVending
                 switch (opcion)
                 {
                     case 1:
-                        ProductoAlimenticio productoAlimenticio = new ProductoAlimenticio();
+                        ProductoAlimenticio productoAlimenticio = new ProductoAlimenticio(Productos.Count);
                         productoAlimenticio.SolicitarDetalles();
                         Productos.Add(productoAlimenticio);
 
                         break;
 
                     case 2:
-                        ProductoElectronico productoElectronico = new ProductoElectronico();
+                        ProductoElectronico productoElectronico = new ProductoElectronico(Productos.Count);
                         productoElectronico.SolicitarDetalles();
                         Productos.Add(productoElectronico);
                         break;
 
                     case 3:
-                        MaterialPrecioso materialPrecioso = new MaterialPrecioso();
+                        MaterialPrecioso materialPrecioso = new MaterialPrecioso(Productos.Count);
                         materialPrecioso.SolicitarDetalles();
                         Productos.Add(materialPrecioso);
                         break;

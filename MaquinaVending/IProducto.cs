@@ -10,7 +10,7 @@ namespace MaquinaVending
     internal interface IProducto
     {
         int TipoProducto { get; set; }
-        int Id { get; set; }
+        int Id { get; }
         string Nombre { get; set; }
         int Unidades { get; set; }
         double Precio_Unitario { get; set; }

@@ -10,7 +10,7 @@ namespace MaquinaVending
     {
         // PROPIEDADES
         public int TipoProducto { get; set; }
-        public int Id { get; set; } // Vendrá dado por la cantidad de productos que haya en la máquina expendedora 
+        public int Id { get; protected set; } // Vendrá dado por la cantidad de productos que haya en la máquina expendedora 
         public string Nombre { get; set; }
         public int Unidades { get; set; }
         public double Precio_Unitario { get; set; } // Precio de una sola unidad
@@ -18,8 +18,9 @@ namespace MaquinaVending
 
         // CONSTRUCTORES
         public Producto() { }
-        public Producto(string nombre, int unidades, double precio_Unitario, string descripcion)
+        public Producto(int id, string nombre, int unidades, double precio_Unitario, string descripcion)
         {
+            Id = id;
             Nombre = nombre;
             Unidades = unidades;
             Precio_Unitario = precio_Unitario;

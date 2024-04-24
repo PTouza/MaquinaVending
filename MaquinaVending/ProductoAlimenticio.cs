@@ -16,7 +16,14 @@ namespace MaquinaVending
             TipoProducto = 2;
         }
 
-        public ProductoAlimenticio(string nombre, int unidades, double precio_Unitario, string descripcion, string infoNutricional) : base(nombre, unidades, precio_Unitario, descripcion)
+        public ProductoAlimenticio(int id)
+        {
+            Id = id;
+            TipoProducto = 2;
+        }
+
+        public ProductoAlimenticio(int id, string nombre, int unidades, double precio_Unitario, string descripcion, string infoNutricional) 
+            : base(id, nombre, unidades, precio_Unitario, descripcion)
         {
             TipoProducto = 2;
             InfoNutricional = infoNutricional;

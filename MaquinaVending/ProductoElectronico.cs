@@ -19,8 +19,14 @@ namespace MaquinaVending
             TipoProducto = 3;
         }
 
-        public ProductoElectronico (string nombre, int unidades, double precio_Unitario, string descripcion,string peso,
-            bool tiene_Bateria, bool precargado) : base (nombre, unidades, precio_Unitario, descripcion)
+        public ProductoElectronico (int id)
+        {
+            Id = id;
+            TipoProducto = 3;
+        }
+
+        public ProductoElectronico (int id, string nombre, int unidades, double precio_Unitario, string descripcion,string peso,
+            bool tiene_Bateria, bool precargado) : base (id, nombre, unidades, precio_Unitario, descripcion)
         {
             TipoProducto = 3;
             Peso = peso;
