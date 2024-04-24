@@ -223,6 +223,7 @@ namespace MaquinaVending
                     {
                         billetesDevueltos = (cambioEntero / billete);
                         cambio -= billete * billetesDevueltos;
+                        cambioEntero -= billete * billetesDevueltos;
                         Console.WriteLine($"\t{billetesDevueltos} billete/s de {billete} €");
                         Console.ReadKey();
                     }
