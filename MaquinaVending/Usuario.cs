@@ -194,55 +194,71 @@ namespace MaquinaVending
 
         public void PagarEfectivo(double precio)
         {
-            Console.WriteLine($"El precio del producto es : {precio}");
-            Console.WriteLine("Introduce el dinero para comprar el producto");
-            float dinero_Introducido = float.Parse(Console.ReadLine());
+            Console.WriteLine($"Tiene que pagar {precio} Euros");
+            Console.Write("Introduce el dinero para comprar el producto: ");
+            double dinero_Introducido = double.Parse(Console.ReadLine());
             if (dinero_Introducido > precio)
             {
-                /*Para que la maquina me devuelva monedas o billetes exactos:
-                  1. Creamos un array con el valor de los billetes que queremos que nos devuelva la máquina en este caso
-                      he decidido que la máquina  duelva como mucho  el cambio en billetes de 50.
-
-                  2. He hecho un foreach para que me recorra el array. Dentro del array he dividido el cambio entre el valor del billete
-                     y luego he calculado su resto para que me devuelva el billete que más se acerca al dinero introducido.
-                */
                 double cambio = dinero_Introducido - precio;
-                int  [] billetes  = {50,20,10,5 };
-                double billetesDevueltos = 0;
+                cambio = Math.Round(cambio, 3); // Redondeo el cambio para tener céntimos exactos
+                Console.WriteLine($"Su cambio es de {cambio} Euros");
+                int cambioEntero = (int)cambio; // Saco la parte entera del cambio usando una conversión implícita a int
+                double cambioDecimal = Math.Round(cambio - cambioEntero, 3); // Saco la parte decimal restando la parte entera del cambio al cambio total
+                int[] billetes = { 50, 20, 10, 5 }; // Declaro un array de billetes para ver la devolución
+                int billetesDevueltos = 0;
+                Console.WriteLine("Su cambio es de: ");
                 foreach (int billete in billetes)
                 {
-                    if (cambio > billete && cambio % billete == 0)
+                    cambio = Math.Round(cambio, 3);
+                    if (cambioEntero >= billete)
                     {
-                        billetesDevueltos = cambio/billete;
+                        billetesDevueltos = (cambioEntero / billete);
                         cambio -= billete * billetesDevueltos;
-                        Console.Write($"Su cambio es de {billetesDevueltos} billete/s de {billete} €, ");
+                        Console.WriteLine($"\t{billetesDevueltos} billete/s de {billete} €");
                     }
                 }
 
-                double[] monedas = {2,1,0.5, 0.2, 0.1, 0.05, 0.02, 0.01 };
-                double monedasDevueltas = 0;
-                
-                foreach (int moneda in monedas)
+                int[] monedasEnteras = { 2, 1 };
+                int monedasDevueltasEnteras = 0;
+
+                foreach (int moneda in monedasEnteras)
                 {
-                    if (cambio > moneda && cambio % moneda == 0)
+                    cambio = Math.Round(cambio, 3);
+                    if (cambioEntero >= moneda)
                     {
-                        monedasDevueltas = cambio/moneda;
-                        Console.Write("Su cambio");
+                        monedasDevueltasEnteras = cambioEntero / moneda;
+                        Console.WriteLine($"\t{monedasDevueltasEnteras} moneda/s de {moneda} Euros");
+                        cambioEntero -= moneda * monedasDevueltasEnteras;
+                        cambio -= moneda * monedasDevueltasEnteras;
                     }
-                    
+
                 }
-                
 
+                double[] monedasDecimales = { 0.5, 0.2, 0.1, 0.05, 0.02, 0.01 };
+                int monedasDevueltasDecimales = 0;
 
+                foreach (double moneda in monedasDecimales)
+                {
+                    cambio = Math.Round(cambio, 3);
+                    cambioDecimal = Math.Round(cambioDecimal, 3);
+                    if (cambioDecimal >= moneda)
+                    {
+                        monedasDevueltasDecimales = (int)(cambioDecimal / moneda);
+                        cambio -= moneda * monedasDevueltasDecimales;
+                        cambioDecimal -= moneda * monedasDevueltasDecimales;
+                        Console.WriteLine($"\t{monedasDevueltasDecimales} moneda/s de {moneda} Euros");
+                    }
+                }
             }
+
             else if (dinero_Introducido == precio)
             {
                 Console.WriteLine("Muchas Gracias por comprar recoja su producto");
                 Console.ReadKey();
             }
-            
-            
-            else
+
+
+            else if (dinero_Introducido < precio)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Error, no se ha introducido la cantidad exacta");
