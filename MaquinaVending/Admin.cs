@@ -155,8 +155,6 @@ namespace MaquinaVending
                 opcion = int.Parse(Console.ReadLine());
                 if (QuiereContinuar())
                 {
-
-
                     switch (opcion)
                     {
                         case 1:
@@ -164,7 +162,7 @@ namespace MaquinaVending
                             break;
 
                         case 2:
-
+                            LeerArchivoJSON();
                             break;
 
                         default:
