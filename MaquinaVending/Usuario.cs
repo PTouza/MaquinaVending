@@ -39,11 +39,13 @@ namespace MaquinaVending
                     case 1: // PIDO EL ID DEL PRODUCTO QUE QUIERE COMPRAR
                         int opcion2 = 0;
                         double precioFinal = 0;
+                        bool productoEncontrado = false;
                         do
                         {
                             Producto producto = BuscarProductoMaquina();
                             if (producto != null)
                             {
+                                productoEncontrado = true;
                                 precioFinal = precioFinal + producto.Vender();
                                 Console.Write("¿Quieres añadir otro producto? (1.- Si / 2.-  No): ");
                                 opcion2 = int.Parse(Console.ReadLine());
@@ -51,7 +53,7 @@ namespace MaquinaVending
 
                         } while (opcion2 == 1);
 
-                        PagarProducto(precioFinal);
+                        if (productoEncontrado) { PagarProducto(precioFinal); }
                         break;
 
                     case 2: // CANCELAMOS LA OPERACIÓN Y VUELVE AL MENÚ
