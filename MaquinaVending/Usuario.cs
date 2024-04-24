@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
+using System.Globalization;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
@@ -53,7 +54,7 @@ namespace MaquinaVending
 
                         } while (opcion2 == 1);
 
-                        if (productoEncontrado) { PagarProducto(precioFinal); }
+                        if (productoEncontrado) { PagarProducto(precioFinal);}
                         break;
 
                     case 2: // CANCELAMOS LA OPERACIÓN Y VUELVE AL MENÚ
@@ -152,7 +153,7 @@ namespace MaquinaVending
                 else if (QuiereContinuar())
                 {
                     Console.Write("Introduce la fecha de caducidad: ");
-                    DateTime fechaCaducidadTarjeta = DateTime.Parse(Console.ReadLine());
+                    DateTime fechaCaducidadTarjeta = DateTime.ParseExact(Console.ReadLine(), "MM/yy", CultureInfo.InvariantCulture);
                     if (fechaCaducidadTarjeta < DateTime.Now)
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
