@@ -165,11 +165,13 @@ namespace MaquinaVending
                         if (pin.ToString().Length != 4)
                         {
                             Console.WriteLine("El Pin debe tener cuatro números, porfavor inténtelo de nuevo");
+                            Console.ReadKey();
                         }
 
                         else
                         {
                             Console.WriteLine($"Operación aceptada, el coste total es {precio} € ");
+                            Console.ReadKey();
                         }
                     }
                 }
