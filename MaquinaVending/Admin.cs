@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.Design;
 using System.Diagnostics.Eventing.Reader;
+using System.Text.Json;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
@@ -145,23 +146,32 @@ namespace MaquinaVending
         public void CargaCompletaProducto()
         {
             int opcion = 0;
-            Console.Write("¿Quiere continuar con la operación (1.- Si | 2.- No): ");
+            Console.Clear();
+            Console.WriteLine("1.- Archivo CSV");
+            Console.WriteLine("2.- Archivo JSON");
+            Console.Write("\tEscoge una opción: ");
             try
             {
                 opcion = int.Parse(Console.ReadLine());
-
-                switch (opcion)
+                if (QuiereContinuar())
                 {
-                    case 1:
-                        LeerArchivoCSV();
-                        break;
 
-                    case 2:
-                        break;
 
-                    default:
-                        break;
+                    switch (opcion)
+                    {
+                        case 1:
+                            LeerArchivoCSV();
+                            break;
+
+                        case 2:
+
+                            break;
+
+                        default:
+                            break;
+                    }
                 }
+
             }catch (Exception e) { Console.WriteLine(e.Message); }
             
         }
@@ -171,6 +181,7 @@ namespace MaquinaVending
             var path = Console.ReadLine();
             if (File.Exists(path))
             {
+                ProductosMaquina.Clear();
                 using (StreamReader sr = new StreamReader(path))
                 {
                     
@@ -205,6 +216,47 @@ namespace MaquinaVending
             else
             {
                 Console.WriteLine("El archivo dado no existe o no lo hemos encontrado, porfavor inténtalo de nuevo");
+            }
+        }
+        public void LeerArchivoJSON()
+        {
+            Console.Write("Introduce la úbicación del archivo: ");
+            var path = Console.ReadLine();
+
+            if (File.Exists(path))
+            {
+                string json = File.ReadAllText("usuarios.json");
+
+                List<Object> ProductosMaquinaJson = JsonSerializer.Deserialize<List<Object>>(json);
+
+                if (ProductosMaquinaJson.Count != 0)
+                {
+                    foreach (Object o in ProductosMaquinaJson)
+                    {
+
+                        JsonElement jsonElement = (JsonElement)o;
+
+                        int tipoProducto = jsonElement.GetProperty("TipoProducto").GetInt32();
+
+                        switch(tipoProducto)
+                        {
+                            case 1:
+                                MaterialPrecioso mp = JsonSerializer.Deserialize<MaterialPrecioso>(jsonElement.GetRawText());
+                                ProductosMaquina.Add(mp);
+                                break;
+
+                            case 2:
+                                ProductoAlimenticio pa = JsonSerializer.Deserialize<ProductoAlimenticio>(jsonElement.GetRawText());
+                                ProductosMaquina.Add(pa);
+                                break;
+
+                            case 3:
+                                ProductoElectronico pe = JsonSerializer.Deserialize<ProductoElectronico>(jsonElement.GetRawText());
+                                ProductosMaquina.Add(pe);
+                                break;
+                        }
+                    }
+                }
             }
         }
         public void AddUnidades()

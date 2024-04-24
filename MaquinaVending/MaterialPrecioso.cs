@@ -13,11 +13,15 @@ namespace MaquinaVending
         public string Peso { get; set; }
 
         // CONSTRUCTORES
-        public MaterialPrecioso() { }
+        public MaterialPrecioso() 
+        {
+            TipoProducto = 1;
+        }
 
         public MaterialPrecioso(string nombre, int unidades, double precio_Unitario, string descripcion, 
             string tipoMaterial, string peso) : base (nombre, unidades, precio_Unitario,descripcion)
         {
+            TipoProducto = 1;
             TipoMaterial = tipoMaterial;
             Peso = peso;
         }

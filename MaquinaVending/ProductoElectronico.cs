@@ -14,11 +14,15 @@ namespace MaquinaVending
         public bool Precargado { get; set; }
 
         // CONSTRUCTORES
-        public ProductoElectronico() { }
+        public ProductoElectronico()
+        {
+            TipoProducto = 3;
+        }
 
         public ProductoElectronico (string nombre, int unidades, double precio_Unitario, string descripcion,string peso,
             bool tiene_Bateria, bool precargado) : base (nombre, unidades, precio_Unitario, descripcion)
         {
+            TipoProducto = 3;
             Peso = peso;
             Tiene_Bateria = tiene_Bateria;
             Precargado = precargado;

@@ -11,10 +11,14 @@ namespace MaquinaVending
     {
         public string InfoNutricional { get; set; }
 
-        public ProductoAlimenticio() { }
+        public ProductoAlimenticio()
+        {
+            TipoProducto = 2;
+        }
 
         public ProductoAlimenticio(string nombre, int unidades, double precio_Unitario, string descripcion, string infoNutricional) : base(nombre, unidades, precio_Unitario, descripcion)
         {
+            TipoProducto = 2;
             InfoNutricional = infoNutricional;
         }
 

@@ -9,6 +9,7 @@ namespace MaquinaVending
     internal abstract class Producto : IProducto
     {
         // PROPIEDADES
+        public int TipoProducto { get; set; }
         public int Id { get; set; } // Vendrá dado por la cantidad de productos que haya en la máquina expendedora 
         public string Nombre { get; set; }
         public int Unidades { get; set; }
