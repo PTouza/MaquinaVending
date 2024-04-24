@@ -177,8 +177,8 @@ namespace MaquinaVending
 
                         else
                         {
-                            Console.WriteLine($"Operación aceptada, el coste total es {precio} € ");
                             VaultBoy();
+                            Console.WriteLine($"Operación aceptada, el coste total es {precio} € ");
                             Console.ReadKey();
                         }
                     }
@@ -269,8 +269,8 @@ namespace MaquinaVending
 
             else if (dinero_Introducido == precio)
             {
-                Console.WriteLine("Muchas Gracias por comprar recoja su producto");
                 VaultBoy();
+                Console.WriteLine("Muchas Gracias por comprar recoja su producto");                
                 Console.ReadKey();
             }
 
