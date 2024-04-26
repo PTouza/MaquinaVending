@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 namespace MaquinaVending
 {
     internal interface IUsuario
-    { 
-
+    {
+        List<Producto> ProductosMaquina;
         void Menu();
         void PagarTarjeta(double precio);
         void PagarEfectivo(double precio);

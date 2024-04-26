@@ -17,9 +17,11 @@ namespace MaquinaVending
         string Descripcion { get; set; }
 
         double Vender();
+        void QuitarUnidades(int unidades);
         void AddUnidades(int unidades);
         string ToString();
         void MostrarInfo();
         void SolicitarDetalles();
+        Producto Clonar();
     }
 }
