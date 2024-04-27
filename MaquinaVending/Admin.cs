@@ -116,7 +116,7 @@ namespace MaquinaVending
 
             Console.Clear();
             Console.WriteLine("1. Añadir productos existentes");
-            Console.WriteLine("2. Introducir nuevos productos a la máquina");
+            Console.WriteLine("2. Añadir nuevos productos al almacén");
             Console.Write("Escoge una opción: ");
             try
             {
@@ -173,6 +173,7 @@ namespace MaquinaVending
             }catch (Exception e) { Console.WriteLine(e.Message); }
             
         }
+
         public void LeerArchivoCSV()
         {
             Console.Write("Introduce la dirección de memoria del archivo: ");
@@ -216,6 +217,7 @@ namespace MaquinaVending
                 Console.WriteLine("El archivo dado no existe o no lo hemos encontrado, porfavor inténtalo de nuevo");
             }
         }
+
         public void LeerArchivoJSON()
         {
             Console.Write("Introduce la úbicación del archivo: ");
@@ -257,6 +259,7 @@ namespace MaquinaVending
                 }
             }
         }
+
         public void AddUnidades()
         {
             Producto productoMaquina = BuscarProductoMaquina();
@@ -274,6 +277,7 @@ namespace MaquinaVending
                 productoMaquina.AddUnidades(unidades);
             }
         }
+
         public void AddNewProducto()
         {
             Console.WriteLine("¿Que tipo de producto quiere añadir?: ");
@@ -317,6 +321,7 @@ namespace MaquinaVending
             }catch(Exception e) { Console.WriteLine(e.Message); }
             
         }
+
         public void AddProductoMaquina()
         {
             string nombre = null;
@@ -369,7 +374,6 @@ namespace MaquinaVending
                 }
             }
         }
-
 
         public Producto BuscarProductoAlmacen(string nombre)
         {
