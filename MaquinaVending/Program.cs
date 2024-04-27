@@ -95,18 +95,21 @@ namespace MaquinaVending
                             switch (tipoProducto)
                             {
                                 case 1:
-                                    MaterialPrecioso mp = JsonSerializer.Deserialize<MaterialPrecioso>(jsonElement.GetRawText());
-                                    productosMaquina.Add(mp);
+                                    MaterialPrecioso mp = JsonSerializer.Deserialize<MaterialPrecioso>
+                                        (jsonElement.GetRawText());
+                                    products.Add(mp);
                                     break;
 
                                 case 2:
-                                    ProductoAlimenticio pa = JsonSerializer.Deserialize<ProductoAlimenticio>(jsonElement.GetRawText());
-                                    productosMaquina.Add(pa);
+                                    ProductoAlimenticio pa = JsonSerializer.Deserialize<ProductoAlimenticio>
+                                        (jsonElement.GetRawText());
+                                    products.Add(pa);
                                     break;
 
                                 case 3:
-                                    ProductoElectronico pe = JsonSerializer.Deserialize<ProductoElectronico>(jsonElement.GetRawText());
-                                    productosMaquina.Add(pe);
+                                    ProductoElectronico pe = JsonSerializer.Deserialize<ProductoElectronico>
+                                        (jsonElement.GetRawText());
+                                    products.Add(pe);
                                     break;
                             }
                         }

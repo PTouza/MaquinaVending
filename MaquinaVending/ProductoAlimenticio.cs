@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace MaquinaVending
@@ -11,6 +12,7 @@ namespace MaquinaVending
     {
         public string InfoNutricional { get; set; }
 
+        [JsonConstructor]
         public ProductoAlimenticio()
         {
             TipoProducto = 2;

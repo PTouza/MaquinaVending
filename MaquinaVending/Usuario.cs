@@ -56,8 +56,7 @@ namespace MaquinaVending
 
                         } while (opcion2 == 1);
 
-                        //if (productoEncontrado) { PagarProducto(precioFinal);}
-                        PagarProducto(precioFinal);
+                        if (productoEncontrado) { PagarProducto(precioFinal);}
                         break;
 
                     case 2: // CANCELAMOS LA OPERACIÓN Y VUELVE AL MENÚ
@@ -290,7 +289,7 @@ namespace MaquinaVending
         {
             foreach (Producto p in ProductosMaquina)
             {
-                Console.WriteLine($"ID: {p.Id}, Nombre: {p.Nombre}, Unidades {p.Unidades}, Precio {p.Precio_Unitario}€," +
+                Console.WriteLine($"ID: {p.Id}, Nombre: {p.Nombre}, Unidades {p.Unidades}, Precio {p.Precio_Unitario} Euros," +
                     $" Información del producto: {p.Descripcion}");
             }
 

@@ -49,7 +49,8 @@ namespace MaquinaVending
                             break;
 
                         case 2: // MOSTRAR INFORMACIÓN
-                            MostrarInfo();
+                            Producto p = BuscarProductoMaquina();
+                            p.MostrarInfo();
                             break;
 
                         case 3: // SALIR

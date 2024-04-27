@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace MaquinaVending
@@ -10,6 +11,7 @@ namespace MaquinaVending
     {
         // PROPIEDADES
         public int TipoProducto { get; set; }
+        [JsonInclude]
         public int Id { get; protected set; } // Vendrá dado por la cantidad de productos que haya en la máquina expendedora 
         public string Nombre { get; set; }
         public int Unidades { get; set; }
@@ -30,9 +32,13 @@ namespace MaquinaVending
         // MÉTODOS
         public double Vender()
         {
-            Console.Write("¿Cuantas unidades desea?: ");
-            int cantidadProductos = int.Parse(Console.ReadLine());
-
+            int cantidadProductos;
+            do
+            {
+                Console.Write("¿Cuantas unidades desea?: ");
+                cantidadProductos = int.Parse(Console.ReadLine());
+                if(cantidadProductos > Unidades) { Console.WriteLine("No tenemos suficientes unidades"); }
+            } while (cantidadProductos <= Unidades);
             Unidades -= cantidadProductos;
             return cantidadProductos * Precio_Unitario;
         }
