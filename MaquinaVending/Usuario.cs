@@ -56,7 +56,7 @@ namespace MaquinaVending
 
                         } while (opcion2 == 1);
 
-                        if (productoEncontrado) { PagarProducto(precioFinal);}
+                        if (productoEncontrado && precioFinal > 0) { PagarProducto(precioFinal);}
                         break;
 
                     case 2: // CANCELAMOS LA OPERACIÓN Y VUELVE AL MENÚ

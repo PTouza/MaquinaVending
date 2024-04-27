@@ -37,8 +37,12 @@ namespace MaquinaVending
             {
                 Console.Write("¿Cuantas unidades desea?: ");
                 cantidadProductos = int.Parse(Console.ReadLine());
-                if(cantidadProductos > Unidades) { Console.WriteLine("No tenemos suficientes unidades"); }
-            } while (cantidadProductos <= Unidades);
+                if(cantidadProductos > Unidades) 
+                { 
+                    Console.WriteLine("No tenemos suficientes unidades");
+                    cantidadProductos = 0;
+                }
+            } while (cantidadProductos > Unidades);
             Unidades -= cantidadProductos;
             return cantidadProductos * Precio_Unitario;
         }
