@@ -54,7 +54,14 @@ namespace MaquinaVending
 
         public void QuitarUnidades(int unidades)
         {
-            Unidades -= unidades;
+            if (unidades > Unidades)
+            {
+                Console.WriteLine("\tNo tenemos suficientes unidades disponibles, inténtalo de nuevo");
+            }
+            else
+            {
+                Unidades -= unidades;
+            }
         }
 
         public override string ToString()
@@ -72,7 +79,7 @@ namespace MaquinaVending
         {
             Console.Write("Nombre del producto: ");
             Nombre  = Console.ReadLine();
-            Console.WriteLine("Unidades: ");
+            Console.Write("Unidades: ");
             Unidades = int.Parse(Console.ReadLine());
             Console.Write("Precio por unidad: ");
             Precio_Unitario = double.Parse(Console.ReadLine());

@@ -24,7 +24,7 @@ namespace MaquinaVending
             productosMaquina = new List<Producto>();
             CargarProductos();
             CargarProductosMaquina();
-            Admin admin = new Admin(productosMaquina, "admin123", products);
+            Admin admin = new Admin(products, "admin123",productosMaquina);
             Cliente cliente = new Cliente(productosMaquina);
             do
             {
@@ -81,11 +81,11 @@ namespace MaquinaVending
 
                 if (json != string.Empty)
                 {
-                    List<Object> ProductosMaquinaJson = JsonSerializer.Deserialize<List<Object>>(json);
+                    List<Object> ProductosJson = JsonSerializer.Deserialize<List<Object>>(json);
 
-                    if (ProductosMaquinaJson.Count != 0)
+                    if (ProductosJson.Count != 0)
                     {
-                        foreach (Object o in ProductosMaquinaJson)
+                        foreach (Object o in ProductosJson)
                         {
 
                             JsonElement jsonElement = (JsonElement)o;

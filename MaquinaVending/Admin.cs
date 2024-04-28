@@ -20,7 +20,7 @@ namespace MaquinaVending
 
         public Admin() { }
 
-        public Admin(List<Producto> productos, string password, List<Producto> productosMaquina) : base(productos)
+        public Admin(List<Producto> productos, string password, List<Producto> productosMaquina) : base(productosMaquina)
         {
             Password = password;
             Productos = productos;
@@ -66,7 +66,7 @@ namespace MaquinaVending
                     Console.WriteLine("\t╚═══════════════════════════════════════╝");
                     Console.WriteLine();
                     
-                    Console.Write("\tPor favor, introduzca su opción:");
+                    Console.Write("\tPor favor, introduzca su opción: ");
                     try
                     {
                         opcion = int.Parse(Console.ReadLine());
@@ -81,6 +81,8 @@ namespace MaquinaVending
 
                             case 2: // MOSTRAR INFORMACIÓN
                                 MostrarInfo();
+                                Console.Write("\tPulse cualquier tecla para continuar");
+                                Console.ReadKey();
                                 break;
 
                             case 3: // CARGA INDIVIDUAL
@@ -266,16 +268,26 @@ namespace MaquinaVending
             Producto productoAlmacen = BuscarProductoAlmacen(productoMaquina.Nombre);
             Console.Write("Introduce el número de unidades que desa introducir: ");
             int unidades = int.Parse(Console.ReadLine());
-            if(productoMaquina != null && productoAlmacen != null)
+            if (unidades + productoMaquina.Unidades > 10)
             {
-                productoAlmacen.QuitarUnidades(unidades);
-                productoMaquina.AddUnidades(unidades);
+                Console.WriteLine("La máquina solo admite 10 unidades por producto");
+                Console.Write("Pulse cualquier tecla para continuar");
+                Console.ReadKey();
             }
+            else
+            {
+                if (productoMaquina != null && productoAlmacen != null)
+                {
+                    productoAlmacen.QuitarUnidades(unidades);
+                    productoMaquina.AddUnidades(unidades);
+                }
 
-            else if(productoMaquina != null)
-            {
-                productoMaquina.AddUnidades(unidades);
+                else if (productoMaquina != null)
+                {
+                    productoMaquina.AddUnidades(unidades);
+                }
             }
+            
         }
 
         public void AddNewProducto()
@@ -377,16 +389,16 @@ namespace MaquinaVending
 
         public Producto BuscarProductoAlmacen(string nombre)
         {
-            foreach(Producto p in Productos)
-            {
-                Console.WriteLine($"Nombre: {p.Nombre}, Unidades {p.Unidades}, Precio {p.Precio_Unitario}€," +
-                    $" Información del producto: {p.Descripcion}");
-            }
-            Console.WriteLine();
             if (nombre == null)
             {
                 Console.Write("Introduce el nombre del producto: ");
                 nombre = Console.ReadLine();
+                foreach (Producto p in Productos)
+                {
+                    Console.WriteLine($"Nombre: {p.Nombre}, Unidades {p.Unidades}, Precio {p.Precio_Unitario}€," +
+                        $" Información del producto: {p.Descripcion}");
+                }
+                Console.WriteLine();
             }
             Producto producto = Productos.Find(x => x.Nombre.ToLower() == nombre.ToLower());
             return producto;

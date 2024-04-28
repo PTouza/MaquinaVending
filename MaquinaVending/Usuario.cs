@@ -21,8 +21,6 @@ namespace MaquinaVending
 
         public Usuario(List<Producto> productos)
         {
-            
-
             ProductosMaquina = productos;
             ProductosMaquina.Capacity = 12;
         }
@@ -287,12 +285,15 @@ namespace MaquinaVending
 
         public Producto BuscarProductoMaquina()
         {
+            Console.Clear();
+
             foreach (Producto p in ProductosMaquina)
             {
                 Console.WriteLine($"ID: {p.Id}, Nombre: {p.Nombre}, Unidades {p.Unidades}, Precio {p.Precio_Unitario} Euros," +
                     $" Información del producto: {p.Descripcion}");
+                Console.WriteLine();
             }
-
+            Console.WriteLine();
             Console.Write("Introduce el Id del Producto: ");
             int id = int.Parse(Console.ReadLine());
             Producto producto = null;
