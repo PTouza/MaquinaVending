@@ -200,35 +200,45 @@ namespace MaquinaVending
             if (File.Exists(path))
             {
                 ProductosMaquina.Clear();
-                using (StreamReader sr = new StreamReader(path))
+                string[] checkNumProductos = File.ReadAllLines(path);
+                if (checkNumProductos.Length <= 12)
                 {
-                    
-                    string line = null;
-                    string[] campos = null;
-                    while ((line = sr.ReadLine()) != null)
+
+
+                    using (StreamReader sr = new StreamReader(path))
                     {
-                        campos = line.Split(';');
-                        switch (int.Parse(campos[0]))
+
+                        string line = null;
+                        string[] campos = null;
+                        while ((line = sr.ReadLine()) != null)
                         {
-                            case 1:
-                                MaterialPrecioso mp = new MaterialPrecioso(ProductosAlmacen.Count, campos[1], int.Parse(campos[2]), double.Parse(campos[3]),
-                                    campos[4], campos[5], campos[6]);
-                                ProductosMaquina.Add(mp);
-                                break;
+                            campos = line.Split(';');
+                            switch (int.Parse(campos[0]))
+                            {
+                                case 1:
+                                    MaterialPrecioso mp = new MaterialPrecioso(ProductosAlmacen.Count, campos[1], int.Parse(campos[2]), double.Parse(campos[3]),
+                                        campos[4], campos[5], campos[6]);
+                                    ProductosMaquina.Add(mp);
+                                    break;
 
-                            case 2:
-                                ProductoAlimenticio pa = new ProductoAlimenticio(ProductosAlmacen.Count, campos[1], int.Parse(campos[2]), double.Parse(campos[3]),
-                                    campos[4], campos[7]);
-                                ProductosMaquina.Add(pa);
-                                break;
+                                case 2:
+                                    ProductoAlimenticio pa = new ProductoAlimenticio(ProductosAlmacen.Count, campos[1], int.Parse(campos[2]), double.Parse(campos[3]),
+                                        campos[4], campos[7]);
+                                    ProductosMaquina.Add(pa);
+                                    break;
 
-                            case 3:
-                                ProductoElectronico pe = new ProductoElectronico(ProductosAlmacen.Count, campos[1], int.Parse(campos[2]), double.Parse(campos[3]),
-                                    campos[4], campos[6], bool.Parse(campos[8]), bool.Parse(campos[9]));
-                                ProductosMaquina.Add(pe);
-                                break;
+                                case 3:
+                                    ProductoElectronico pe = new ProductoElectronico(ProductosAlmacen.Count, campos[1], int.Parse(campos[2]), double.Parse(campos[3]),
+                                        campos[4], campos[6], bool.Parse(campos[8]), bool.Parse(campos[9]));
+                                    ProductosMaquina.Add(pe);
+                                    break;
+                            }
                         }
                     }
+                }
+                else
+                {
+                    Console.WriteLine("No se admiten más de 12 productos en la máquina");
                 }
             }
             else
@@ -248,7 +258,7 @@ namespace MaquinaVending
 
                 List<Object> ProductosMaquinaJson = JsonSerializer.Deserialize<List<Object>>(json);
 
-                if (ProductosMaquinaJson.Count != 0)
+                if (ProductosMaquinaJson.Count != 0 && ProductosMaquinaJson.Count <= 12)
                 {
                     foreach (Object o in ProductosMaquinaJson)
                     {
@@ -274,6 +284,18 @@ namespace MaquinaVending
                                 ProductosMaquina.Add(pe);
                                 break;
                         }
+                    }
+                }
+
+                else
+                {
+                    if(ProductosMaquinaJson.Count == 0)
+                    {
+                        Console.WriteLine("No se han encontrado archivos para cargar");
+                    }
+                    else
+                    {
+                        Console.WriteLine("No se admiten más de 12 productos en la máquina");
                     }
                 }
             }
