@@ -119,6 +119,7 @@ namespace MaquinaVending
             Console.Clear();
             Console.WriteLine("1. Añadir productos existentes");
             Console.WriteLine("2. Añadir nuevos productos al almacén");
+            Console.WriteLine("3. Retirar productos");
             Console.Write("Escoge una opción: ");
             try
             {
@@ -138,6 +139,22 @@ namespace MaquinaVending
 
                         } while (opcion2 == 1);
                         break;
+
+                    case 3:
+                        Producto producto = BuscarProductoMaquina();
+                        Console.Write("¿Cuántas unidades quiere retirar?: ");
+                        producto.QuitarUnidades(int.Parse(Console.ReadLine()));
+                        if (producto.Unidades == 0)
+                        {
+                            Console.Write("Se han retirado todas las unidades, ¿Quiere retirar el producto?(1.- SI / 2.- NO): ");
+                            int opcionRetirar = int.Parse(Console.ReadLine());
+                            if(opcionRetirar == 1)
+                            {
+                                ProductosMaquina.Remove(producto);
+                            }
+                        }
+                        break;
+
                     default:
                         Console.WriteLine("Salir");
                         break;

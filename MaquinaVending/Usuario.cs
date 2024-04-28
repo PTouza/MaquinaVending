@@ -46,10 +46,18 @@ namespace MaquinaVending
                             Producto producto = BuscarProductoMaquina();
                             if (producto != null)
                             {
-                                productoEncontrado = true;
-                                precioFinal = precioFinal + producto.Vender();
-                                Console.Write("¿Quieres añadir otro producto? (1.- Si / 2.-  No): ");
-                                opcion2 = int.Parse(Console.ReadLine());
+                                if (producto.Unidades > 0)
+                                {
+                                    productoEncontrado = true;
+                                    precioFinal = precioFinal + producto.Vender();
+                                    Console.Write("¿Quieres añadir otro producto? (1.- Si / 2.-  No): ");
+                                    opcion2 = int.Parse(Console.ReadLine());
+                                }
+
+                                else if (producto.Unidades == 0)
+                                {
+                                    Console.WriteLine("Lo sentimos, no nos quedan unidades de este producto");
+                                }
                             }
 
                         } while (opcion2 == 1);
