@@ -15,7 +15,7 @@ namespace MaquinaVending
     internal class Admin : Usuario
     {
         private string Password { get; set; }
-        public List<Producto> Productos { get; private set; }
+        public List<Producto> ProductosAlmacen { get; private set; }
 
 
         public Admin() { }
@@ -23,7 +23,7 @@ namespace MaquinaVending
         public Admin(List<Producto> productos, string password, List<Producto> productosMaquina) : base(productosMaquina)
         {
             Password = password;
-            Productos = productos;
+            ProductosAlmacen = productos;
         }
 
         public override void Menu()
@@ -194,19 +194,19 @@ namespace MaquinaVending
                         switch (int.Parse(campos[0]))
                         {
                             case 1:
-                                MaterialPrecioso mp = new MaterialPrecioso(Productos.Count, campos[1], int.Parse(campos[2]), double.Parse(campos[3]),
+                                MaterialPrecioso mp = new MaterialPrecioso(ProductosAlmacen.Count, campos[1], int.Parse(campos[2]), double.Parse(campos[3]),
                                     campos[4], campos[5], campos[6]);
                                 ProductosMaquina.Add(mp);
                                 break;
 
                             case 2:
-                                ProductoAlimenticio pa = new ProductoAlimenticio(Productos.Count, campos[1], int.Parse(campos[2]), double.Parse(campos[3]),
+                                ProductoAlimenticio pa = new ProductoAlimenticio(ProductosAlmacen.Count, campos[1], int.Parse(campos[2]), double.Parse(campos[3]),
                                     campos[4], campos[7]);
                                 ProductosMaquina.Add(pa);
                                 break;
 
                             case 3:
-                                ProductoElectronico pe = new ProductoElectronico(Productos.Count, campos[1], int.Parse(campos[2]), double.Parse(campos[3]),
+                                ProductoElectronico pe = new ProductoElectronico(ProductosAlmacen.Count, campos[1], int.Parse(campos[2]), double.Parse(campos[3]),
                                     campos[4], campos[6], bool.Parse(campos[8]), bool.Parse(campos[9]));
                                 ProductosMaquina.Add(pe);
                                 break;
@@ -306,22 +306,22 @@ namespace MaquinaVending
                 switch (opcion)
                 {
                     case 1:
-                        ProductoAlimenticio productoAlimenticio = new ProductoAlimenticio(Productos.Count);
+                        ProductoAlimenticio productoAlimenticio = new ProductoAlimenticio(ProductosAlmacen.Count);
                         productoAlimenticio.SolicitarDetalles();
-                        Productos.Add(productoAlimenticio);
+                        ProductosAlmacen.Add(productoAlimenticio);
 
                         break;
 
                     case 2:
-                        ProductoElectronico productoElectronico = new ProductoElectronico(Productos.Count);
+                        ProductoElectronico productoElectronico = new ProductoElectronico(ProductosAlmacen.Count);
                         productoElectronico.SolicitarDetalles();
-                        Productos.Add(productoElectronico);
+                        ProductosAlmacen.Add(productoElectronico);
                         break;
 
                     case 3:
-                        MaterialPrecioso materialPrecioso = new MaterialPrecioso(Productos.Count);
+                        MaterialPrecioso materialPrecioso = new MaterialPrecioso(ProductosAlmacen.Count);
                         materialPrecioso.SolicitarDetalles();
-                        Productos.Add(materialPrecioso);
+                        ProductosAlmacen.Add(materialPrecioso);
                         break;
 
                     default:
@@ -393,24 +393,24 @@ namespace MaquinaVending
             {
                 Console.Write("Introduce el nombre del producto: ");
                 nombre = Console.ReadLine();
-                foreach (Producto p in Productos)
+                foreach (Producto p in ProductosAlmacen)
                 {
                     Console.WriteLine($"Nombre: {p.Nombre}, Unidades {p.Unidades}, Precio {p.Precio_Unitario}€," +
                         $" Información del producto: {p.Descripcion}");
                 }
                 Console.WriteLine();
             }
-            Producto producto = Productos.Find(x => x.Nombre.ToLower() == nombre.ToLower());
+            Producto producto = ProductosAlmacen.Find(x => x.Nombre.ToLower() == nombre.ToLower());
             return producto;
         }
 
         public void GuardarJson()
         {
-            if (Productos.Count > 0)
+            if (ProductosAlmacen.Count > 0)
             {
                 File.Create("productos.json").Close();
 
-                string json = JsonSerializer.Serialize(Productos);
+                string json = JsonSerializer.Serialize(ProductosAlmacen);
                 using (StreamWriter sw = new StreamWriter("productos.json"))
                 {
                     sw.WriteLine(json);

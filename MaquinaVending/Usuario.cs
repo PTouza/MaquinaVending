@@ -13,15 +13,15 @@ using System.Threading;
 
 namespace MaquinaVending
 {
-    internal abstract class Usuario : IUsuario
+    internal abstract class Usuario
     {
         protected List<Producto> ProductosMaquina;
 
         public Usuario() { }
 
-        public Usuario(List<Producto> productos)
+        public Usuario(List<Producto> productosMaquina)
         {
-            ProductosMaquina = productos;
+            ProductosMaquina = productosMaquina;
             ProductosMaquina.Capacity = 12;
         }
 
