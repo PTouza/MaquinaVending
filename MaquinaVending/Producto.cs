@@ -14,6 +14,8 @@ namespace MaquinaVending
         [JsonInclude]
         public int Id { get; protected set; } // Vendrá dado por la cantidad de productos que haya en la máquina expendedora 
         public string Nombre { get; set; }
+
+        [JsonInclude]
         public int Unidades { get; protected set; }
         public double Precio_Unitario { get; set; } // Precio de una sola unidad
         public string Descripcion {  get; set; }

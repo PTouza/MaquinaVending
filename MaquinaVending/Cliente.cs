@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace MaquinaVending
@@ -54,17 +55,20 @@ namespace MaquinaVending
                             break;
 
                         case 3: // SALIR
+                            Console.Write("\n\tSaliendo del menú...");
                             break;
 
                         default:
                             break;
                     }
-                }catch(Exception e) 
+                }catch(FormatException) 
                 {
-                    Console.WriteLine(e.Message);
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.Write("\n\tIntroduce un valor válido");
+                    Console.ResetColor();
                 }
-               
 
+                Thread.Sleep(2000);
 
             } while (opcion != 3);
 

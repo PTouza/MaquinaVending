@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using WMPLib;
 using System.Media;
 using System.Text.Json;
+using System.Threading;
 
 namespace MaquinaVending
 {
@@ -37,11 +38,13 @@ namespace MaquinaVending
                 Console.ResetColor();
                 Console.WriteLine("\t╔═══════════════════════════════╗");
                 Console.WriteLine("\t║ 1.- Si es Cliente             ║");
+                Console.WriteLine("\t║                               ║");
                 Console.WriteLine("\t║ 2.- Si es Admin               ║");
+                Console.WriteLine("\t║                               ║");
                 Console.WriteLine("\t║ 3.- Salir                     ║");
                 Console.WriteLine("\t╚═══════════════════════════════╝");
                 Console.WriteLine();
-                Console.Write("\tPor favor, introduzca su opción:   ");
+                Console.Write("\tPor favor, introduzca su opción: ");
                 try
                 {
                     opcion = int.Parse(Console.ReadLine());
@@ -61,11 +64,13 @@ namespace MaquinaVending
                             break;
                     }
                 }
-                catch (Exception e)
+                catch (FormatException)
                 {
-                    Console.WriteLine(e.Message);
+                    Console.WriteLine();
+                    Console.Write($"\tIntroduzca un valor válido");
                 }
 
+                Thread.Sleep(4000);
 
             } while (opcion != 3);
 

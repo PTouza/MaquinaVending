@@ -30,7 +30,7 @@ namespace MaquinaVending
         public void ComprarProducto()
         {
             int opcion = 0;
-            Console.Write("¿Quiere continuar con la operación? (1.- Si / 2.- No): ");
+            Console.Write("\n\t¿Quiere continuar con la operación? (1.- Si / 2.- No): ");
             try
             {
                 opcion = int.Parse(Console.ReadLine());
@@ -66,14 +66,16 @@ namespace MaquinaVending
                         break;
 
                     case 2: // CANCELAMOS LA OPERACIÓN Y VUELVE AL MENÚ
+                        Console.Write("Cancelando la operación...");
+                        Thread.Sleep(1500);
                         break;
 
                     default:
                         break;
                 }
-            } catch (Exception e) 
+            } catch (FormatException) 
             {
-                Console.WriteLine(e.Message);
+                Console.Write("\n\tIntroduce un valor válido");
             }
             
         }
@@ -300,6 +302,7 @@ namespace MaquinaVending
                 Console.WriteLine($"ID: {p.Id}, Nombre: {p.Nombre}, Unidades {p.Unidades}, Precio {p.Precio_Unitario} Euros," +
                     $" Información del producto: {p.Descripcion}");
                 Console.WriteLine();
+                Thread.Sleep(500);
             }
             Console.WriteLine();
             Console.Write("Introduce el Id del Producto: ");
