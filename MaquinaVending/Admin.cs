@@ -141,26 +141,31 @@ namespace MaquinaVending
                         break;
 
                     case 3:
-                        Producto producto = BuscarProductoMaquina();
-                        Console.Write("¿Cuántas unidades quiere retirar?: ");
-                        producto.QuitarUnidades(int.Parse(Console.ReadLine()));
-                        if (producto.Unidades == 0)
-                        {
-                            Console.Write("Se han retirado todas las unidades, ¿Quiere retirar el producto?(1.- SI / 2.- NO): ");
-                            int opcionRetirar = int.Parse(Console.ReadLine());
-                            if(opcionRetirar == 1)
-                            {
-                                ProductosMaquina.Remove(producto);
-                            }
-                        }
+                        RetirarProductos();
                         break;
 
                     default:
-                        Console.WriteLine("Salir");
+                        Console.WriteLine("Saliendo...");
+                        Thread.Sleep(3000);
                         break;
                 }
             }catch(Exception e) { Console.WriteLine(e.Message) ; }
             
+        }
+        public void RetirarProductos()
+        {
+            Producto producto = BuscarProductoMaquina();
+            Console.Write("¿Cuántas unidades quiere retirar?: ");
+            producto.QuitarUnidades(int.Parse(Console.ReadLine()));
+            if (producto.Unidades == 0)
+            {
+                Console.Write("Se han retirado todas las unidades, ¿Quiere retirar el producto?(1.- SI / 2.- NO): ");
+                int opcionRetirar = int.Parse(Console.ReadLine());
+                if (opcionRetirar == 1)
+                {
+                    ProductosMaquina.Remove(producto);
+                }
+            }
         }
         public void CargaCompletaProducto()
         {
@@ -199,52 +204,58 @@ namespace MaquinaVending
             var path = Console.ReadLine();
             if (File.Exists(path))
             {
-                ProductosMaquina.Clear();
-                string[] checkNumProductos = File.ReadAllLines(path);
-                if (checkNumProductos.Length <= 12)
+                try
                 {
-
-
-                    using (StreamReader sr = new StreamReader(path))
+                    string[] checkNumProductos = File.ReadAllLines(path);
+                    if (checkNumProductos.Length <= 12)
                     {
+                        ProductosMaquina.Clear();
 
-                        string line = null;
-                        string[] campos = null;
-                        while ((line = sr.ReadLine()) != null)
+                        using (StreamReader sr = new StreamReader(path))
                         {
-                            campos = line.Split(';');
-                            switch (int.Parse(campos[0]))
+                            string line = null;
+                            string[] campos = null;
+                            while ((line = sr.ReadLine()) != null)
                             {
-                                case 1:
-                                    MaterialPrecioso mp = new MaterialPrecioso(ProductosAlmacen.Count, campos[1], int.Parse(campos[2]), double.Parse(campos[3]),
-                                        campos[4], campos[5], campos[6]);
-                                    ProductosMaquina.Add(mp);
-                                    break;
+                                campos = line.Split(';');
+                                switch (int.Parse(campos[0]))
+                                {
+                                    case 1:
+                                        MaterialPrecioso mp = new MaterialPrecioso(ProductosAlmacen.Count, campos[1], int.Parse(campos[2]), double.Parse(campos[3]),
+                                            campos[4], campos[5], campos[6]);
+                                        ProductosMaquina.Add(mp);
+                                        break;
 
-                                case 2:
-                                    ProductoAlimenticio pa = new ProductoAlimenticio(ProductosAlmacen.Count, campos[1], int.Parse(campos[2]), double.Parse(campos[3]),
-                                        campos[4], campos[7]);
-                                    ProductosMaquina.Add(pa);
-                                    break;
+                                    case 2:
+                                        ProductoAlimenticio pa = new ProductoAlimenticio(ProductosAlmacen.Count, campos[1], int.Parse(campos[2]), double.Parse(campos[3]),
+                                            campos[4], campos[7]);
+                                        ProductosMaquina.Add(pa);
+                                        break;
 
-                                case 3:
-                                    ProductoElectronico pe = new ProductoElectronico(ProductosAlmacen.Count, campos[1], int.Parse(campos[2]), double.Parse(campos[3]),
-                                        campos[4], campos[6], bool.Parse(campos[8]), bool.Parse(campos[9]));
-                                    ProductosMaquina.Add(pe);
-                                    break;
+                                    case 3:
+                                        ProductoElectronico pe = new ProductoElectronico(ProductosAlmacen.Count, campos[1], int.Parse(campos[2]), double.Parse(campos[3]),
+                                            campos[4], campos[6], bool.Parse(campos[8]), bool.Parse(campos[9]));
+                                        ProductosMaquina.Add(pe);
+                                        break;
+                                }
                             }
                         }
                     }
-                }
-                else
-                {
-                    Console.WriteLine("No se admiten más de 12 productos en la máquina");
-                }
+
+
+                    else
+                    {
+                        Console.WriteLine("No se admiten más de 12 productos en la máquina");
+                    }
+                }catch (Exception ex) { Console.WriteLine(ex.Message); }
             }
             else
             {
                 Console.WriteLine("El archivo dado no existe o no lo hemos encontrado, porfavor inténtalo de nuevo");
             }
+
+            Console.Write("\tPulse cualquier tecla para continuar...");
+            Console.ReadKey();
         }
 
         public void LeerArchivoJSON()
@@ -254,51 +265,64 @@ namespace MaquinaVending
 
             if (File.Exists(path))
             {
-                string json = File.ReadAllText(path);
-
-                List<Object> ProductosMaquinaJson = JsonSerializer.Deserialize<List<Object>>(json);
-
-                if (ProductosMaquinaJson.Count != 0 && ProductosMaquinaJson.Count <= 12)
+                try
                 {
-                    foreach (Object o in ProductosMaquinaJson)
+                    string json = File.ReadAllText(path);
+
+                    List<Object> ProductosMaquinaJson = JsonSerializer.Deserialize<List<Object>>(json);
+
+                    if (ProductosMaquinaJson.Count != 0 && ProductosMaquinaJson.Count <= 12)
                     {
-
-                        JsonElement jsonElement = (JsonElement)o;
-
-                        int tipoProducto = jsonElement.GetProperty("TipoProducto").GetInt32();
-
-                        switch(tipoProducto)
+                        ProductosMaquina.Clear();
+                        foreach (Object o in ProductosMaquinaJson)
                         {
-                            case 1:
-                                MaterialPrecioso mp = JsonSerializer.Deserialize<MaterialPrecioso>(jsonElement.GetRawText());
-                                ProductosMaquina.Add(mp);
-                                break;
 
-                            case 2:
-                                ProductoAlimenticio pa = JsonSerializer.Deserialize<ProductoAlimenticio>(jsonElement.GetRawText());
-                                ProductosMaquina.Add(pa);
-                                break;
+                            JsonElement jsonElement = (JsonElement)o;
 
-                            case 3:
-                                ProductoElectronico pe = JsonSerializer.Deserialize<ProductoElectronico>(jsonElement.GetRawText());
-                                ProductosMaquina.Add(pe);
-                                break;
+                            int tipoProducto = jsonElement.GetProperty("TipoProducto").GetInt32();
+
+                            switch (tipoProducto)
+                            {
+                                case 1:
+                                    MaterialPrecioso mp = JsonSerializer.Deserialize<MaterialPrecioso>(jsonElement.GetRawText());
+                                    ProductosMaquina.Add(mp);
+                                    break;
+
+                                case 2:
+                                    ProductoAlimenticio pa = JsonSerializer.Deserialize<ProductoAlimenticio>(jsonElement.GetRawText());
+                                    ProductosMaquina.Add(pa);
+                                    break;
+
+                                case 3:
+                                    ProductoElectronico pe = JsonSerializer.Deserialize<ProductoElectronico>(jsonElement.GetRawText());
+                                    ProductosMaquina.Add(pe);
+                                    break;
+                            }
                         }
                     }
-                }
 
-                else
-                {
-                    if(ProductosMaquinaJson.Count == 0)
-                    {
-                        Console.WriteLine("No se han encontrado archivos para cargar");
-                    }
                     else
                     {
-                        Console.WriteLine("No se admiten más de 12 productos en la máquina");
+                        if (ProductosMaquinaJson.Count == 0)
+                        {
+                            Console.WriteLine("No se han encontrado archivos para cargar");
+                        }
+                        else
+                        {
+                            Console.WriteLine("No se admiten más de 12 productos en la máquina");
+                        }
                     }
-                }
+                }catch (Exception ex) { Console.WriteLine(ex.Message); }
             }
+
+            else
+            {
+                Console.WriteLine("\tEl archivo no ha sido encontrado");
+            }
+
+            Console.Write("\tPulse cualquier tecla para continuar");
+            Console.ReadKey();
+
         }
 
         public void AddUnidades()
@@ -380,22 +404,32 @@ namespace MaquinaVending
             Producto productoClonado = producto.Clonar();
             if (producto != null)
             {
+                producto.MostrarInfo();
                 Console.Write("¿Quiere añadir este producto a la máquina? (1.- SI | 2.- NO): ");
                 int opcion = int.Parse(Console.ReadLine());
-                if(producto.Unidades > 10)
-                {
-                    productoClonado.Unidades = 10;
-                    producto.QuitarUnidades(10);
-                    Console.WriteLine($"Quedan {producto.Unidades} unidades del producto {producto.Nombre}");
-                }
-
-                else
-                {
-                    Console.WriteLine($"No quedan existencias del producto {producto.Nombre} en el Almacén");
-                }
+                
                 int opcionQuitarProducto = 0;
                 if (opcion == 1)
                 {
+                    if (producto.Unidades > 0)
+                    {
+                        if (producto.Unidades > 10)
+                        {
+                            productoClonado.SetUnidades(10);
+                            producto.QuitarUnidades(10);
+                            
+                        }
+                        else
+                        {
+                            productoClonado.SetUnidades(producto.Unidades);
+                            producto.SetUnidades(0);
+                        }
+                    }
+
+                    else
+                    {
+                        Console.WriteLine($"No quedan existencias del producto {producto.Nombre} en el Almacén");
+                    }
                     if (ProductosMaquina.Count < 11)
                     {
                         ProductosMaquina.Add(producto);

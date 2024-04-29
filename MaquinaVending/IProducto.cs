@@ -12,7 +12,7 @@ namespace MaquinaVending
         int TipoProducto { get; set; }
         int Id { get; }
         string Nombre { get; set; }
-        int Unidades { get; set; }
+        int Unidades { get; }
         double Precio_Unitario { get; set; }
         string Descripcion { get; set; }
 

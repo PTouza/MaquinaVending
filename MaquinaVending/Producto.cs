@@ -14,7 +14,7 @@ namespace MaquinaVending
         [JsonInclude]
         public int Id { get; protected set; } // Vendrá dado por la cantidad de productos que haya en la máquina expendedora 
         public string Nombre { get; set; }
-        public int Unidades { get; set; }
+        public int Unidades { get; protected set; }
         public double Precio_Unitario { get; set; } // Precio de una sola unidad
         public string Descripcion {  get; set; }
 
@@ -43,7 +43,7 @@ namespace MaquinaVending
                     cantidadProductos = 0;
                 }
             } while (cantidadProductos > Unidades);
-            Unidades -= cantidadProductos;
+            QuitarUnidades(cantidadProductos);
             return cantidadProductos * Precio_Unitario;
         }
 
@@ -62,6 +62,11 @@ namespace MaquinaVending
             {
                 Unidades -= unidades;
             }
+        }
+
+        public void SetUnidades(int unidades)
+        {
+            Unidades = unidades;
         }
 
         public override string ToString()
