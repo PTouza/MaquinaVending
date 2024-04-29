@@ -37,11 +37,11 @@ namespace MaquinaVending
             int cantidadProductos;
             do
             {
-                Console.Write("¿Cuantas unidades desea?: ");
+                Console.Write("\t¿Cuantas unidades desea?: ");
                 cantidadProductos = int.Parse(Console.ReadLine());
                 if(cantidadProductos > Unidades) 
                 { 
-                    Console.WriteLine("No tenemos suficientes unidades");
+                    Console.WriteLine("\tNo tenemos suficientes unidades");
                     cantidadProductos = 0;
                 }
             } while (cantidadProductos > Unidades);
