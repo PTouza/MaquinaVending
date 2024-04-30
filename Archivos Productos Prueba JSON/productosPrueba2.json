@@ -1,0 +1,62 @@
+[
+  {
+    "TipoProducto": 2,
+    "Id": 36,
+    "Precio_Unitario": 2.99,
+    "Nombre": "Rabanos",
+    "Unidades": 10,
+    "Descripcion": "Rabanos frescos y crujientes",
+    "InfoNutricional": "Rico en vitamina A"
+  },
+  {
+    "TipoProducto": 1,
+    "Id": 37,
+    "Precio_Unitario": 900.0,
+    "Nombre": "Plomo",
+    "Unidades": 10,
+    "Descripcion": "Plomo puro",
+    "TipoMaterial": "Plomo",
+    "Peso": "1g"
+  },
+  {
+    "TipoProducto": 3,
+    "Id": 38,
+    "Precio_Unitario": 799.99,
+    "Nombre": "Samsung Galaxy S20",
+    "Unidades": 10,
+    "Descripcion": "Samsung Galaxy S20 con 128GB de almacenamiento",
+    "Tiene_Bateria": true,
+    "Peso": "171g",
+    "Precargado": true
+  },
+  {
+    "TipoProducto": 2,
+    "Id": 39,
+    "Precio_Unitario": 1.49,
+    "Nombre": "Leche Desnatada",
+    "Unidades": 10,
+    "Descripcion": "Leche Desnatada fresca",
+    "InfoNutricional": "Rico en calcio y vitamina D"
+  },
+  {
+    "TipoProducto": 1,
+    "Id": 40,
+    "Precio_Unitario": 30.0,
+    "Nombre": "Niquel",
+    "Unidades": 10,
+    "Descripcion": "Niquel puro",
+    "TipoMaterial": "Niquel",
+    "Peso": "1g"
+  },
+  {
+    "TipoProducto": 3,
+    "Id": 41,
+    "Precio_Unitario": 399.99,
+    "Nombre": "PlayStation 4",
+    "Unidades": 10,
+    "Descripcion": "Consola de videojuegos PlayStation 4",
+    "Tiene_Bateria": false,
+    "Peso": "4.5kg",
+    "Precargado": false
+  }
+]

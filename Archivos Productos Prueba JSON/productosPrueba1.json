@@ -1,0 +1,123 @@
+[
+  {
+    "TipoProducto": 2,
+    "Id": 24,
+    "Precio_Unitario": 1.99,
+    "Nombre": "Manzanas Granny Smith",
+    "Unidades": 10,
+    "Descripcion": "Manzanas rojas frescas y jugosas",
+    "InfoNutricional": "Bajo en calorías, alto en fibra"
+  },
+  {
+    "TipoProducto": 1,
+    "Id": 25,
+    "Precio_Unitario": 1500.0,
+    "Nombre": "Oro",
+    "Unidades": 10,
+    "Descripcion": "Oro puro de 24 quilates",
+    "TipoMaterial": "Oro",
+    "Peso": "1g"
+  },
+  {
+    "TipoProducto": 3,
+    "Id": 26,
+    "Precio_Unitario": 999.99,
+    "Nombre": "iPhone 13",
+    "Unidades": 10,
+    "Descripcion": "iPhone 13 con 128GB de almacenamiento",
+    "Tiene_Bateria": true,
+    "Peso": "174g",
+    "Precargado": true
+  },
+  {
+    "TipoProducto": 2,
+    "Id": 27,
+    "Precio_Unitario": 0.99,
+    "Nombre": "Pan Integral",
+    "Unidades": 10,
+    "Descripcion": "Pan integral fresco",
+    "InfoNutricional": "Alto en fibra, bajo en grasa"
+  },
+  {
+    "TipoProducto": 1,
+    "Id": 28,
+    "Precio_Unitario": 20.0,
+    "Nombre": "Plata",
+    "Unidades": 10,
+    "Descripcion": "Plata pura",
+    "TipoMaterial": "Plata",
+    "Peso": "1g"
+  },
+  {
+    "TipoProducto": 3,
+    "Id": 29,
+    "Precio_Unitario": 299.99,
+    "Nombre": "Nintendo Switch",
+    "Unidades": 10,
+    "Descripcion": "Consola de videojuegos Nintendo Switch",
+    "Tiene_Bateria": true,
+    "Peso": "398g",
+    "Precargado": false
+  },
+  {
+    "TipoProducto": 2,
+    "Id": 30,
+    "Precio_Unitario": 2.99,
+    "Nombre": "Zanahorias",
+    "Unidades": 10,
+    "Descripcion": "Zanahorias frescas y crujientes",
+    "InfoNutricional": "Rico en vitamina A"
+  },
+  {
+    "TipoProducto": 1,
+    "Id": 31,
+    "Precio_Unitario": 900.0,
+    "Nombre": "Platino",
+    "Unidades": 10,
+    "Descripcion": "Platino puro",
+    "TipoMaterial": "Platino",
+    "Peso": "1g"
+  },
+  {
+    "TipoProducto": 3,
+    "Id": 32,
+    "Precio_Unitario": 799.99,
+    "Nombre": "Samsung Galaxy S21",
+    "Unidades": 10,
+    "Descripcion": "Samsung Galaxy S21 con 128GB de almacenamiento",
+    "Tiene_Bateria": true,
+    "Peso": "171g",
+    "Precargado": true
+  },
+  {
+    "TipoProducto": 2,
+    "Id": 33,
+    "Precio_Unitario": 1.49,
+    "Nombre": "Leche Entera",
+    "Unidades": 10,
+    "Descripcion": "Leche entera fresca",
+    "InfoNutricional": "Rico en calcio y vitamina D"
+  },
+  {
+    "TipoProducto": 1,
+    "Id": 34,
+    "Precio_Unitario": 30.0,
+    "Nombre": "Cobre",
+    "Unidades": 10,
+    "Descripcion": "Cobre puro",
+    "TipoMaterial": "Cobre",
+    "Peso": "1g"
+  },
+  {
+    "TipoProducto": 3,
+    "Id": 35,
+    "Precio_Unitario": 399.99,
+    "Nombre": "PlayStation 5",
+    "Unidades": 10,
+    "Descripcion": "Consola de videojuegos PlayStation 5",
+    "Tiene_Bateria": false,
+    "Peso": "4.5kg",
+    "Precargado": false
+  }
+
+]
