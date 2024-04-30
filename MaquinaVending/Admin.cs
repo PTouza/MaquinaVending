@@ -102,6 +102,7 @@ namespace MaquinaVending
                                 break;
 
                             case 6:
+                                GuardarJson();
                                 Console.Write("\tSaliendo...");
                                 Thread.Sleep(1500);
                                 break;
