@@ -126,17 +126,19 @@ namespace MaquinaVending
             Console.Clear();
             Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("\t╔══════════════════════════════════════════════╗");
-            Console.WriteLine("\t║ 1.- Añadir productos                         ║");
-            Console.WriteLine("\t║                                              ║");
-            Console.WriteLine("\t║ 2.- Añadir nuevos productos al almacén       ║");
-            Console.WriteLine("\t║                                              ║");
-            Console.WriteLine("\t║ 3.- Retirar productos                        ║"); 
-            Console.WriteLine("\t║                                              ║");
-            Console.WriteLine("\t║ 4.- Añadir unidades al almacén               ║");
-            Console.WriteLine("\t║                                              ║");
-            Console.WriteLine("\t║ 5.- Salir                                    ║");
-            Console.WriteLine("\t╚══════════════════════════════════════════════╝");
+            Console.WriteLine("\t╔══════════════════════════════════════════════════╗");
+            Console.WriteLine("\t║ 1.- Añadir unidades a productos de la máquina    ║");
+            Console.WriteLine("\t║                                                  ║");
+            Console.WriteLine("\t║ 2.- Añadir nuevos productos al almacén           ║");
+            Console.WriteLine("\t║                                                  ║");
+            Console.WriteLine("\t║ 3.- Retirar productos                            ║"); 
+            Console.WriteLine("\t║                                                  ║");
+            Console.WriteLine("\t║ 4.- Añadir unidades al almacén                   ║");
+            Console.WriteLine("\t║                                                  ║");
+            Console.WriteLine("\t║ 5.- Añadir producto a la máquina                 ║");
+            Console.WriteLine("\t║                                                  ║");
+            Console.WriteLine("\t║ 6.- Salir                                        ║");
+            Console.WriteLine("\t╚══════════════════════════════════════════════════╝");
             Console.ResetColor();
             Console.WriteLine();
             Console.Write("\tEscoge una opción: ");
@@ -174,9 +176,14 @@ namespace MaquinaVending
                         break;
 
                     case 5:
+                        AddProductoMaquina();
+                        break;
+
+                    case 6:
                         Console.Write("\tSaliendo...");
                         Thread.Sleep(1500);
                         break;
+
                     default:
                         Console.Write("\tIntroduce una opción válida");
                         Thread.Sleep(1500);
@@ -381,26 +388,30 @@ namespace MaquinaVending
         public void AddUnidades()
         {
             Producto productoMaquina = BuscarProductoMaquina();
-            Producto productoAlmacen = BuscarProductoAlmacen(productoMaquina.Nombre);
-            Console.Write("Introduce el número de unidades que desa introducir: ");
-            int unidades = int.Parse(Console.ReadLine());
-            if (unidades + productoMaquina.Unidades > 10)
+            if (productoMaquina != null)
             {
-                Console.WriteLine("La máquina solo admite 10 unidades por producto");
-                Console.Write("Pulse cualquier tecla para continuar");
-                Console.ReadKey();
-            }
-            else
-            {
-                if (productoMaquina != null && productoAlmacen != null)
+                Producto productoAlmacen = BuscarProductoAlmacen(productoMaquina.Nombre);
+                Console.Write("Introduce el número de unidades que desa introducir: ");
+                int unidades = int.Parse(Console.ReadLine());
+                if (unidades + productoMaquina.Unidades > 10)
                 {
-                    productoAlmacen.QuitarUnidades(unidades);
-                    productoMaquina.AddUnidades(unidades);
+                    Console.WriteLine("\tLa máquina solo admite 10 unidades por producto");
+                    Console.Write("\n\tPulse cualquier tecla para continuar");
+                    Console.ReadKey();
                 }
-
-                else if (productoMaquina != null)
+                else
                 {
-                    productoMaquina.AddUnidades(unidades);
+                    if (productoAlmacen != null && productoAlmacen.Unidades >= unidades)
+                    {
+                        productoAlmacen.QuitarUnidades(unidades);
+                        productoMaquina.AddUnidades(unidades);
+                    }
+
+                    else
+                    {
+                        Console.WriteLine("\tNo hemos podido completar la operación");
+                        Thread.Sleep(1500);
+                    }
                 }
             }
             
@@ -458,10 +469,8 @@ namespace MaquinaVending
             {
                 try
                 {
-
-
                     producto.MostrarInfo();
-                    Console.Write("¿Quiere añadir este producto a la máquina? (1.- SI | 2.- NO): ");
+                    Console.Write("\n\t¿Quiere añadir este producto a la máquina? (1.- SI | 2.- NO): ");
                     int opcion = int.Parse(Console.ReadLine());
 
                     int opcionQuitarProducto = 0;
@@ -481,26 +490,27 @@ namespace MaquinaVending
                                 producto.SetUnidades(0);
                             }
 
-                            Console.WriteLine($"\tQuedan {producto.Unidades} unidades del producto '{producto.Nombre}' en el almacén");
+                            Console.WriteLine($"\n\tQuedan {producto.Unidades} unidades del producto '{producto.Nombre}' en el almacén");
 
                         }
 
                         else
                         {
-                            Console.WriteLine($"No quedan existencias del producto {producto.Nombre} en el Almacén");
+                            Console.WriteLine($"\n\tNo quedan existencias del producto {producto.Nombre} en el Almacén");
                         }
+
                         if (ProductosMaquina.Count < 11)
                         {
                             ProductosMaquina.Add(producto);
                             Thread.Sleep(1000);
-                            Console.WriteLine("Producto añadido a la máquina");
+                            Console.WriteLine("\n\tProducto añadido a la máquina");
                         }
 
                         else
                         {
-                            Console.WriteLine("La máquina está al máximo de su capacidad");
+                            Console.WriteLine("\n\tLa máquina está al máximo de su capacidad");
                             Thread.Sleep(1000);
-                            Console.WriteLine("¿Desea quitar un producto de la máquina? (1.- SI | 2.- NO): ");
+                            Console.WriteLine("\n\t¿Desea quitar un producto de la máquina? (1.- SI | 2.- NO): ");
                             opcionQuitarProducto = int.Parse(Console.ReadLine());
                             if (opcionQuitarProducto == 1)
                             {
@@ -514,9 +524,9 @@ namespace MaquinaVending
                             }
                         }
 
-                        Console.WriteLine("Operación realizada correctamente");
+                        Console.WriteLine("\n\tOperación realizada correctamente");
                     }
-                }catch(Exception ex) { Console.WriteLine(ex.Message); }
+                }catch(FormatException) { Console.Write("\n\tIntroduce un valor válido"); }
             }
         }
 
