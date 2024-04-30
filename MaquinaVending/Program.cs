@@ -20,7 +20,10 @@ namespace MaquinaVending
             // Inicia la música del programa
             WindowsMediaPlayer musica = new WindowsMediaPlayer();
             musica.URL = "Smooth operator But only the Best Part loop_qczc8Xzt8aU.mp3";
+            musica.settings.setMode("loop", true);
+            musica.settings.volume = 35;
             musica.controls.play();
+            
 
             // Creo la variable que vamos a usar en el switch
             int opcion = 0;

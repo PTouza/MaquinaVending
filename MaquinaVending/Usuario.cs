@@ -28,7 +28,7 @@ namespace MaquinaVending
         }
 
         // Métodos
-        public abstract void Menu(); // El método Menu() lo declaramos como abstract ya que va a ser propio de cada clase hija
+        public abstract void Menu(); // El método Menu() lo declaramos como abstract ya que va a ser propio de cada clase derivada
 
         public void ComprarProducto()
         {
@@ -93,6 +93,7 @@ namespace MaquinaVending
             }
 
         }
+
         public void PagarProducto(double precio_Producto)
         {
 

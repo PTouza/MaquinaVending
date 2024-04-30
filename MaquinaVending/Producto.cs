@@ -71,8 +71,6 @@ namespace MaquinaVending
             Unidades = unidades;
         }
 
-        
-
         public virtual void MostrarInfo()
         {
             Console.Write($"({Id}) Nombre: {Nombre} | Unidades: {Unidades} | Precio: {Precio_Unitario}€ " +

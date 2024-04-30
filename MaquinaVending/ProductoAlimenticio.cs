@@ -12,7 +12,6 @@ namespace MaquinaVending
     {
         public string InfoNutricional { get; set; }
 
-        [JsonConstructor]
         public ProductoAlimenticio()
         {
             TipoProducto = 2;
