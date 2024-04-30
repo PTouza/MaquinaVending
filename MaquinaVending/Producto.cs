@@ -71,10 +71,7 @@ namespace MaquinaVending
             Unidades = unidades;
         }
 
-        public override string ToString()
-        {
-            return $"{Nombre};{Unidades};{Precio_Unitario};{Descripcion}"; // Formato del archivo CSV
-        }
+        
 
         public virtual void MostrarInfo()
         {

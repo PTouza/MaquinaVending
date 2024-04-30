@@ -40,10 +40,6 @@ namespace MaquinaVending
             Console.Write($"Peso: {Peso} | ¿Tiene batería?: {Tiene_Bateria} | ¿Está precargado?: {Precargado}");
         }
 
-        public override string ToString()
-        {
-            return $"3;{base.ToString()};;{Peso};;{Tiene_Bateria};{Precargado}";
-        }
 
 
         public override void SolicitarDetalles()

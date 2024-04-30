@@ -32,10 +32,6 @@ namespace MaquinaVending
             Peso = peso;
         }
 
-        public override string ToString()
-        {
-            return $"1;{base.ToString()};{TipoMaterial};{Peso};;;";
-        }
         
         public override void MostrarInfo()
         {

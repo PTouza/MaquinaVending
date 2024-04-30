@@ -34,13 +34,9 @@ namespace MaquinaVending
         public override void MostrarInfo()
         {
             base.MostrarInfo();
-            Console.Write($"Información nutricional: {InfoNutricional}");
+            Console.WriteLine($"Información nutricional: {InfoNutricional}");
         }
 
-        public override string ToString()
-        {
-            return $"2;{base.ToString()};;;{InfoNutricional};;";
-        }
 
         public override void SolicitarDetalles()
         {
