@@ -148,7 +148,7 @@ namespace MaquinaVending
                     case 1: // Añadir unidades a un producto presente en la máquina
                         AddUnidades();
                         break;
-                    case 2:
+                    case 2: // Añadir nuevos productos al almacén
                         int opcion2 = 0;
                         do
                         {
