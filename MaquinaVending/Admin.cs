@@ -145,26 +145,29 @@ namespace MaquinaVending
                 opcion = int.Parse(Console.ReadLine());
                 switch (opcion)
                 {
-                    case 1:
+                    case 1: // Añadir unidades a un producto presente en la máquina
                         AddUnidades();
                         break;
                     case 2:
                         int opcion2 = 0;
                         do
                         {
-                            AddNewProducto();
-                            Console.Write("¿Quiere añadir otro producto? (1.- Si / 2.- No): ");
+                            AddNewProducto(); // Añadimos un producto al almacén
+                            Console.Write("¿Quiere añadir otro producto? (1.- Si / 2.- No): "); // Le damos al usuario la opción de añadir otro producto
                             opcion2 = int.Parse(Console.ReadLine());
 
                         } while (opcion2 == 1);
                         break;
 
-                    case 3:
-                        RetirarProductos();
+                    case 3: // Quitar unidades a un producto presente en la máquina
+                        RetirarProductos(); 
                         break;
 
                     case 4:
+                        // Buscamos el producto del almacén por nombre
                         Producto producto = BuscarProductoAlmacen(null);
+
+                        // Le pedimos al admin las unidades que quiere añadir
                         Console.Write("¿Cuántas unidades quiere añadir?: ");
                         int unidades = int.Parse(Console.ReadLine());
                         producto.AddUnidades(unidades);
@@ -172,22 +175,32 @@ namespace MaquinaVending
 
                     case 5:
                         Console.Write("\tSaliendo...");
-                        Thread.Sleep(3000);
+                        Thread.Sleep(1500);
                         break;
                     default:
                         Console.Write("\tIntroduce una opción válida");
-                        Thread.Sleep(3000);
+                        Thread.Sleep(1500);
                         break;
                 }
-            }catch(Exception e) { Console.WriteLine(e.Message) ; }
+            }
+            catch(FormatException) 
+            { 
+                Console.Write("\n\tIntroduce un valor válido");
+                Thread.Sleep(1500);
+            }
             
         }
 
         public void RetirarProductos()
         {
+            // Buscamos el producto deseado
             Producto producto = BuscarProductoMaquina();
+
+            // Pedimos las unidades al admin
             Console.Write("\t¿Cuántas unidades quiere retirar?: ");
             producto.QuitarUnidades(int.Parse(Console.ReadLine()));
+
+            // Si ya no hay existencias del producto en la máquina le damos la opción de retirarlo
             if (producto.Unidades == 0)
             {
                 Console.Write("\tSe han retirado todas las unidades, ¿Quiere retirar el producto?(1.- SI / 2.- NO): ");

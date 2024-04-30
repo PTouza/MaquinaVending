@@ -34,6 +34,7 @@ namespace MaquinaVending
             // Creamos instancias de los usuarios, como solo va a haber dos los creamos sin pedir datos
             Admin admin = new Admin(products, "admin123",productosMaquina);
             Cliente cliente = new Cliente(productosMaquina);
+
             do
             {
                 Console.Clear();
@@ -81,7 +82,6 @@ namespace MaquinaVending
 
             } while (opcion != 3);
 
-
             Console.ReadKey();
         }
 
@@ -113,18 +113,21 @@ namespace MaquinaVending
                             switch (tipoProducto)
                             {
                                 case 1:
+                                    // Deserializamos como MaterialPrecioso
                                     MaterialPrecioso mp = JsonSerializer.Deserialize<MaterialPrecioso>
                                         (jsonElement.GetRawText());
                                     products.Add(mp);
                                     break;
 
                                 case 2:
+                                    // Deserializamos como ProductoAlimenticio
                                     ProductoAlimenticio pa = JsonSerializer.Deserialize<ProductoAlimenticio>
                                         (jsonElement.GetRawText());
                                     products.Add(pa);
                                     break;
 
                                 case 3:
+                                    // Deserializamos commo ProductoElectronico
                                     ProductoElectronico pe = JsonSerializer.Deserialize<ProductoElectronico>
                                         (jsonElement.GetRawText());
                                     products.Add(pe);
@@ -170,16 +173,19 @@ namespace MaquinaVending
                             switch (tipoProducto)
                             {
                                 case 1:
+                                    // Deserializamos como MaterialPrecioso
                                     MaterialPrecioso mp = JsonSerializer.Deserialize<MaterialPrecioso>(jsonElement.GetRawText());
                                     productosMaquina.Add(mp);
                                     break;
 
                                 case 2:
+                                    // Deserializamos como ProductoAlimenticio
                                     ProductoAlimenticio pa = JsonSerializer.Deserialize<ProductoAlimenticio>(jsonElement.GetRawText());
                                     productosMaquina.Add(pa);
                                     break;
 
                                 case 3:
+                                    // Deserializamos como ProductoElectronico
                                     ProductoElectronico pe = JsonSerializer.Deserialize<ProductoElectronico>(jsonElement.GetRawText());
                                     productosMaquina.Add(pe);
                                     break;
