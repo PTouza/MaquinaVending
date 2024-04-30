@@ -101,6 +101,11 @@ namespace MaquinaVending
                                 }
                                 break;
 
+                            case 6:
+                                Console.Write("\tSaliendo...");
+                                Thread.Sleep(1500);
+                                break;
+
                             default:
                                 break;
                         }
@@ -464,11 +469,12 @@ namespace MaquinaVending
         public void AddProductoMaquina()
         {
             Producto producto = BuscarProductoAlmacen(null);
-            Producto productoClonado = producto.Clonar();
-            if (producto != null)
+            
+            if (producto != null && ProductosMaquina.Find(x => x.Nombre == producto.Nombre) == null)
             {
                 try
                 {
+                    Producto productoClonado = producto.Clonar();
                     producto.MostrarInfo();
                     Console.Write("\n\t¿Quiere añadir este producto a la máquina? (1.- SI | 2.- NO): ");
                     int opcion = int.Parse(Console.ReadLine());
@@ -527,6 +533,11 @@ namespace MaquinaVending
                         Console.WriteLine("\n\tOperación realizada correctamente");
                     }
                 }catch(FormatException) { Console.Write("\n\tIntroduce un valor válido"); }
+            }
+
+            else if(ProductosMaquina.Find(x => x.Nombre == producto.Nombre) != null)
+            {
+                Console.WriteLine("\n\tEste producto ya está disponible en la máquina");
             }
         }
 
