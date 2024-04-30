@@ -17,14 +17,21 @@ namespace MaquinaVending
         static List<Producto> productosMaquina;
         static void Main(string[] args)
         {
+            // Inicia la música del programa
             WindowsMediaPlayer musica = new WindowsMediaPlayer();
             musica.URL = "Smooth operator But only the Best Part loop_qczc8Xzt8aU.mp3";
             musica.controls.play();
+
+            // Creo la variable que vamos a usar en el switch
             int opcion = 0;
+
+            // Inicializamos las listas y las cargamos de los archivos .json
             products = new List<Producto>();
             productosMaquina = new List<Producto>();
             CargarProductos();
             CargarProductosMaquina();
+
+            // Creamos instancias de los usuarios, como solo va a haber dos los creamos sin pedir datos
             Admin admin = new Admin(products, "admin123",productosMaquina);
             Cliente cliente = new Cliente(productosMaquina);
             do
@@ -51,11 +58,11 @@ namespace MaquinaVending
 
                     switch (opcion)
                     {
-                        case 1:
+                        case 1: // Llamamos al método menú del cliente
                             cliente.Menu();
                             break;
 
-                        case 2:
+                        case 2: // Llamamos al método menú del admin
                             admin.Menu();
                             break;
 
@@ -82,21 +89,27 @@ namespace MaquinaVending
         {
             if (File.Exists("productos.json"))
             {
+                // Leo todo el archivo y lo almaceno en un solo string
                 string json = File.ReadAllText("productos.json");
 
                 if (json != string.Empty)
                 {
+                    // si el archivo no está vacío lo deseralizo en una lista de objetos Object, ya que no sabemos todavía que tipo de Producto es
                     List<Object> ProductosJson = JsonSerializer.Deserialize<List<Object>>(json);
 
+                    // Si hay elementos en la lista empezamos la deserialización
                     if (ProductosJson.Count != 0)
                     {
+                        // Recorremos la lista de objetos Object
                         foreach (Object o in ProductosJson)
                         {
-
+                            // Hacemos una conversión implícita a JsonElement para poder acceder a la propiedad TipoProducto
                             JsonElement jsonElement = (JsonElement)o;
 
+                            // Accedemos a la propiedad TipoProducto para hacer la deserialización final
                             int tipoProducto = jsonElement.GetProperty("TipoProducto").GetInt32();
 
+                            // Dependiendo del valor de TipoProducto deserializamos como un objeto u otro
                             switch (tipoProducto)
                             {
                                 case 1:
@@ -124,6 +137,7 @@ namespace MaquinaVending
 
             else
             {
+                // Si el archivo no existe, lo creamos
                 File.Create("productos.json").Close();
             }
         }
@@ -132,22 +146,27 @@ namespace MaquinaVending
         {
             if (File.Exists("productosMaquina.json"))
             {
+                // Leo todo el archivo y lo almaceno en un solo string
                 string json = File.ReadAllText("productosMaquina.json");
 
                 if (json != string.Empty)
                 {
-
+                    // si el archivo no está vacío lo deseralizo en una lista de objetos Object, ya que no sabemos todavía que tipo de Producto es
                     List<Object> ProductosMaquinaJson = JsonSerializer.Deserialize<List<Object>>(json);
 
+                    // Si hay elementos en la lista empezamos la deserialización
                     if (ProductosMaquinaJson.Count != 0)
                     {
+                        // Recorremos la lista de objetos Object
                         foreach (Object o in ProductosMaquinaJson)
                         {
-
+                            // Hacemos una conversión implícita a JsonElement para poder acceder a la propiedad TipoProducto
                             JsonElement jsonElement = (JsonElement)o;
 
+                            // Accedemos a la propiedad TipoProducto para hacer la deserialización final
                             int tipoProducto = jsonElement.GetProperty("TipoProducto").GetInt32();
 
+                            // Dependiendo del valor de TipoProducto deserializamos como un objeto u otro
                             switch (tipoProducto)
                             {
                                 case 1:
@@ -172,6 +191,7 @@ namespace MaquinaVending
 
             else
             {
+                // Si el archivo no existe, lo creamos
                 File.Create("productosMaquina.json").Close();
             }
         }

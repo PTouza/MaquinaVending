@@ -94,6 +94,11 @@ namespace MaquinaVending
                                 break;
 
                             case 5: // ELIMINAR UN PRODUCTO
+                                Producto producto = BuscarProductoMaquina();
+                                if (QuiereContinuar())
+                                {
+                                    ProductosMaquina.Remove(producto);
+                                }
                                 break;
 
                             default:
@@ -181,11 +186,11 @@ namespace MaquinaVending
         public void RetirarProductos()
         {
             Producto producto = BuscarProductoMaquina();
-            Console.Write("¿Cuántas unidades quiere retirar?: ");
+            Console.Write("\t¿Cuántas unidades quiere retirar?: ");
             producto.QuitarUnidades(int.Parse(Console.ReadLine()));
             if (producto.Unidades == 0)
             {
-                Console.Write("Se han retirado todas las unidades, ¿Quiere retirar el producto?(1.- SI / 2.- NO): ");
+                Console.Write("\tSe han retirado todas las unidades, ¿Quiere retirar el producto?(1.- SI / 2.- NO): ");
                 int opcionRetirar = int.Parse(Console.ReadLine());
                 if (opcionRetirar == 1)
                 {

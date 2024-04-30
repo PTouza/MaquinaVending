@@ -15,8 +15,10 @@ namespace MaquinaVending
 {
     internal abstract class Usuario
     {
+        // Lista de producto que habrá en la máquina expendedora
         protected List<Producto> ProductosMaquina;
 
+        // Constructores
         public Usuario() { }
 
         public Usuario(List<Producto> productosMaquina)
@@ -25,11 +27,13 @@ namespace MaquinaVending
             ProductosMaquina.Capacity = 12;
         }
 
-        public abstract void Menu();
+        // Métodos
+        public abstract void Menu(); // El método Menu() lo declaramos como abstract ya que va a ser propio de cada clase hija
 
         public void ComprarProducto()
         {
             int opcion = 0;
+            // Pedimos confirmación de que quiere comprar el producto
             Console.Write("\n\t¿Quiere continuar con la operación? (1.- Si / 2.- No): ");
             try
             {
@@ -40,21 +44,26 @@ namespace MaquinaVending
                     case 1: // PIDO EL ID DEL PRODUCTO QUE QUIERE COMPRAR
                         int opcion2 = 0;
                         double precioFinal = 0;
-                        bool productoEncontrado = false;
+                        bool productoEncontrado = false; // esta variable nos ayudará a la hora de pasar el precio final a la función correspondiente
                         do
                         {
+                            // Buscamos el producto
                             Producto producto = BuscarProductoMaquina();
+
                             if (producto != null)
                             {
+                                // Comprobamos si queda unidades
                                 if (producto.Unidades > 0)
                                 {
+                                    // Si quedan unidades pasamos a deducir el precio final
                                     productoEncontrado = true;
                                     precioFinal = precioFinal + producto.Vender();
+
                                     Console.Write("\n\t¿Quieres añadir otro producto? (1.- Si / 2.-  No): ");
                                     opcion2 = int.Parse(Console.ReadLine());
                                 }
 
-                                else if (producto.Unidades == 0)
+                                else
                                 {
                                     Console.WriteLine("\n\tLo sentimos, no nos quedan unidades de este producto");
                                 }
@@ -62,6 +71,7 @@ namespace MaquinaVending
 
                         } while (opcion2 == 1);
 
+                        // Si hemos encontrado el producto y el precioFinal es mayor que 0 pasamos a pagar
                         if (productoEncontrado && precioFinal > 0) { PagarProducto(precioFinal); }
                         break;
 
@@ -153,7 +163,10 @@ namespace MaquinaVending
             Console.ResetColor();
             Console.Write("\tIntroduce el número de la tarjeta: ");
 
-            Int64 numTarjeta = Int64.Parse(Console.ReadLine());
+            // Para almacenar el numero de la tarjeta necesitamos un entero de 64 bits, debido a que es un número de 16 dígitos
+            Int64 numTarjeta = Int64.Parse(Console.ReadLine()); 
+
+            // Comprobamos si los datos son correctos
             if (numTarjeta.ToString().Length != 16)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
@@ -173,6 +186,7 @@ namespace MaquinaVending
                 else if (QuiereContinuar())
                 {
                     Console.Write("\n\tIntroduce la fecha de caducidad (mes/año): ");
+                    // Declaramos la variable junto con el formato que tendrá la entrada por consola
                     DateTime fechaCaducidadTarjeta = DateTime.ParseExact(Console.ReadLine(), "MM/yy", CultureInfo.InvariantCulture);
                     if (fechaCaducidadTarjeta < DateTime.Now)
                     {
@@ -202,6 +216,7 @@ namespace MaquinaVending
 
         public bool QuiereContinuar()
         {
+            // Hemos creado esta función para pedirle al usuario si quiere continuar con alguna operación, así reutilizamos código y evitamos recursividad
             bool continuar = false;
             Console.Write("\t¿Quiere continuar? (1.- SI | 2.- NO): ");
             try
@@ -227,59 +242,69 @@ namespace MaquinaVending
             if (dinero_Introducido > precio)
             {
                 double cambio = dinero_Introducido - precio;
-                cambio = Math.Round(cambio, 3); // Redondeo el cambio para tener céntimos exactos
+                // Redondeo el cambio para tener céntimos exactos
+                cambio = Math.Round(cambio, 3); 
 
                 Console.WriteLine($"\n\tSu cambio es de {cambio} Euros");
                 Thread.Sleep(1000);
 
-                int cambioEntero = (int)cambio; // Saco la parte entera del cambio usando una conversión implícita a int
-                double cambioDecimal = Math.Round(cambio - cambioEntero, 3); // Saco la parte decimal restando la parte entera del cambio al cambio total
-                int[] billetes = { 50, 20, 10, 5 }; // Declaro un array de billetes para ver la devolución
+                // Saco la parte entera del cambio usando una conversión implícita a int, ya que c# elimina los decimales sin hacer ninguna aproximación
+                int cambioEntero = (int)cambio;
+
+                // Saco la parte decimal restando la parte entera del cambio al cambio total
+                double cambioDecimal = Math.Round(cambio - cambioEntero, 3);
+
+                // Declaro un array de billetes para calcular el cambio de billetes, en caso de que haya
+                int[] billetes = { 50, 20, 10, 5 };
                 int billetesDevueltos = 0;
 
                 Console.WriteLine("\n\tAquí tiene su cambio: ");
 
+                // Comprobamos si alguno de los billetes es mayor que el cambio entero y calculamos los billetes a devolver
                 foreach (int billete in billetes)
                 {
-                    cambio = Math.Round(cambio, 3);
+                    
                     if (cambioEntero >= billete)
                     {
                         billetesDevueltos = (cambioEntero / billete);
-                        cambio -= billete * billetesDevueltos;
+                       
                         cambioEntero -= billete * billetesDevueltos;
                         Console.WriteLine($"\t{billetesDevueltos} billete/s de {billete} €");
                         Thread.Sleep(500);
                     }
                 }
 
+                // Declaramos un array con las monedas enteras
                 int[] monedasEnteras = { 2, 1 };
                 int monedasDevueltasEnteras = 0;
 
+                // Comprobamos si alguna moneda es mayor que el cambio entero y calculamos las monedas a devolver
                 foreach (int moneda in monedasEnteras)
                 {
-                    cambio = Math.Round(cambio, 3);
+                    
                     if (cambioEntero >= moneda)
                     {
                         monedasDevueltasEnteras = cambioEntero / moneda;
                         Console.WriteLine($"\t{monedasDevueltasEnteras} moneda/s de {moneda} Euros");
                         Thread.Sleep(500);
                         cambioEntero -= moneda * monedasDevueltasEnteras;
-                        cambio -= moneda * monedasDevueltasEnteras;
+                        
                     }
 
                 }
 
+                // Declaramos un array con los céntimos
                 double[] monedasDecimales = { 0.5, 0.2, 0.1, 0.05, 0.02, 0.01 };
                 int monedasDevueltasDecimales = 0;
 
+                // Comprobamos si alguna de las monedas son mayores que el cambio decimal
                 foreach (double moneda in monedasDecimales)
                 {
-                    cambio = Math.Round(cambio, 3);
+                    // Redondeamos para usar las cifras que necesitamos, que son 3
                     cambioDecimal = Math.Round(cambioDecimal, 3);
                     if (cambioDecimal >= moneda)
                     {
                         monedasDevueltasDecimales = (int)(cambioDecimal / moneda);
-                        cambio -= moneda * monedasDevueltasDecimales;
                         cambioDecimal -= moneda * monedasDevueltasDecimales;
                         Console.WriteLine($"\t{monedasDevueltasDecimales} moneda/s de {moneda} Euros");
                         Thread.Sleep(500);
@@ -307,6 +332,7 @@ namespace MaquinaVending
         {
             Console.Clear();
 
+            // Damos una información general de cada producto
             foreach (Producto p in ProductosMaquina)
             {
                 Console.WriteLine($" ID: {p.Id}, Nombre: {p.Nombre}, Unidades {p.Unidades}, Precio {p.Precio_Unitario} Euros," +
@@ -319,6 +345,8 @@ namespace MaquinaVending
             int id = int.Parse(Console.ReadLine());
             Console.WriteLine();
             Producto producto = null;
+
+            // Buscamos el producto que necesitamos
             producto = ProductosMaquina.Find(x => x.Id == id);
 
             if (producto == null)
@@ -338,6 +366,7 @@ namespace MaquinaVending
 
         public void MostrarInfo()
         {
+            // Buscamos el producto y le mostramos la información al usuario
             Producto producto = BuscarProductoMaquina();
             if (producto != null)
             {
@@ -347,6 +376,7 @@ namespace MaquinaVending
 
         public void VaultBoy()
         {
+            // Imagen del VaultBoy de Fallout para cuando se haya completado una compra
             Console.WriteLine("                                    ,▄▄▄                              \r\n                                       ▄▓█▀▀▀▀▀█▄                           \r\n               ▄▄▓█`       ,▄▄▓▓▄▄▄▄▄@██▀!√√√√√└▀█▄                         \r\n            .▓█▀██       #█▀▀└:.!╙▀▀██▀:√√√√√√√√√!▀▀█▓▓▄▄                   \r\n           ╓█▀..▀█▓▄▄▄▄▓▀▀:√√√√√√√√√√√√√√√√√√√√√√√√√░░▀▀██▄                 \r\n           ██.√√√!▀▀▀▀▀:√√√√√√√√√√√√√√√√√√√√√√√√√√√√╠░░░░▀█▄                \r\n           █▌√√√√√√√√√√√√√▄▄▄▄▄.√√√√√√√╓▄▄▄.√√√√√√√√╠░░░░░╙█▄               \r\n           ██.√√√√√√√√√▄#█▀╙`╙▀█▓▄▄▄@▓██████▄.√√√√√╠░░░░░░░╙█▓▄             \r\n         ┌████:√√√√√(▄█▀╙       └▀▀▀▀└   └▀▀██,√√╓╢░░░░░░░░░░▀██▄           \r\n         ██:√╙▀▓▄▄▓▓▀▀                      └██▄░░░░░░░░░░░░░░░██▄          \r\n         █▌√√╓██▀  ▄▄@╕                       ▀▀█▓▀▀▀▀▀▀███▄░░░░██▄         \r\n         ██▄▓█▀  ╙▀▀▀▀▀                 ,▄               ▀███░░░░██▄        \r\n          ███`                         ▓███,     .        ███░░░░║██        \r\n         ▓█▀     ,▄                     └▀██▄            ▄██▀░░░░░██`       \r\n        ██▀     ███¼        ,              ▀▀        ╓@██▀▀░░░░░░░██        \r\n       ██▀     ▐███       ╓█▀        ▄▄,          .  ▄╙▀█░░░░░░░░╟██        \r\n      ▐█▌       ▀▀└     .▓█└        #███          .  ╙█▓,▀█░░░░░░██▌        \r\n      ██              ▄▓█▀          ███▌          . .▄,▀█▄╙█░░░░███         \r\n     ╟█▌            #██▀            ╙▀▀           .  ▀█▓,█▄╙█░░███          \r\n     ██─            ███                             ▓▄,▀█▄█,█░███`          \r\n     ██             ╙███                         .   ▀█▄╙█Ö█████            \r\n     ██    ,#         ╙╙                         . ╙█▄ ▀ ╙████▀             \r\n     ██  ╒███▄▄                  ▐█▄            .   ╙▀  .@███┘              \r\n     ██▌  ██▄ └╙▀▀#╦▄▄▄▄▄▄▄▄▄▄▄▄#████▄         .         ╙███               \r\n     ▐██   ▀ ▀▓▄,     `└╙└└ .      ███▌        .          ╟██               \r\n      ██▌      ╙▀█▓▄▄▄,   .,▄▄▄▓▓▀▀╙██        .          .███               \r\n      └██▄        └▀▀▀███▀▀▀▀╙\"     ▀       ..          ▄███                \r\n       ╙██▄       Ñ▓▓▓▓µ                   ..    ▄▓▓▓▓███▀`                 \r\n        └██▄        `└└                  ..    ▄███▀└└                      \r\n          ▀██▄                          .   ▄▓██▀└                          \r\n            ▀█▓▄                     ..  ▄▓██▀╙                             \r\n              ╙▀█▄,                .╓▄▓██████                               \r\n                 ╙██▓▄         ...   '' ▄██▀                                \r\n                  ╙█████▓▓▄▄▄▄      .▄▄██▀'                                 \r\n                    ▀█████▄▄▄▄▄▄▄▄▓████▀                                    \r\n                       ╙▀▀▀██████▀▀▀╙     ");
 
             Thread.Sleep(1000);
