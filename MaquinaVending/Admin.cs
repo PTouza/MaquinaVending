@@ -463,7 +463,8 @@ namespace MaquinaVending
 
                 
 
-            }catch(Exception e) { Console.WriteLine(e.Message); }
+            }
+            catch(FormatException) { Console.Write("\t\nIntroduce un valor válido"); }
             
         }
 

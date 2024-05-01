@@ -81,7 +81,7 @@ namespace MaquinaVending
                     Console.Write($"\tIntroduzca un valor válido");
                 }
 
-                Thread.Sleep(4000);
+                Thread.Sleep(2000);
 
             } while (opcion != 3);
 
@@ -90,118 +90,139 @@ namespace MaquinaVending
 
         public static void CargarProductos()
         {
-            if (File.Exists("productos.json"))
+            try
             {
-                // Leo todo el archivo y lo almaceno en un solo string
-                string json = File.ReadAllText("productos.json");
 
-                if (json != string.Empty)
+
+                if (File.Exists("productos.json"))
                 {
-                    // si el archivo no está vacío lo deseralizo en una lista de objetos Object, ya que no sabemos todavía que tipo de Producto es
-                    List<Object> ProductosJson = JsonSerializer.Deserialize<List<Object>>(json);
+                    // Leo todo el archivo y lo almaceno en un solo string
+                    string json = File.ReadAllText("productos.json");
 
-                    // Si hay elementos en la lista empezamos la deserialización
-                    if (ProductosJson.Count != 0)
+                    if (json != string.Empty)
                     {
-                        // Recorremos la lista de objetos Object
-                        foreach (Object o in ProductosJson)
+                        // si el archivo no está vacío lo deseralizo en una lista de objetos Object, ya que no sabemos todavía que tipo de Producto es
+                        List<Object> ProductosJson = JsonSerializer.Deserialize<List<Object>>(json);
+
+                        // Si hay elementos en la lista empezamos la deserialización
+                        if (ProductosJson.Count != 0)
                         {
-                            // Hacemos una conversión implícita a JsonElement para poder acceder a la propiedad TipoProducto
-                            JsonElement jsonElement = (JsonElement)o;
-
-                            // Accedemos a la propiedad TipoProducto para hacer la deserialización final
-                            int tipoProducto = jsonElement.GetProperty("TipoProducto").GetInt32();
-
-                            // Dependiendo del valor de TipoProducto deserializamos como un objeto u otro
-                            switch (tipoProducto)
+                            // Recorremos la lista de objetos Object
+                            foreach (Object o in ProductosJson)
                             {
-                                case 1:
-                                    // Deserializamos como MaterialPrecioso
-                                    MaterialPrecioso mp = JsonSerializer.Deserialize<MaterialPrecioso>
-                                        (jsonElement.GetRawText());
-                                    products.Add(mp);
-                                    break;
+                                // Hacemos una conversión implícita a JsonElement para poder acceder a la propiedad TipoProducto
+                                JsonElement jsonElement = (JsonElement)o;
 
-                                case 2:
-                                    // Deserializamos como ProductoAlimenticio
-                                    ProductoAlimenticio pa = JsonSerializer.Deserialize<ProductoAlimenticio>
-                                        (jsonElement.GetRawText());
-                                    products.Add(pa);
-                                    break;
+                                // Accedemos a la propiedad TipoProducto para hacer la deserialización final
+                                int tipoProducto = jsonElement.GetProperty("TipoProducto").GetInt32();
 
-                                case 3:
-                                    // Deserializamos commo ProductoElectronico
-                                    ProductoElectronico pe = JsonSerializer.Deserialize<ProductoElectronico>
-                                        (jsonElement.GetRawText());
-                                    products.Add(pe);
-                                    break;
+                                // Dependiendo del valor de TipoProducto deserializamos como un objeto u otro
+                                switch (tipoProducto)
+                                {
+                                    case 1:
+                                        // Deserializamos como MaterialPrecioso
+                                        MaterialPrecioso mp = JsonSerializer.Deserialize<MaterialPrecioso>
+                                            (jsonElement.GetRawText());
+                                        products.Add(mp);
+                                        break;
+
+                                    case 2:
+                                        // Deserializamos como ProductoAlimenticio
+                                        ProductoAlimenticio pa = JsonSerializer.Deserialize<ProductoAlimenticio>
+                                            (jsonElement.GetRawText());
+                                        products.Add(pa);
+                                        break;
+
+                                    case 3:
+                                        // Deserializamos commo ProductoElectronico
+                                        ProductoElectronico pe = JsonSerializer.Deserialize<ProductoElectronico>
+                                            (jsonElement.GetRawText());
+                                        products.Add(pe);
+                                        break;
+                                }
                             }
                         }
                     }
                 }
+
+                else
+                {
+                    // Si el archivo no existe, lo creamos
+                    File.Create("productos.json").Close();
+                }
             }
 
-            else
-            {
-                // Si el archivo no existe, lo creamos
-                File.Create("productos.json").Close();
+            catch (FileNotFoundException) 
+            { 
+                Console.Write("Ups, algo ha pasado con el archivo durante la carga");
+                Thread.Sleep(1500);
             }
         }
 
         public static void CargarProductosMaquina()
         {
-            if (File.Exists("productosMaquina.json"))
+            try
             {
-                // Leo todo el archivo y lo almaceno en un solo string
-                string json = File.ReadAllText("productosMaquina.json");
 
-                if (json != string.Empty)
+
+                if (File.Exists("productosMaquina.json"))
                 {
-                    // si el archivo no está vacío lo deseralizo en una lista de objetos Object, ya que no sabemos todavía que tipo de Producto es
-                    List<Object> ProductosMaquinaJson = JsonSerializer.Deserialize<List<Object>>(json);
+                    // Leo todo el archivo y lo almaceno en un solo string
+                    string json = File.ReadAllText("productosMaquina.json");
 
-                    // Si hay elementos en la lista empezamos la deserialización
-                    if (ProductosMaquinaJson.Count != 0)
+                    if (json != string.Empty)
                     {
-                        // Recorremos la lista de objetos Object
-                        foreach (Object o in ProductosMaquinaJson)
+                        // si el archivo no está vacío lo deseralizo en una lista de objetos Object, ya que no sabemos todavía que tipo de Producto es
+                        List<Object> ProductosMaquinaJson = JsonSerializer.Deserialize<List<Object>>(json);
+
+                        // Si hay elementos en la lista empezamos la deserialización
+                        if (ProductosMaquinaJson.Count != 0)
                         {
-                            // Hacemos una conversión implícita a JsonElement para poder acceder a la propiedad TipoProducto
-                            JsonElement jsonElement = (JsonElement)o;
-
-                            // Accedemos a la propiedad TipoProducto para hacer la deserialización final
-                            int tipoProducto = jsonElement.GetProperty("TipoProducto").GetInt32();
-
-                            // Dependiendo del valor de TipoProducto deserializamos como un objeto u otro
-                            switch (tipoProducto)
+                            // Recorremos la lista de objetos Object
+                            foreach (Object o in ProductosMaquinaJson)
                             {
-                                case 1:
-                                    // Deserializamos como MaterialPrecioso
-                                    MaterialPrecioso mp = JsonSerializer.Deserialize<MaterialPrecioso>(jsonElement.GetRawText());
-                                    productosMaquina.Add(mp);
-                                    break;
+                                // Hacemos una conversión implícita a JsonElement para poder acceder a la propiedad TipoProducto
+                                JsonElement jsonElement = (JsonElement)o;
 
-                                case 2:
-                                    // Deserializamos como ProductoAlimenticio
-                                    ProductoAlimenticio pa = JsonSerializer.Deserialize<ProductoAlimenticio>(jsonElement.GetRawText());
-                                    productosMaquina.Add(pa);
-                                    break;
+                                // Accedemos a la propiedad TipoProducto para hacer la deserialización final
+                                int tipoProducto = jsonElement.GetProperty("TipoProducto").GetInt32();
 
-                                case 3:
-                                    // Deserializamos como ProductoElectronico
-                                    ProductoElectronico pe = JsonSerializer.Deserialize<ProductoElectronico>(jsonElement.GetRawText());
-                                    productosMaquina.Add(pe);
-                                    break;
+                                // Dependiendo del valor de TipoProducto deserializamos como un objeto u otro
+                                switch (tipoProducto)
+                                {
+                                    case 1:
+                                        // Deserializamos como MaterialPrecioso
+                                        MaterialPrecioso mp = JsonSerializer.Deserialize<MaterialPrecioso>(jsonElement.GetRawText());
+                                        productosMaquina.Add(mp);
+                                        break;
+
+                                    case 2:
+                                        // Deserializamos como ProductoAlimenticio
+                                        ProductoAlimenticio pa = JsonSerializer.Deserialize<ProductoAlimenticio>(jsonElement.GetRawText());
+                                        productosMaquina.Add(pa);
+                                        break;
+
+                                    case 3:
+                                        // Deserializamos como ProductoElectronico
+                                        ProductoElectronico pe = JsonSerializer.Deserialize<ProductoElectronico>(jsonElement.GetRawText());
+                                        productosMaquina.Add(pe);
+                                        break;
+                                }
                             }
                         }
                     }
                 }
-            }
 
-            else
+                else
+                {
+                    // Si el archivo no existe, lo creamos
+                    File.Create("productosMaquina.json").Close();
+                }
+            }
+            catch (FileNotFoundException)
             {
-                // Si el archivo no existe, lo creamos
-                File.Create("productosMaquina.json").Close();
+                Console.Write("Ups, algo ha pasado con el archivo durante la carga");
+                Thread.Sleep(1500);
             }
         }
     }
